@@ -42,7 +42,6 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background */
     .bg-effects {
       position: fixed;
       top: 0;
@@ -112,7 +111,6 @@
       z-index: 1;
     }
 
-    /* Header */
     header {
       padding: 20px 0;
       position: fixed;
@@ -194,19 +192,15 @@
       width: 100%;
     }
 
-    /* Hero */
     .hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
       padding-top: 140px;
       padding-bottom: 80px;
     }
 
-    .hero-content {
+    .hero-header {
       text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
+      margin-bottom: 60px;
     }
 
     .hero-badge {
@@ -215,11 +209,11 @@
       gap: 8px;
       padding: 10px 20px;
       background: rgba(139,92,246,0.1);
-      border: 1px solid rgba(139,92,246,0.2);
+      border: 1px solid rgba(139,92,256,0.2);
       border-radius: 50px;
       font-size: 13px;
       color: var(--accent-tertiary);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       animation: fadeInUp 0.8s ease-out;
     }
 
@@ -237,7 +231,7 @@
       50% { opacity: 0.5; transform: scale(1.2); }
     }
 
-    .hero h1 {
+    .hero-header h1 {
       font-size: clamp(42px, 7vw, 72px);
       font-weight: 800;
       line-height: 1.15;
@@ -246,7 +240,7 @@
       animation: fadeInUp 0.8s ease-out 0.1s both;
     }
 
-    .hero h1 .gradient {
+    .hero-header h1 .gradient {
       background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent-tertiary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -257,66 +251,29 @@
       font-size: 20px;
       color: var(--text-secondary);
       max-width: 700px;
-      margin: 0 auto 52px;
+      margin: 0 auto;
       line-height: 1.7;
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Products Scroll */
-    .products-section {
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
       animation: fadeInUp 0.8s ease-out 0.3s both;
     }
 
-    .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    .products-scroll {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding: 10px 0 30px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .products-scroll::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .products-scroll::-webkit-scrollbar-track {
-      background: var(--bg-card);
-      border-radius: 3px;
-    }
-
-    .products-scroll::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, var(--accent), var(--accent-tertiary));
-      border-radius: 3px;
-    }
-
     .product-card {
-      flex: 0 0 380px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 36px;
-      scroll-snap-align: start;
+      padding: 40px;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
@@ -353,18 +310,14 @@
     }
 
     .product-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 32px;
       background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.1));
-    }
-
-    .product-card.jobs .product-icon {
-      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,182,212,0.1));
     }
 
     .product-card.coming .product-icon {
@@ -383,12 +336,6 @@
       letter-spacing: 0.05em;
     }
 
-    .product-card.jobs .product-tag {
-      background: rgba(16,185,129,0.1);
-      border-color: rgba(16,185,129,0.2);
-      color: #10b981;
-    }
-
     .product-card.coming .product-tag {
       background: rgba(255,255,255,0.05);
       border-color: rgba(255,255,255,0.1);
@@ -396,14 +343,14 @@
     }
 
     .product-card h3 {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .product-card > p {
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.7;
       margin-bottom: 24px;
     }
@@ -418,13 +365,13 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 12px 20px;
+      padding: 12px 24px;
       background: linear-gradient(135deg, var(--accent), #2563eb);
       color: #fff;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      border-radius: 10px;
+      border-radius: 12px;
       transition: all 0.3s;
     }
 
@@ -445,133 +392,6 @@
       border-color: var(--border-hover);
     }
 
-    /* Jobs */
-    .job-list {
-      margin-top: 8px;
-    }
-
-    .job-item {
-      padding: 16px;
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      margin-bottom: 10px;
-      border: 1px solid transparent;
-      transition: all 0.3s;
-    }
-
-    .job-item:hover {
-      border-color: var(--border-hover);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .job-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text-primary);
-    }
-
-    .job-item .salary {
-      color: #10b981;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .job-item .tags {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .job-item .tags span {
-      font-size: 11px;
-      color: var(--text-muted);
-      background: var(--bg-card);
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
-    /* Features Section */
-    .features {
-      padding: 100px 0;
-      position: relative;
-    }
-
-    .features::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: 80px;
-      background: linear-gradient(to bottom, var(--border), transparent);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-header h2 {
-      font-size: 40px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-
-    .section-header p {
-      color: var(--text-secondary);
-      font-size: 16px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .feature-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-    }
-
-    .feature-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1));
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin: 0 auto 20px;
-    }
-
-    .feature-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .feature-card p {
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    /* Footer */
     footer {
       padding: 40px 0;
       border-top: 1px solid var(--border);
@@ -588,26 +408,17 @@
       text-decoration: none;
     }
 
-    /* Responsive */
-    @media (max-width: 968px) {
-      .features-grid {
+    @media (max-width: 768px) {
+      .products-grid {
         grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      nav {
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .product-card {
-        flex: 0 0 320px;
       }
 
       .hero-subtitle {
         font-size: 16px;
+      }
+
+      nav {
+        gap: 20px;
       }
     }
   </style>
@@ -628,7 +439,6 @@
       </a>
       <nav>
         <a href="#products">产品</a>
-        <a href="#about">关于</a>
         <a href="https://github.com/hlf2002" target="_blank">GitHub</a>
       </nav>
     </div>
@@ -636,104 +446,40 @@
 
   <section class="hero">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          专注软件创新
-        </div>
-        <h1>
-          <span class="gradient">珠海换呗科技有限公司</span>
-        </h1>
-        <p class="hero-subtitle">
-          致力于打造优质的软件工具和 AI 技能，赋能智能化时代。我们坚持创新、安全、简洁的产品理念，为用户创造卓越的数字体验。
-        </p>
+      <div class="hero-header">
+        <div class="hero-badge">专注软件创新</div>
+        <h1><span class="gradient">珠海换呗科技有限公司</span></h1>
+        <p class="hero-subtitle">致力于打造优质的软件工具和 AI 技能，赋能智能化时代</p>
+      </div>
 
-        <div class="products-section" id="products">
-          <p class="section-label">我们的产品</p>
-          <div class="products-scroll">
-            <!-- Product 1: 天下无密 -->
-            <div class="product-card">
-              <div class="product-header">
-                <div class="product-icon">🔐</div>
-                <span class="product-tag">密码管理</span>
-              </div>
-              <h3>天下无密</h3>
-              <p>安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。</p>
-              <div class="product-links">
-                <a href="https://github.com/hlf2002/wumi" target="_blank" class="product-btn">
-                  查看 GitHub
-                </a>
-              </div>
-            </div>
-
-            <!-- Product 2: 招聘 -->
-            <div class="product-card jobs">
-              <div class="product-header">
-                <div class="product-icon">🚀</div>
-                <span class="product-tag">热招中</span>
-              </div>
-              <h3>加入我们</h3>
-              <p>寻找志同道合的伙伴，一起打造优秀的软件产品。</p>
-              <div class="job-list">
-                <div class="job-item">
-                  <h4>前端开发工程师</h4>
-                  <p class="salary">15K-30K · 珠海</p>
-                  <div class="tags">
-                    <span>React</span>
-                    <span>TypeScript</span>
-                    <span>Electron</span>
-                  </div>
-                </div>
-                <div class="job-item">
-                  <h4>AI 技能工程师</h4>
-                  <p class="salary">25K-50K · 远程</p>
-                  <div class="tags">
-                    <span>LLM</span>
-                    <span>Prompt</span>
-                    <span>Agent</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Product 3: Coming Soon -->
-            <div class="product-card coming">
-              <div class="product-header">
-                <div class="product-icon">✨</div>
-                <span class="product-tag">即将推出</span>
-              </div>
-              <h3>更多产品</h3>
-              <p>我们正在开发更多优质的软件工具和 AI 技能，敬请期待...</p>
-              <div class="product-links">
-                <span style="color: var(--text-muted); font-size: 13px;">敬请期待</span>
-              </div>
-            </div>
+      <div class="products-grid" id="products">
+        <div class="product-card">
+          <div class="product-header">
+            <div class="product-icon">🔐</div>
+            <span class="product-tag">密码管理</span>
+          </div>
+          <h3>天下无密</h3>
+          <p>安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。</p>
+          <div class="product-links">
+            <a href="https://github.com/hlf2002/wumi" target="_blank" class="product-btn">
+              查看 GitHub
+            </a>
+            <a href="https://hlf2002.github.io/wumi-web" target="_blank" class="product-btn secondary">
+              产品官网
+            </a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="features" id="about">
-    <div class="container">
-      <div class="section-header">
-        <h2>关于换呗科技</h2>
-        <p>专注软件创新，赋能 AI 时代</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">💻</div>
-          <h3>软件工具</h3>
-          <p>打造高效、实用的桌面端和 Web 端软件工具</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <h3>AI 技能</h3>
-          <p>开发基于大模型的 AI 技能和智能代理</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>安全隐私</h3>
-          <p>重视用户数据安全，坚持本地优先原则</p>
+        <div class="product-card coming">
+          <div class="product-header">
+            <div class="product-icon">✨</div>
+            <span class="product-tag">即将推出</span>
+          </div>
+          <h3>更多产品</h3>
+          <p>我们正在开发更多优质的软件工具和 AI 技能，敬请期待...</p>
+          <div class="product-links">
+            <span style="color: var(--text-muted); font-size: 14px;">敬请期待</span>
+          </div>
         </div>
       </div>
     </div>
