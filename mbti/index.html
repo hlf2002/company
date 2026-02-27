@@ -363,6 +363,18 @@
             transition: width 0.4s ease;
         }
 
+        .encouragement {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f8f9fa, #fff5f5);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-coral);
+            animation: fadeIn 0.5s ease;
+        }
+
         .question-card {
             background: var(--bg-white);
             border: 1px solid var(--border-color);
@@ -799,6 +811,7 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill" style="width: 0%"></div>
                 </div>
+                <div class="encouragement" id="encouragement">🎯 加油！开始你的性格探索之旅吧！</div>
             </div>
 
             <div class="question-card">
@@ -1248,6 +1261,25 @@
             showPage('testPage');
         }
 
+        // 鼓励语录
+        const encouragements = [
+            { threshold: 0, text: "🎯 加油！开始你的性格探索之旅吧！" },
+            { threshold: 10, text: "🚀 不错！你已经开始了这段旅程，继续加油！" },
+            { threshold: 25, text: "💪 继续保持！你对自己的了解越来越深入了！" },
+            { threshold: 50, text: "🌟 太棒了！你已经完成一半了！胜利在望！" },
+            { threshold: 75, text: "🔥 加油！你马上就能看到完整的性格报告了！" },
+            { threshold: 90, text: "🏆 就要完成了！你的性格画像即将呈现！" }
+        ];
+
+        function getEncouragement(progress) {
+            for (let i = encouragements.length - 1; i >= 0; i--) {
+                if (progress >= encouragements[i].threshold) {
+                    return encouragements[i].text;
+                }
+            }
+            return encouragements[0].text;
+        }
+
         // 显示题目
         function showQuestion() {
             const q = questions[currentQuestion];
@@ -1263,6 +1295,9 @@
 
             const progress = ((currentQuestion + 1) / totalQuestions) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
+
+            // 更新鼓励语录
+            document.getElementById('encouragement').textContent = getEncouragement(progress);
 
             // 清除之前的选择状态
             document.getElementById('optionA').classList.remove('selected');
