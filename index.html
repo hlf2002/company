@@ -1,222 +1,289 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head>
+<html class="scroll-smooth dark" lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MBTI 首页 - 温暖亲和</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<title>珠海换呗科技有限公司</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "primary": "#4e6e5d","accent": "#d97706","background-light": "#fdfbf7","background-dark": "#1a1c1a",
-                "sage-light": "#e8edeb",
-                "warm-gray": "#71716a"
-              },
-              fontFamily: {
-                "display": ["Inter", "Noto Sans SC", "sans-serif"]
-              },
-              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
-            },
-          },
+<style type="text/tailwindcss">
+        :root {
+            --deep-black: #020203;
+            --industrial-gray: #0d0e12;
+            --tech-blue: #0088ff;
+            --sleek-silver: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
-    </script>
+        @layer base {
+            body {
+                @apply bg-[var(--deep-black)] text-slate-300 font-['Noto_Sans_SC'] antialiased;
+            }
+        }
+    </style>
+<style>
+        .industrial-card {
+            background: var(--industrial-gray);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .industrial-card:hover {
+            border-color: rgba(0, 136, 255, 0.4);
+            background: rgba(13, 14, 18, 0.8);
+        }
+        .holographic-title {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 136, 255, 0.2);
+        }
+        .grid-blueprint {
+            background-image:
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
-<div class="relative flex min-h-screen flex-col overflow-x-hidden">
-<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
-<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-<div class="flex items-center gap-3">
-<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
-<span class="material-symbols-outlined text-2xl">psychology</span>
+<body class="selection:bg-[var(--tech-blue)] selection:text-white">
+<div class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute inset-0 grid-blueprint opacity-20"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-[var(--tech-blue)]/5 to-transparent blur-[120px]"></div>
 </div>
-<h2 class="text-xl font-bold tracking-tight text-primary dark:text-primary">MBTI 首页</h2>
-</div>
-<nav class="hidden md:flex items-center gap-10">
-<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">人格类型</a>
-<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">文章</a>
-<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">联系我们</a>
-</nav>
+<nav class="sticky top-0 z-50 w-full border-b border-white/5 bg-[var(--deep-black)]/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 <div class="flex items-center gap-4">
-<button class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
-<span>开始测试</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-<div class="h-10 w-10 rounded-full bg-sage-light dark:bg-slate-800 flex items-center justify-center border border-primary/10 overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="用户头像" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Z8MJpJuA4NTNkjdHV4Y_lfOqEXLPbAlp6-prK0Ab49gJ_V_0ggDOh2fi2KXyJWiffHLcX54l93Nj0lYN_eewAAV0QEfzXEbRetUJOz8beV4cte2m-5fPAERraxN1Wj1sCpTpT8eKAQoE720Sn1x9KgdzRVIjXjt9Y8kdUDB7oik15ewxqP0sFUBwdpg3gTifbWAJG1A4Xz6iXuQMxykg6HoqANf3LTnKH43etz99ufm5y6sC0tx9DrCG9rNk4nH6unJAOjVFYgU"/>
+<div class="w-8 h-8 border border-[var(--tech-blue)] flex items-center justify-center">
+<span class="font-mono text-[var(--tech-blue)] font-bold text-sm">HB</span>
 </div>
+<span class="font-bold tracking-tight text-white text-lg">珠海换呗科技有限公司</span>
+</div>
+<div class="hidden md:flex items-center gap-10 text-xs font-medium tracking-widest uppercase text-slate-400">
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="#products">产品中心</a>
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="https://github.com/hlf2002" target="_blank">GitHub</a>
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="#about">关于我们</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-3 py-1 border border-white/10 rounded-sm font-mono text-[10px] text-slate-500 uppercase">
+                Status: Operational
+            </div>
+</div>
+</div>
+</nav>
+<header class="relative z-10 pt-32 pb-24 px-6">
+<div class="max-w-5xl mx-auto text-center">
+<div class="inline-flex items-center gap-3 px-3 py-1 mb-8 border-l border-[var(--tech-blue)] bg-[var(--tech-blue)]/5 text-[var(--tech-blue)] text-[10px] font-mono tracking-[0.2em] uppercase">
+            Zhuhai Huanbei Technology Co., Ltd. // Enterprise Portal
+        </div>
+<h1 class="text-6xl md:text-8xl font-bold mb-8 tracking-tighter holographic-title leading-tight">
+            珠海换呗科技有限公司
+        </h1>
+<p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
+            致力于打造优质的软件工具和 AI 技能，赋能智能化时代
+        </p>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="px-8 py-4 bg-[var(--tech-blue)] text-white font-bold text-sm tracking-widest uppercase hover:bg-blue-600 transition-all" href="#products">
+                查看产品
+            </a>
+<a class="px-8 py-4 border border-white/10 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/5 transition-all" href="https://github.com/hlf2002" target="_blank">
+                GitHub
+            </a>
 </div>
 </div>
 </header>
-<main class="flex-1">
-<section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-24">
-<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-<div class="flex flex-col gap-8 order-2 lg:order-1">
-<div class="space-y-4">
-<span class="inline-block rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">发现您的专属成长路径</span>
-<h1 class="text-4xl font-black leading-[1.2] tracking-tight text-slate-900 dark:text-slate-50 lg:text-5xl">
-                                了解<span class="text-primary">真实</span>的自己，<br/>读懂身边的他人
-                            </h1>
-<p class="max-w-xl text-lg leading-relaxed text-warm-gray dark:text-slate-400">
-                                加入全球超过 200 万人的行列，通过我们基于科学且兼具包容性的性格评估工具，探索您的真实潜能。这是一个温暖亲和、为每一位独立个体精心打造的测评空间。
-                            </p>
+<main class="relative z-10 max-w-7xl mx-auto px-6 py-24" id="products">
+<div class="flex items-end justify-between mb-16 border-b border-white/5 pb-8">
+<div>
+<h2 class="text-sm font-mono text-[var(--tech-blue)] uppercase tracking-[0.4em] mb-2">Product Matrix</h2>
+<h3 class="text-3xl font-bold text-white">核心产品矩阵</h3>
 </div>
-<div class="flex flex-wrap gap-4">
-<button class="h-14 rounded-xl bg-primary px-8 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
-                                开始免费测试
-                            </button>
-<button class="h-14 rounded-xl border-2 border-primary/20 bg-transparent px-8 text-lg font-bold text-primary hover:bg-primary/5 transition-colors">
-                                探索人格类型
-                            </button>
+<div class="text-[10px] font-mono text-slate-600 uppercase hidden md:block text-right">
+            Deployment: v1.0.0<br/>
+            Region: Greater Bay Area
+        </div>
 </div>
-<div class="flex items-center gap-4 text-sm text-warm-gray">
-<div class="flex -space-x-2">
-<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-200" data-alt="多样化用户头像 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKKX8Qwap7DyxtMbYUDrV9G00dIvvELd2gd82yGFKvqdPt2duQgaivoS9iC-mg1geDlb_eAH8yYt0XnoxU6RflmG4yv3LinJE3APCTTHFZH-XBrLBg17R5kHAO9ghKAssGNtyXnZ5hnvoBMyAzPT83JqYfFWX4GvsqrB3h6LZd__D4ASsfmH28HYk_Jb_hbWX8JwqeIa3HvWuR4EJcBEjaGdIm3-TGR6YpaD3eHhS0RczkWE_xCBrYYH7ZVElOk6TROFgiyerSIyw')"></div>
-<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-300" data-alt="多样化用户头像 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBx5sCjD4uYC0cbwr5qSxiWuPtjXIbMs-W570TvPi5Ick2lzrIbQRqTCrd3AO-ciuHmNnv0fJZ3L_6zGA26nrBeEKcS5B6KdzQv5OSViRpZ57Zugq_hrozrOawJL7RmWXwWKUttkaTKwiqGAEWuONJqLWnDJN2r3au5PUe--V5LSCbDjJjPXCLI8HAVwsAhgI77azEPLYZW26v_FuLebTErvKQ7ot_bCodnKZYGh2D5yBJ3xJT2TEGHS_tFj6TYTP6KgwZBerv-q-U')"></div>
-<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-400" data-alt="多样化用户头像 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAgYX7a9wBhYW4_YAVmQFGqq3_zM4i0GS15RbMk2j4ikUbOrPqzsrMaHVKZRWx9oeTSPJ5VE8Y8zN3_3suQ-Y7dBsqitKQz2An8TThARKbUQzuGAfpiwrXWkPg2_Cj1B4jpMTW1Am6U5A8u6q8yOxBv_eeHeAUyYAb0HJ0tfxvDlsR8w37YCR501IhwJpjFwT_cDDyy1XkqgkAom1j_5A1gz2c5g2lZp1oaYjFZBhIWaK3JZEouFnOxVOeA66QTQ_aBIcN0V00iCCI')"></div>
+<div class="grid lg:grid-cols-2 gap-8">
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">lock_open</span>
 </div>
-<p>深受每月 <span class="font-bold text-slate-900 dark:text-slate-200">50,000+</span> 访客的信赖</p>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-SEC-001</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">天下无密 - 密码管理器</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。
+            </p>
+<div class="flex gap-4">
+<a href="https://hlf2002.github.io/wumi-web" target="_blank" class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">立即访问</a>
+<a href="https://github.com/hlf2002/wumi" target="_blank" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">GitHub</a>
 </div>
 </div>
-<div class="relative order-1 lg:order-2">
-<div class="aspect-square w-full rounded-3xl bg-sage-light dark:bg-primary/10 overflow-hidden shadow-inner flex items-center justify-center">
-<img class="h-full w-full object-cover p-12" data-alt="展现多元人群互动温暖氛围的插画" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtphyLjpM-LBrKMR1VOMg_jkyDAf_POQ9Ai89edQT8n1U87giYbWhe2PbmxccacJF0nY9Rt7raWeOYceczp0TvVwUzmDspHPDpRCczkn99SKwO0Cd1L9eTtCP05j2csIqHHW0oU1yPOAFBaFNGcQlblYKAle8hIC_hxpwa3zvkV6KL2u3OxwCXr_tlhlh_YXbw_PHQiE7IXU1Wb4DT8GjYZZYxxl61jDy8slgzQzyX-Koof5OajxhKia5TDZuuhn7caOoMI7tWmZM"/>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">psychology</span>
 </div>
-<div class="absolute -bottom-6 -left-6 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-xl border border-primary/10">
-<div class="flex items-center gap-4">
-<div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-accent">
-<span class="material-symbols-outlined">favorite</span>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-002</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">MBTI 性格测评系统</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                基于大数据分析与心理学模型的精准人格画像工具，助力团队协作与自我探索。
+            </p>
+<div class="flex gap-4">
+<a href="https://www.7373.com.cn/mbti" target="_blank" class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">立即体验</a>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">算法验证</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">hub</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-003</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">换呗 AI 技能市场</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                汇聚各类 AI 技能和自动化工具的在线市场，让 AI 为您的工作和生活赋能。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">code</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-DEV-004</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">开发者工具套件</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                为开发者打造的效率工具集，包括代码生成、API 测试、自动化脚本等功能。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">cloud</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-CLD-005</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">云服务解决方案</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                提供稳定可靠的云端服务，支持私有化部署和定制化开发。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">memory</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-006</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">AI 模型定制服务</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                基于大语言模型的定制化 AI 解决方案，为企业打造专属智能助手。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+</div>
+<section class="mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-white/5">
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">开源项目</div>
+<div class="text-3xl font-bold text-white">10+</div>
 </div>
 <div>
-<p class="text-sm font-bold text-slate-900 dark:text-slate-100">100% 隐私保护</p>
-<p class="text-xs text-warm-gray">您的结果仅由您自己掌握</p>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">GitHub _stars</div>
+<div class="text-3xl font-bold text-white">1.2K+</div>
 </div>
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">产品用户</div>
+<div class="text-3xl font-bold text-[var(--tech-blue)]">10K+</div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section class="bg-sage-light/50 dark:bg-background-dark/50 py-20">
-<div class="mx-auto max-w-7xl px-6 lg:px-10">
-<div class="mb-12 flex flex-col items-center text-center">
-<h2 class="text-3xl font-bold text-slate-900 dark:text-slate-50">探索 16 种人格类型</h2>
-<p class="mt-4 max-w-2xl text-warm-gray dark:text-slate-400">
-                            每一种人格都是独一无二的。浏览四大核心类别，寻找属于您或您所爱之人的心灵归属。
-                        </p>
-<div class="mt-10 inline-flex rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-sm border border-primary/10">
-<button class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">外交官</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">守护者</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">探险家</button>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
-<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
-<img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="建筑师 INTJ 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
-</div>
-<div class="space-y-1">
-<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">建筑师</h3>
-<p class="text-sm font-medium text-primary uppercase tracking-wide">INTJ-A / INTJ-T</p>
-<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
-                                    富有想象力且具备战略眼光的思考者，对万事皆有计划。
-                                </p>
-</div>
-<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
-                                了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
-<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
-<img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="逻辑学家 INTP 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD00r3YTFpSgcXaHhJRRaXW-LdIecgXo2w0iaT1uftsYLLLtLPe7WCpXbyrJrmURJF1sEIhkzRW3XLBEnSUqzArZm09CjISgdxmfUpjiD2zqguBlXFQOyWBUcnWhcYSLgStRKRCdt3uCzJVT1o2a6IRYSh5OHN0qe9KTZBNZtdqFMwzFZK_--Hsy0cdHENipgZZeY1QKaiZRruvJ-gmESQ_tBmJpJJ9QmAfp4-cK9AnoczxvDwKXmbzlaWgl6ZIEHedqpumRfY6PY"/>
-</div>
-<div class="space-y-1">
-<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">逻辑学家</h3>
-<p class="text-sm font-medium text-primary uppercase tracking-wide">INTP-A / INTP-T</p>
-<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
-                                    具有创造力的发明家，对知识有着永无止境的渴望。
-                                </p>
-</div>
-<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
-                                了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
-<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
-<img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="指挥官 ENTJ 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2WbaSGcXcFAtcpu74Kaxa5TTMY-xviTY5ehanrUyT27oV_dx8tX_G3RI9kuvUokCj7R7ZDKVp2pdKBml40ae2u9Lbj55u-Z_IinwJ1N9oSA8AcNig2zJdlMJVJlPzyAYTwoBzGLwMU2dOF2RyF2DCR-6PT69RTTjC9Y8-y0kKLTpBmvgvLvSuW4qg5d9q__VkKkZVjYtzfxd_Fk91AP8QbFCYL0RYakR9eWSbQJdFmW_a3O1wQEQI4-xzKnkmVwPwWgrH5Gx2-j0"/>
-</div>
-<div class="space-y-1">
-<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">指挥官</h3>
-<p class="text-sm font-medium text-primary uppercase tracking-wide">ENTJ-A / ENTJ-T</p>
-<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
-                                    大胆、富有想象力且意志强大的领导者，总能找到解决之道。
-                                </p>
-</div>
-<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
-                                了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
-<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
-<img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="辩论家 ENTP 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaHAwDxdo-joHrExovugPL0sjg7UyC3oOTpmnJdLkM6cimtlRqPQI-YFPmTWDRt4g3rOFKq0dca9cYl8PA3z5oGWZAPPNaSShgCAPOX46JqiSZ3PxlwRbHl0UMJomQqhQUfKzCm12PqBQN-oloNaEbmZqYXmr5r47T-Mi6eeiQZgFYhbQIPbPEoW4YX885hgJyGkfOI-8v0Cr_c8BVZhAPuXrJMdfVvQcUGYBumX1uK8X2E7JEPZsQManej0yA77J8eI-GcvZYZCE"/>
-</div>
-<div class="space-y-1">
-<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">辩论家</h3>
-<p class="text-sm font-medium text-primary uppercase tracking-wide">ENTP-A / ENTP-T</p>
-<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
-                                    聪明、好奇的思考者，无法抗拒任何智力上的挑战。
-                                </p>
-</div>
-<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
-                                了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</div>
-</section>
-<section class="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-<div class="rounded-3xl bg-primary px-8 py-16 text-center text-white lg:px-24">
-<h2 class="text-3xl font-black lg:text-4xl">准备好遇见内在的自己了吗？</h2>
-<p class="mx-auto mt-6 max-w-xl text-lg text-sage-light opacity-90">
-                        加入数百万人的行列，今天就开启您的自我发现之旅。只需 10 分钟。
-                    </p>
-<button class="mt-10 inline-flex h-14 items-center justify-center rounded-xl bg-white px-10 text-lg font-bold text-primary transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/10">
-                        立即开始测试
-                    </button>
-<p class="mt-6 text-sm font-medium opacity-70">无需注册即可开始。</p>
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">运行状态</div>
+<div class="text-3xl font-bold text-white">99.9%</div>
 </div>
 </section>
 </main>
-<footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
-<div class="mx-auto max-w-7xl px-6 lg:px-10">
-<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
-<div class="flex items-center gap-3">
-<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-<span class="material-symbols-outlined text-lg">psychology</span>
+<footer class="relative z-10 pt-24 pb-12 px-6 border-t border-white/5" id="about">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+<div class="col-span-2">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-6 h-6 border border-[var(--tech-blue)] flex items-center justify-center">
+<span class="font-mono text-[var(--tech-blue)] text-[10px] font-bold">HB</span>
 </div>
-<span class="text-lg font-bold text-slate-900 dark:text-slate-100">MBTI 首页</span>
+<span class="font-bold tracking-tight text-white">珠海换呗科技有限公司</span>
 </div>
-<div class="flex gap-8 text-sm font-medium text-warm-gray">
-<a class="hover:text-primary" href="#">隐私政策</a>
-<a class="hover:text-primary" href="#">服务条款</a>
-<a class="hover:text-primary" href="#">联系我们</a>
-</div>
-<div class="flex gap-4">
-<a class="text-warm-gray hover:text-primary" href="#">
-<span class="material-symbols-outlined">share</span>
-</a>
-<a class="text-warm-gray hover:text-primary" href="#">
-<span class="material-symbols-outlined">mail</span>
-</a>
-</div>
-</div>
-<p class="mt-8 text-center text-xs text-warm-gray/60 dark:text-slate-500">
-                    © 2024 MBTI 首页。保留所有权利。与 Myers &amp; Briggs 基金会无关。
+<p class="text-sm text-slate-500 max-w-sm leading-relaxed font-light">
+                    成立于2024年，致力于为全球用户提供优质的软件工具和 AI 解决方案。我们坚持开源精神，打造安全、高效、易用的产品。
                 </p>
 </div>
-</footer>
+<div>
+<h5 class="text-[11px] font-bold text-white uppercase tracking-widest mb-6">法律合规</h5>
+<ul class="flex flex-col gap-4 text-xs text-slate-500">
+<li><a class="hover:text-white transition-colors" href="#">用户协议</a></li>
+<li><a class="hover:text-white transition-colors" href="#">隐私政策</a></li>
+<li><a href="http://beian.miit.gov.cn/" target="_blank" class="hover:text-white transition-colors">粤ICP备2026020205号</a></li>
+</ul>
 </div>
+<div>
+<h5 class="text-[11px] font-bold text-white uppercase tracking-widest mb-6">开源社区</h5>
+<ul class="flex flex-col gap-4 text-xs text-slate-500">
+<li><a href="https://github.com/hlf2002" target="_blank" class="hover:text-white transition-colors">GitHub</a></li>
+<li><a href="https://github.com/hlf2002/wumi" target="_blank" class="hover:text-white transition-colors">天下无密</a></li>
+<li><a href="https://www.7373.com.cn/mbti" target="_blank" class="hover:text-white transition-colors">MBTI 测试</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5 text-[10px] font-mono text-slate-600">
+<div class="flex items-center gap-6">
+<span>© 2024 珠海换呗科技有限公司</span>
+<span class="hidden md:inline">ZHUHAI, CHINA</span>
+</div>
+<div class="flex items-center gap-4">
+<span id="sys-time"></span>
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+<span>SYSTEM ONLINE</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    function updateSystemTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const element = document.getElementById('sys-time');
+        if(element) {
+            element.textContent = `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+        }
+    }
+    setInterval(updateSystemTime, 1000);
+    updateSystemTime();
+</script>
+
 </body></html>
