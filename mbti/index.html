@@ -1,1589 +1,858 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTI性格测试 | MBTI.7373.com.cn</title>
-    <meta name="description" content="专业的MBTI性格测试，28道题目精确测量你的性格类型，了解你的MBTI类型及职业倾向。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-white: #FFFFFF;
-            --text-primary: #1a1a2e;
-            --text-secondary: #666666;
-            --text-muted: #999999;
-            --accent-blue: #4a90d9;
-            --accent-blue-hover: #3a7bc8;
-            --accent-coral: #ff6b6b;
-            --accent-teal: #20c997;
-            --accent-purple: #9b59b6;
-            --accent-orange: #f39c12;
-            --border-color: #e8e8e8;
-            --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        body {
-            font-family: "Noto Sans SC", "PingFang SC", -apple-system, sans-serif;
-            background: var(--bg-white);
-            color: var(--text-primary);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* 主内容区 */
-        .main-content {
-            padding-top: 60px;
-            min-height: 100vh;
-        }
-
-        /* 首页 */
-        .home-page {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 24px;
-            text-align: center;
-        }
-
-        .home-page h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .home-page .subtitle {
-            font-size: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 48px;
-        }
-
-        .intro-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 48px;
-            margin-bottom: 40px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .intro-card h2 {
-            font-size: 24px;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-        }
-
-        .intro-card p {
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            font-size: 16px;
-        }
-
-        .dimensions-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 32px 0;
-        }
-
-        .dimension-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: left;
-        }
-
-        .dimension-item h4 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .dimension-item .letters {
-            display: inline-flex;
-            gap: 4px;
-        }
-
-        .dimension-item .letters span {
-            background: var(--accent-blue);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .dimension-item p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        .start-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--accent-blue), #5a9fe0);
-            color: white;
-            border: none;
-            padding: 18px 48px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.3);
-        }
-
-        .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 144, 217, 0.4);
-        }
-
-        .start-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* 题数选择 */
-        .test-choice {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 32px 0;
-        }
-
-        .choice-btn {
-            flex: 1;
-            max-width: 280px;
-            padding: 24px;
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            background: var(--bg-white);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .choice-btn:hover {
-            border-color: var(--accent-blue);
-            box-shadow: var(--card-shadow);
-        }
-
-        .choice-btn.recommended {
-            border-color: var(--accent-coral);
-            position: relative;
-        }
-
-        .choice-btn.recommended::before {
-            content: '强烈推荐';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-coral);
-            color: white;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .choice-btn .num {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .choice-btn .label {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-        }
-
-        .choice-btn .desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-
-        .choice-btn.recommended .num {
-            color: var(--accent-coral);
-        }
-
-        .choice-btn .start-icon {
-            margin-top: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .choice-btn.recommended .start-icon {
-            color: var(--accent-coral);
-        }
-
-        .choice-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item .number {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--accent-blue);
-        }
-
-        .stat-item .label {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* 测试页面 */
-        .test-page {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            display: none;
-        }
-
-        .test-page.active {
-            display: block;
-        }
-
-        .progress-container {
-            margin-bottom: 40px;
-        }
-
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 4px;
-            transition: width 0.4s ease;
-        }
-
-        .encouragement {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 15px;
-            color: var(--text-secondary);
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #f8f9fa, #fff5f5);
-            border-radius: 12px;
-            border-left: 4px solid var(--accent-coral);
-            animation: fadeIn 0.5s ease;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: flex-start;
-            margin-top: 24px;
-        }
-
-        .prev-btn {
-            padding: 10px 20px;
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .prev-btn:hover {
-            background: #f8f9fa;
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-        }
-
-        .question-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .question-number {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        .question-text {
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .option-btn {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 24px;
-            background: #f8f9fa;
-            border: 2px solid transparent;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .option-btn:hover {
-            background: #fff;
-            border-color: var(--accent-blue);
-            box-shadow: var(--card-shadow);
-        }
-
-        .option-btn.selected {
-            background: #fff;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 4px rgba(74, 144, 217, 0.15);
-        }
-
-        .option-letter {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-white);
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-            transition: all 0.3s;
-        }
-
-        .option-btn.selected .option-letter {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            color: white;
-        }
-
-        .option-content {
-            flex: 1;
-        }
-
-        .option-content p {
-            font-size: 16px;
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* 结果页面 */
-        .result-page {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
-
-        .result-page.active {
-            display: block;
-        }
-
-        .result-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .result-header h1 {
-            font-size: 20px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .mbti-type {
-            font-size: 80px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-coral));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 8px;
-            margin-bottom: 16px;
-        }
-
-        .type-name {
-            font-size: 28px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-bottom: 48px;
-        }
-
-        .result-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .result-card h3 {
-            font-size: 18px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .dimension-result {
-            margin-bottom: 20px;
-        }
-
-        .dimension-result:last-child {
-            margin-bottom: 0;
-        }
-
-        .dimension-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .dimension-label .pair {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .dimension-label .value {
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .dimension-bar {
-            height: 12px;
-            background: #f0f0f0;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .dimension-fill {
-            height: 100%;
-            border-radius: 6px;
-            transition: width 1s ease;
-        }
-
-        .dimension-fill.e-i { background: linear-gradient(90deg, #3498db, #2980b9); }
-        .dimension-fill.s-n { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
-        .dimension-fill.t-f { background: linear-gradient(90deg, #e74c3c, #c0392b); }
-        .dimension-fill.j-p { background: linear-gradient(90deg, #f39c12, #e67e22); }
-
-        .type-description {
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        .type-description h4 {
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .type-description p {
-            margin-bottom: 16px;
-        }
-
-        /* 16种类型匹配度 */
-        .all-types {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .all-types h3 {
-            font-size: 18px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .types-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        .type-item {
-            padding: 16px 12px;
-            border-radius: 12px;
-            text-align: center;
-            background: #f8f9fa;
-            transition: all 0.3s;
-        }
-
-        .type-item.current {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-        }
-
-        .type-item .type-letter {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .type-item .match-percent {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .retest-btn {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 40px auto 0;
-            padding: 16px 32px;
-            background: var(--bg-white);
-            border: 2px solid var(--accent-blue);
-            color: var(--accent-blue);
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .retest-btn:hover {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            padding: 40px 24px;
-            color: var(--text-muted);
-            font-size: 14px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* 动画 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 0 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .home-page h1 {
-                font-size: 32px;
-            }
-
-            .home-page .subtitle {
-                font-size: 18px;
-            }
-
-            .dimensions-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                flex-direction: column;
-                gap: 24px;
-            }
-
-            .mbti-type {
-                font-size: 48px;
-                letter-spacing: 4px;
-            }
-
-            .result-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .types-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .question-text {
-                font-size: 18px;
-            }
-
-            .option-btn {
-                padding: 16px;
-            }
-        }
-    </style>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBTI性格测试 - 发现真实的自己</title>
+<meta name="description" content="专业的MBTI性格测试，基于科学且兼具包容性。加入全球200万人的行列，发现你的性格类型，了解真实的自己。">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#4e6e5d",
+        "accent": "#d97706",
+        "background-light": "#fdfbf7",
+        "background-dark": "#1a1c1a",
+        "sage-light": "#e8edeb",
+        "warm-gray": "#71716a"
+      },
+      fontFamily: {
+        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+      }
+    }
+  }
+}
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Noto Sans SC", "PingFang SC", -apple-system, sans-serif; }
+.home-page, .test-page, .result-page { display: none; }
+.home-page.active, .test-page.active, .result-page.active { display: block; }
+</style>
 </head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <a href="#" class="logo" onclick="goHome()">
-            <div class="logo-icon">M</div>
-            <span>MBTI.7373.com.cn</span>
-        </a>
-        <div class="nav-links">
-            <a href="#" onclick="goHome()">首页</a>
-            <a href="#about">关于MBTI</a>
-        </div>
-    </nav>
+<body class="bg-background-light font-display text-slate-900">
+<div class="min-h-screen flex flex-col">
+<!-- 导航栏 -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/90 backdrop-blur-md">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+<div class="flex items-center gap-3">
+<a href="/" class="flex items-center gap-3 text-decoration-none">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">psychology</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-primary">MBTI 测试</span>
+</a>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary" href="#types">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary" href="https://www.7373.com.cn">返回官网</a>
+</nav>
+<div class="flex items-center gap-4">
+<button onclick="showTestChoice()" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md">
+<span>开始测试</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</header>
 
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <!-- 首页 -->
-        <div class="home-page" id="homePage">
-            <h1>MBTI 性格测试</h1>
-            <p class="subtitle">发现你的性格类型，了解真实的自己</p>
+<main class="flex-1">
+<!-- 首页 -->
+<div class="home-page active" id="homePage">
+<section class="mx-auto max-w-7xl px-6 py-12 lg:py-24">
+<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+<div class="flex flex-col gap-8 order-2 lg:order-1">
+<div class="space-y-4">
+<span class="inline-block rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">发现您的专属成长路径</span>
+<h1 class="text-4xl font-black leading-[1.2] tracking-tight text-slate-900 lg:text-5xl">
+了解<span class="text-primary">真实</span>的自己，<br/>读懂身边的他人
+</h1>
+<p class="max-w-xl text-lg leading-relaxed text-warm-gray">
+加入全球超过 200 万人的行列，通过我们基于科学且兼具包容性的性格评估工具，探索您的真实潜能。这是一个温暖亲和、为每一位独立个体精心打造的测评空间。
+</p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button onclick="showTestChoice()" class="h-14 rounded-xl bg-primary px-8 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
+开始免费测试
+</button>
+<button onclick="document.getElementById('types').scrollIntoView({behavior: 'smooth'})" class="h-14 rounded-xl border-2 border-primary/20 bg-transparent px-8 text-lg font-bold text-primary hover:bg-primary/5 transition-colors">
+探索人格类型
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-warm-gray">
+<div class="flex -space-x-2">
+<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-200"></div>
+<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-300"></div>
+<div class="h-8 w-8 rounded-full border-2 border-background-light bg-slate-400"></div>
+</div>
+<p>深受每月 <span class="font-bold text-slate-900">50,000+</span> 访客的信赖</p>
+</div>
+</div>
+<div class="relative order-1 lg:order-2">
+<div class="aspect-square w-full rounded-3xl bg-sage-light overflow-hidden shadow-inner flex items-center justify-center">
+<div class="text-center p-8">
+<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="w-16 h-16 rounded-2xl bg-white shadow flex items-center justify-center text-2xl">🧠</div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow flex items-center justify-center text-2xl">💡</div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow flex items-center justify-center text-2xl">🎯</div>
+<div class="w-16 h-16 rounded-2xl bg-white shadow flex items-center justify-center text-2xl">✨</div>
+</div>
+<p class="text-primary font-bold text-lg">16种性格类型</p>
+<p class="text-warm-gray text-sm">精准分析你的独特人格</p>
+</div>
+</div>
+<div class="absolute -bottom-6 -left-6 rounded-2xl bg-white p-6 shadow-xl border border-primary/10">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-accent">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">100% 隐私保护</p>
+<p class="text-xs text-warm-gray">您的结果仅由您自己掌握</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="intro-card">
-                <h2>关于 MBTI 性格测试</h2>
-                <p>MBTI（Myers-Briggs Type Indicator）是一种基于卡尔·荣格心理类型理论的性格评估工具。</p>
-                <p>通过四个维度八个偏好的组合，能够精确识别出16种不同的性格类型，帮助你更好地了解自己和他人。</p>
+<!-- 人格类型展示 -->
+<section class="bg-sage-light/50 py-20" id="types">
+<div class="mx-auto max-w-7xl px-6">
+<div class="mb-12 flex flex-col items-center text-center">
+<h2 class="text-3xl font-bold text-slate-900">探索 16 种人格类型</h2>
+<p class="mt-4 max-w-2xl text-warm-gray">
+每一种人格都是独一无二的。浏览四大核心类别，寻找属于您或您所爱之人的心灵归属。
+</p>
+<div class="mt-10 inline-flex rounded-2xl bg-white p-1.5 shadow-sm border border-primary/10">
+<button class="category-btn rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all" data-category="analyst" onclick="filterTypes('analyst')">分析家</button>
+<button class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all" data-category="diplomat" onclick="filterTypes('diplomat')">外交官</button>
+<button class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all" data-category="sentinel" onclick="filterTypes('sentinel')">守护者</button>
+<button class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all" data-category="explorer" onclick="filterTypes('explorer')">探险家</button>
+</div>
+</div>
 
-                <div class="dimensions-grid">
-                    <div class="dimension-item">
-                        <h4><span class="letters"><span>E</span><span>I</span></span> 外向 vs 内向</h4>
-                        <p>你从哪里获得能量？E代表从外部世界获取能量，I代表从内心独处中获得能量。</p>
-                    </div>
-                    <div class="dimension-item">
-                        <h4><span class="letters"><span>S</span><span>N</span></span> 感觉 vs 直觉</h4>
-                        <p>你如何获取信息？S关注具体事实和细节，N关注可能性和整体模式。</p>
-                    </div>
-                    <div class="dimension-item">
-                        <h4><span class="letters"><span>T</span><span>F</span></span> 思考 vs 情感</h4>
-                        <p>你如何做决定？T基于逻辑和客观分析，F基于个人价值观和他人感受。</p>
-                    </div>
-                    <div class="dimension-item">
-                        <h4><span class="letters"><span>J</span><span>P</span></span> 判断 vs 知觉</h4>
-                        <p>你如何应对外部世界？J喜欢有计划和结构，P喜欢灵活和开放。</p>
-                    </div>
-                </div>
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4" id="typesGrid">
+<!-- 分析家 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🏛️</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">建筑师</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INTJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+富有想象力且具备战略眼光的思考者，对万事皆有计划。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-                <div class="test-choice">
-                    <div class="choice-btn" onclick="startTest(40)">
-                        <div class="num">40</div>
-                        <div class="label">道题</div>
-                        <div class="desc">快速测试，约3分钟</div>
-                        <div class="start-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                            开始
-                        </div>
-                    </div>
-                    <div class="choice-btn recommended" onclick="startTest(100)">
-                        <div class="num">100</div>
-                        <div class="label">道题</div>
-                        <div class="desc">详细测试，约8分钟，更精准</div>
-                        <div class="start-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                            开始
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🔬</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">逻辑学家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INTP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+具有创造力的发明家，对知识有着永无止境的渴望。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="number">4</div>
-                    <div class="label">个维度</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">16</div>
-                    <div class="label">种性格类型</div>
-                </div>
-            </div>
-        </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">⚔️</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">指挥官</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENTJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+大胆、富有想象力且意志强大的领导者，总能找到解决之道。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-        <!-- 测试页面 -->
-        <div class="test-page" id="testPage">
-            <div class="progress-container">
-                <div class="progress-text">
-                    <span>题目 <span id="currentNum">1</span> / <span id="totalNum">28</span></span>
-                    <span id="dimensionName">外向 vs 内向</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                </div>
-                <div class="encouragement" id="encouragement">🎯 加油！开始你的性格探索之旅吧！</div>
-            </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">💬</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">辩论家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENTP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+聪明、好奇的思考者，无法抗拒任何智力上的挑战。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            <div class="question-card">
-                <div class="question-number" id="questionNumber">第 1 题</div>
-                <div class="question-text" id="questionText"></div>
-                <div class="options">
-                    <button class="option-btn" id="optionA" onclick="selectOption('A')">
-                        <div class="option-letter">A</div>
-                        <div class="option-content">
-                            <p id="optionAText"></p>
-                        </div>
-                    </button>
-                    <button class="option-btn" id="optionB" onclick="selectOption('B')">
-                        <div class="option-letter">B</div>
-                        <div class="option-content">
-                            <p id="optionBText"></p>
-                        </div>
-                    </button>
-                </div>
-                <div class="nav-buttons">
-                    <button class="prev-btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">
-                        ← 上一题
-                    </button>
-                </div>
-            </div>
-        </div>
+<!-- 外交官 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🌟</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">提倡者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INFJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+安静而坚定的理想主义者，始终坚守自己的原则。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-        <!-- 结果页面 -->
-        <div class="result-page" id="resultPage">
-            <div class="result-header">
-                <h1>你的MBTI性格类型是</h1>
-                <div class="mbti-type" id="resultType">INTJ</div>
-                <div class="type-name" id="resultTypeName">建筑师</div>
-            </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎨</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">调停者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INFP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+富有诗意的善良者，始终在寻找生命的意义。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            <div class="result-grid">
-                <div class="result-card">
-                    <h3>四维度分析</h3>
-                    <div class="dimension-result">
-                        <div class="dimension-label">
-                            <span class="pair">外向 (E) — 内向 (I)</span>
-                            <span class="value" id="eiValue">80% I</span>
-                        </div>
-                        <div class="dimension-bar">
-                            <div class="dimension-fill e-i" id="eiBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="dimension-result">
-                        <div class="dimension-label">
-                            <span class="pair">感觉 (S) — 直觉 (N)</span>
-                            <span class="value" id="snValue">70% N</span>
-                        </div>
-                        <div class="dimension-bar">
-                            <div class="dimension-fill s-n" id="snBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="dimension-result">
-                        <div class="dimension-label">
-                            <span class="pair">思考 (T) — 情感 (F)</span>
-                            <span class="value" id="tfValue">65% T</span>
-                        </div>
-                        <div class="dimension-bar">
-                            <div class="dimension-fill t-f" id="tfBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="dimension-result">
-                        <div class="dimension-label">
-                            <span class="pair">判断 (J) — 知觉 (P)</span>
-                            <span class="value" id="jpValue">60% J</span>
-                        </div>
-                        <div class="dimension-bar">
-                            <div class="dimension-fill j-p" id="jpBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">👑</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">主人公</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENFJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+富有魅力的领导者，能够启发和激励他人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-                <div class="result-card">
-                    <h3>性格特点</h3>
-                    <div class="type-description" id="typeDescription">
-                    </div>
-                </div>
-            </div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎉</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">竞选者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENFP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+热情洋溢的创意者，总是寻找支持他人的方式。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            <div class="all-types">
-                <h3>16种性格类型匹配度</h3>
-                <div class="types-grid" id="typesGrid">
-                </div>
-            </div>
+<!-- 守护者 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">📋</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">物流师</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISTJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+务实且注重事实的可靠者，可以信赖他们完成任务。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            <button class="retest-btn" onclick="restartTest()">重新测试</button>
-        </div>
-    </main>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🛡️</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">守卫者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISFJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+非常专注且温暖的守护者，总是时刻准备保护他人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <p>MBTI.7373.com.cn | 专业的MBTI性格测试</p>
-        <p>版权所有 © <a href="https://www.7373.com.cn" target="_blank" style="color: inherit; text-decoration: underline;">珠海换呗科技有限公司</a></p>
-    </footer>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🏢</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">总经理</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESTJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+出色的管理者，在组织和管理方面天赋异禀。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-    <script>
-        // MBTI 完整题目库 - 专业格式
-        // 每个问题有question(问题描述)、a(A选项描述)、b(B选项描述)
-        const allQuestions = [
-            // E vs I 外向-内向 (25题)
-            { dim: 'EI', question: '在社交聚会中，你通常扮演什么角色？', a: '成为焦点，与许多人交流', b: '与熟悉的人小范围交流' },
-            { dim: 'EI', question: '你更喜欢什么样的环境？', a: '多样性和变化的环境', b: '稳定和可预测的环境' },
-            { dim: 'EI', question: '你倾向于如何表达自己的想法？', a: '口头表达，侃侃而谈', b: '书面表达，深思熟虑' },
-            { dim: 'EI', question: '你通过什么方式获得能量？', a: '与他人相处，参加社交活动', b: '独处，安静思考' },
-            { dim: 'EI', question: '在团队工作中，你更倾向于？', a: '带头发言，推动讨论', b: '倾听后发言，补充意见' },
-            { dim: 'EI', question: '什么更容易吸引你的注意力？', a: '外部世界的事物', b: '自己内心的想法' },
-            { dim: 'EI', question: '与陌生人交谈时，你通常？', a: '很容易打开话题', b: '比较沉默' },
-            { dim: 'EI', question: '你更喜欢什么样的工作方式？', a: '与同事协作沟通', b: '独立专注完成' },
-            { dim: 'EI', question: '空闲时间你更倾向于？', a: '参加社交活动', b: '独自享受安静时光' },
-            { dim: 'EI', question: '遇到问题时，你会？', a: '找人倾诉讨论', b: '自己思考解决' },
-            { dim: 'EI', question: '你在什么环境下更能发挥能力？', a: '群体环境中', b: '独自工作时' },
-            { dim: 'EI', question: '你更偏好哪种沟通方式？', a: '面对面交流', b: '文字信息交流' },
-            { dim: 'EI', question: '什么能让你充满动力？', a: '外界反馈', b: '内在想法' },
-            { dim: 'EI', question: '在聚会中，你通常是？', a: '活跃气氛的人', b: '观察氛围的人' },
-            { dim: 'EI', question: '你更倾向于？', a: '结交新朋友', b: '维护老朋友' },
-            { dim: 'EI', question: '做决定时，你会？', a: '听取大家意见', b: '自己深思熟虑' },
-            { dim: 'EI', question: '你的工作风格更倾向于？', a: '边做边讨论', b: '先做再汇报' },
-            { dim: 'EI', question: '你更喜欢？', a: '广度接触各类事物', b: '深度钻研单一领域' },
-            { dim: 'EI', question: '在演讲或发言时，你会？', a: '即兴发挥更自如', b: '准备充分更安心' },
-            { dim: 'EI', question: '你更容易通过什么理解问题？', a: '交谈', b: '阅读' },
-            { dim: 'EI', question: '在团队中，你更喜欢？', a: '担任协调者的角色', b: '担任执行者的角色' },
-            { dim: 'EI', question: '当你兴奋时，你会？', a: '表现在外面', b: '藏在心里' },
-            { dim: 'EI', question: '你更擅长？', a: '同时处理多项任务', b: '专注完成一件事' },
-            { dim: 'EI', question: '你的想法通常？', a: '先说后想', b: '先想后说' },
-            { dim: 'EI', question: '你喜欢的工作环境是？', a: '开放热闹的', b: '安静独立的' },
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎭</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">执政官</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESFJ</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+出色的照顾者，喜欢帮助和支持身边的人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            // S vs N 感觉-直觉 (25题)
-            { dim: 'SN', question: '你更关注事物的哪些方面？', a: '具体的事实和细节', b: '可能性和整体模式' },
-            { dim: 'SN', question: '你更喜欢什么样的知识？', a: '实实在在的技能', b: '概念和理论' },
-            { dim: 'SN', question: '解决问题时，你倾向于？', a: '使用经验和方法', b: '创新和新思路' },
-            { dim: 'SN', question: '你更容易记住什么？', a: '具体的事情和数据', b: '概念和想法' },
-            { dim: 'SN', question: '你更相信什么？', a: '亲眼所见的事实', b: '直觉和灵感' },
-            { dim: 'SN', question: '学习新事物时，你会？', a: '先了解具体操作', b: '先了解整体概念' },
-            { dim: 'SN', question: '什么更容易吸引你？', a: '实际可行的想法', b: '富有想象力的创意' },
-            { dim: 'SN', question: '你看重什么？', a: '实际经验和技能', b: '创新理念和可能性' },
-            { dim: 'SN', question: '阅读时你更注重什么？', a: '具体的事实和数据', b: '作者的见解和理念' },
-            { dim: 'SN', question: '你喜欢什么样的工作？', a: '按部就班的', b: '富有变化的' },
-            { dim: 'SN', question: '你更容易理解什么？', a: '具体可感的事物', b: '抽象复杂的概念' },
-            { dim: 'SN', question: '你更喜欢什么方式？', a: '传统可靠的方法', b: '新颖独特的方式' },
-            { dim: 'SN', question: '描述事物时，你倾向于？', a: '描述具体细节', b: '描述整体印象' },
-            { dim: 'SN', question: '你更容易？', a: '看到事物的现状', b: '预见未来的可能' },
-            { dim: 'SN', question: '你更相信什么？', a: '经过验证的经验', b: '新的可能性' },
-            { dim: 'SN', question: '学习时你更喜欢？', a: '动手实践', b: '理论研究' },
-            { dim: 'SN', question: '什么更能激励你？', a: '现实的利益', b: '未来的愿景' },
-            { dim: 'SN', question: '你更喜欢什么？', a: '确定已知的事物', b: '探索未知领域' },
-            { dim: 'SN', question: '思考时你更倾向于？', a: '基于事实推理', b: '基于想象推演' },
-            { dim: 'SN', question: '你更关注什么？', a: '当前的实际问题', b: '未来的发展方向' },
-            { dim: 'SN', question: '你更容易发现什么？', a: '细节问题', b: '整体趋势' },
-            { dim: 'SN', question: '你更喜欢什么样的指示？', a: '具体明确的', b: '方向性的引导' },
-            { dim: 'SN', question: '决策时你更依赖什么？', a: '过往的数据和信息', b: '直觉和洞察' },
-            { dim: 'SN', question: '什么更能激励你？', a: '可实现的目标', b: '远大的理想' },
-            { dim: 'SN', question: '你更喜欢什么方式？', a: '脚踏实地', b: '富有想象力' },
+<!-- 探险家 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🔧</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">鉴赏家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISTP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+大胆而实用的实验者，是解决难题的专家。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            // T vs F 思考-情感 (25题)
-            { dim: 'TF', question: '做决定时你看重什么？', a: '逻辑和客观分析', b: '个人价值观和他人感受' },
-            { dim: 'TF', question: '当你不同意某人时，你会？', a: '直接指出问题', b: '考虑对方感受' },
-            { dim: 'TF', question: '你更容易被什么说服？', a: '有逻辑的论点', b: '情感化的诉求' },
-            { dim: 'TF', question: '在争论中你更倾向于？', a: '坚持原则，对事不对人', b: '迁就对方，维护和谐' },
-            { dim: 'TF', question: '评价一件事时你更在意什么？', a: '是否公平合理', b: '是否人性化' },
-            { dim: 'TF', question: '你更容易怎么做？', a: '客观地分析情况', b: '设身处地理解他人' },
-            { dim: 'TF', question: '你更欣赏什么？', a: '理性思考的能力', b: '情感丰富的特质' },
-            { dim: 'TF', question: '做决定时你倾向于？', a: '先思考再行动', b: '先感受再思考' },
-            { dim: 'TF', question: '你更容易怎么做？', a: '指出别人的错误', b: '照顾别人的情绪' },
-            { dim: 'TF', question: '你看重什么？', a: '效率和结果', b: '过程中的关系' },
-            { dim: 'TF', question: '在冲突中你更关注什么？', a: '问题的对错', b: '双方的感受' },
-            { dim: 'TF', question: '你更容易怎么做？', a: '理性地拒绝他人', b: '因人情而妥协' },
-            { dim: 'TF', question: '你更认同什么？', a: '公正无私的原则', b: '因人而异的关怀' },
-            { dim: 'TF', question: '当你安慰别人时，你会？', a: '分析问题给出建议', b: '倾听并表示理解' },
-            { dim: 'TF', question: '你更容易被什么打动？', a: '理性的分析', b: '真诚的情感' },
-            { dim: 'TF', question: '工作中你更注重什么？', a: '任务完成的质量', b: '团队氛围的和谐' },
-            { dim: 'TF', question: '你更愿意怎么做？', a: '说出真实的看法', b: '维护良好的人际关系' },
-            { dim: 'TF', question: '看到不公平的事，你会？', a: '立即指出并纠正', b: '考虑各方感受再处理' },
-            { dim: 'TF', question: '你更容易根据什么做判断？', a: '事实', b: '人的因素' },
-            { dim: 'TF', question: '你看重什么？', a: '逻辑的严密性', b: '情感的真挚性' },
-            { dim: 'TF', question: '批评他人时，你会？', a: '对事不对人', b: '顾虑对方感受' },
-            { dim: 'TF', question: '你更容易怎么做？', a: '压抑情感保持理性', b: '流露情感表达感受' },
-            { dim: 'TF', question: '你更欣赏什么样的领导？', a: '公正的', b: '体贴的' },
-            { dim: 'TF', question: '做选择时，你会？', a: '权衡利弊得失', b: '考虑情感因素' },
-            { dim: 'TF', question: '你更容易怎样处理批评？', a: '接受其中的合理部分', b: '感受到情感伤害' },
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎸</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">探险家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISFP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+灵活有魅力的艺术家，随时准备探索和新体验。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-            // J vs P 判断-知觉 (20题) - 优化版
-            // J倾向：喜欢计划、组织、确定性、封闭性、准时、整洁、目标导向
-            // P倾向：喜欢灵活、开放、可能性、即兴、随性、探索
-            { dim: 'JP', question: '面对一个重要任务，你通常会？', a: '先制定详细计划再行动', b: '先开始做，边做边调整' },
-            { dim: 'JP', question: '你更喜欢哪种工作方式？', a: '按部就班，有清晰的步骤', b: '灵活应变，随时调整方向' },
-            { dim: 'JP', question: '当别人问你一个问题时，你倾向于？', a: '给出一个明确的答案', b: '提供多个可能的选项' },
-            { dim: 'JP', question: '你的房间或工作区域通常是？', a: '整洁有序，所有物品各归其位', b: '稍显凌乱，但自己知道东西在哪' },
-            { dim: 'JP', question: '你如何看待"计划赶不上变化"这句话？', a: '应该尽量让计划赶上变化', b: '变化是正常的，计划只是参考' },
-            { dim: 'JP', question: '当你约好一个时间，你会？', a: '严格遵守，几乎从不迟到', b: '时间只是参考，偶尔会有些弹性' },
-            { dim: 'JP', question: '你喜欢什么样的旅行方式？', a: '提前规划好每一天的行程', b: '随性走到哪算哪' },
-            { dim: 'JP', question: '做决定时，你更倾向于？', a: '尽快做出决定并执行', b: '保持开放，等待更多信息' },
-            { dim: 'JP', question: '当你列了一个待办清单，你会？', a: '严格按照清单一项项完成', b: '清单只是提醒，完成顺序很灵活' },
-            { dim: 'JP', question: '你更喜欢哪种生活节奏？', a: '稳定可预测的日程安排', b: '充满变化和可能性' },
-            { dim: 'JP', question: '面对规则和制度，你通常？', a: '尊重并严格执行', b: '保留灵活处理的空间' },
-            { dim: 'JP', question: '你更喜欢完成工作的时间是？', a: '截止日期前预留充足时间', b: '截止日期前最后一刻' },
-            { dim: 'JP', question: '当有人邀请你参加一个临时活动，你会？', a: '提前安排好的时间更安心', b: '随时可以改变计划，很乐意参加' },
-            { dim: 'JP', question: '你更看重工作中的什么？', a: '明确的目标和完成标准', b: '自由发挥和创造的空间' },
-            { dim: 'JP', question: '如果你迟到了，你会？', a: '非常在意并尽快补救', b: '觉得没什么大不了' },
-            { dim: 'JP', question: '你更喜欢哪种社交活动？', a: '有明确主题和安排的聚会', b: '没有特定议程，大家随意交流' },
-            { dim: 'JP', question: '当你学习一个新技能时，你倾向于？', a: '按照教材或课程顺序系统学习', b: '自己摸索，边用边学' },
-            { dim: 'JP', question: '你更希望别人如何评价你？', a: '可靠、守时、言出必行', b: '灵活、创意、随和' },
-            { dim: 'JP', question: '面对生活中的不确定性，你会？', a: '尽量减少不确定因素', b: '接受并享受不确定性带来的可能' },
-            { dim: 'JP', question: '你更喜欢"完成"还是"开始"的感觉？', a: '完成一件事带来的成就感', b: '开始新事物带来的兴奋感' }
-        ];
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">⚡</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">企业家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESTP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+聪明、精力充沛的冒险者，善于分析形势。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
 
-        // 根据题目数量获取题目
-        let questions = [];
-        let currentQuestionCount = 40;
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-sage-light flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎤</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900">表演者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESFP</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray">
+自发、精力充沛的表演者，喜欢带给别人欢乐。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="javascript:void(0)" onclick="startTest(40)">
+开始测试 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
 
-        function getQuestions(count) {
-            // 洗牌数组
-            const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
-            return shuffled.slice(0, count);
+<!-- CTA区域 -->
+<section class="mx-auto max-w-7xl px-6 py-20">
+<div class="rounded-3xl bg-primary px-8 py-16 text-center text-white lg:px-24">
+<h2 class="text-3xl font-black lg:text-4xl">准备好遇见内在的自己了吗？</h2>
+<p class="mx-auto mt-6 max-w-xl text-lg text-sage-light opacity-90">
+加入数百万人的行列，今天就开启您的自我发现之旅。只需 3-5 分钟。
+</p>
+<button onclick="showTestChoice()" class="mt-10 inline-flex h-14 items-center justify-center rounded-xl bg-white px-10 text-lg font-bold text-primary transition-all hover:scale-105 active:scale-95 shadow-lg">
+立即开始测试
+</p>
+<p class="mt-6 text-sm font-medium opacity-70">无需注册即可开始 · 完全免费</p>
+</div>
+</section>
+
+<!-- 题数选择弹窗 -->
+<div id="testChoiceModal" class="fixed inset-0 z-50 hidden">
+<div class="absolute inset-0 bg-black/50" onclick="closeTestChoice()"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg p-6">
+<div class="rounded-2xl bg-white p-8 shadow-2xl">
+<h3 class="text-2xl font-bold text-center mb-2">选择测试题数</h3>
+<p class="text-warm-gray text-center mb-6">不同题数会影响测试精准度</p>
+<div class="space-y-4">
+<button onclick="startTest(40)" class="w-full p-6 rounded-xl border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all text-left">
+<div class="flex items-center justify-between">
+<div>
+<div class="text-xl font-bold text-slate-900">40 道题</div>
+<div class="text-sm text-warm-gray">快速测试，约3分钟</div>
+</div>
+<div class="text-primary font-bold">推荐</div>
+</div>
+</button>
+<button onclick="startTest(80)" class="w-full p-6 rounded-xl border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all text-left">
+<div class="flex items-center justify-between">
+<div>
+<div class="text-xl font-bold text-slate-900">80 道题</div>
+<div class="text-sm text-warm-gray">标准测试，约6分钟</div>
+</div>
+</div>
+</button>
+</div>
+<button onclick="closeTestChoice()" class="mt-4 w-full py-3 text-warm-gray hover:text-slate-900">取消</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 测试页面 -->
+<div class="test-page" id="testPage">
+<div class="max-w-3xl mx-auto px-6 py-8">
+<div class="mb-8">
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm font-medium text-warm-gray">题目 <span id="currentNum">1</span> / <span id="totalNum">40</span></span>
+<span class="text-sm font-medium text-primary" id="dimensionName">外向 vs 内向</span>
+</div>
+<div class="h-2 bg-sage-light rounded-full overflow-hidden">
+<div id="progressFill" class="h-full bg-primary transition-all duration-300" style="width: 0%"></div>
+</div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-lg p-8">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">第 <span id="questionNumber">1</span> 题</span>
+</div>
+<div class="text-xl font-bold text-slate-900 mb-8" id="questionText"></div>
+
+<div class="space-y-4">
+<button class="option-btn w-full p-6 rounded-xl border-2 border-slate-200 hover:border-primary hover:bg-primary/5 transition-all text-left flex items-center gap-4" id="optionA" onclick="selectOption('A')">
+<div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-600">A</div>
+<div class="flex-1 text-slate-700" id="optionAText"></div>
+</button>
+<button class="option-btn w-full p-6 rounded-xl border-2 border-slate-200 hover:border-primary hover:bg-primary/5 transition-all text-left flex items-center gap-4" id="optionB" onclick="selectOption('B')">
+<div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-600">B</div>
+<div class="flex-1 text-slate-700" id="optionBText"></div>
+</button>
+</div>
+
+<div class="mt-8 flex justify-start">
+<button id="prevBtn" onclick="prevQuestion()" class="hidden px-6 py-3 rounded-xl border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all">
+← 上一题
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 结果页面 -->
+<div class="result-page" id="resultPage">
+<div class="max-w-4xl mx-auto px-6 py-12">
+<div class="text-center mb-12">
+<h1 class="text-3xl font-black text-slate-900 mb-4">你的MBTI性格类型是</h1>
+<div class="inline-block px-8 py-4 bg-primary text-white text-5xl font-black rounded-2xl shadow-lg" id="resultType">INTJ</div>
+<div class="mt-4 text-2xl font-bold text-primary" id="resultTypeName">建筑师</div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8 mb-12">
+<div class="bg-white rounded-2xl p-6 shadow-lg">
+<h3 class="font-bold text-slate-900 mb-6">四维度分析</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-600">外向 (E) — 内向 (I)</span>
+<span class="font-bold text-primary" id="eiValue">80% I</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div id="eiBar" class="h-full bg-gradient-to-r from-primary to-accent transition-all" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-600">感觉 (S) — 直觉 (N)</span>
+<span class="font-bold text-primary" id="snValue">70% N</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div id="snBar" class="h-full bg-gradient-to-r from-primary to-accent transition-all" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-600">思考 (T) — 情感 (F)</span>
+<span class="font-bold text-primary" id="tfValue">65% T</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div id="tfBar" class="h-full bg-gradient-to-r from-primary to-accent transition-all" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-slate-600">判断 (J) — 知觉 (P)</span>
+<span class="font-bold text-primary" id="jpValue">60% J</span>
+</div>
+<div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+<div id="jpBar" class="h-full bg-gradient-to-r from-primary to-accent transition-all" style="width: 0%"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-2xl p-6 shadow-lg">
+<h3 class="font-bold text-slate-900 mb-4">性格特点</h3>
+<p class="text-warm-gray leading-relaxed" id="typeDescription"></p>
+</div>
+</div>
+
+<div class="text-center">
+<button onclick="restartTest()" class="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">
+重新测试
+</button>
+</div>
+</div>
+</div>
+</main>
+
+<!-- 页脚 -->
+<footer class="border-t border-primary/10 bg-white py-12">
+<div class="mx-auto max-w-7xl px-6">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-lg">psychology</span>
+</div>
+<span class="text-lg font-bold text-slate-900">MBTI 测试</span>
+</div>
+<div class="flex gap-8 text-sm font-medium text-warm-gray">
+<a class="hover:text-primary" href="https://www.7373.com.cn">返回官网</a>
+</div>
+</div>
+<p class="mt-8 text-center text-xs text-warm-gray/60">
+© 2024 珠海换呗科技有限公司 | 基于科学的人格测评工具
+</p>
+</div>
+</footer>
+</div>
+
+<script>
+// ============ 核心功能代码 ============
+
+// 16种MBTI类型详细描述
+const typeDescriptions = {
+    'INTJ': { name: '建筑师', desc: '富有想象力和战略性的思想家，一切都在他们的掌控之中。' },
+    'INTP': { name: '逻辑学家', desc: '具有创造力的发明家，对知识有着永不满足的渴望。' },
+    'ENTJ': { name: '指挥官', desc: '大胆、富有想象力的领导者，总是寻求改进的方法。' },
+    'ENTP': { name: '辩论家', desc: '聪明、好奇的思想者，喜欢提出挑战性问题。' },
+    'INFJ': { name: '提倡者', desc: '安静而有魅力的理想主义者，始终坚持自己的原则。' },
+    'INFP': { name: '调停者', desc: '富有诗意的善良者，始终在寻找生活的意义。' },
+    'ENFJ': { name: '主人公', desc: '富有魅力的领导者，能够启发和激励他人。' },
+    'ENFP': { name: '竞选者', desc: '热情洋溢的创意者，总是寻找支持他人的方式。' },
+    'ISTJ': { name: '物流师', desc: '务实且注重事实的可靠者，可以信赖他们完成任务。' },
+    'ISFJ': { name: '守卫者', desc: '非常专注且温暖的守护者，总是时刻准备保护他人。' },
+    'ESTJ': { name: '总经理', desc: '出色的管理者，在组织和管理方面天赋异禀。' },
+    'ESFJ': { name: '执政官', desc: '出色的照顾者，喜欢帮助和支持身边的人。' },
+    'ISTP': { name: '鉴赏家', desc: '大胆而实用的实验者，是解决难题的专家。' },
+    'ISFP': { name: '探险家', desc: '灵活有魅力的艺术家，随时准备探索和新体验。' },
+    'ESTP': { name: '企业家', desc: '聪明、精力充沛的冒险者，善于分析形势。' },
+    'ESFP': { name: '表演者', desc: '自发、精力充沛的表演者，喜欢带给别人欢乐。' }
+};
+
+// 题目库 - 80题完整版
+const allQuestions = [
+    // E vs I 外向-内向 (20题)
+    { dim: 'EI', question: '在社交聚会中，你通常扮演什么角色？', a: '成为焦点，与许多人交流', b: '与熟悉的人小范围交流' },
+    { dim: 'EI', question: '你更喜欢什么样的环境？', a: '多样性和变化的环境', b: '稳定和可预测的环境' },
+    { dim: 'EI', question: '你倾向于如何表达自己的想法？', a: '口头表达，侃侃而谈', b: '书面表达，深思熟虑' },
+    { dim: 'EI', question: '你通过什么方式获得能量？', a: '与他人相处，参加社交活动', b: '独处，安静思考' },
+    { dim: 'EI', question: '在团队工作中，你更倾向于？', a: '带头发言，推动讨论', b: '倾听后发言，补充意见' },
+    { dim: 'EI', question: '什么更容易吸引你的注意力？', a: '外部世界的事物', b: '自己内心的想法' },
+    { dim: 'EI', question: '与陌生人交谈时，你通常？', a: '很容易打开话题', b: '比较沉默' },
+    { dim: 'EI', question: '你更喜欢什么样的工作方式？', a: '与同事协作沟通', b: '独立专注完成' },
+    { dim: 'EI', question: '空闲时间你更倾向于？', a: '参加社交活动', b: '独自享受安静时光' },
+    { dim: 'EI', question: '遇到问题时，你会？', a: '找人倾诉讨论', b: '自己思考解决' },
+    { dim: 'EI', question: '你更偏好哪种沟通方式？', a: '面对面交流', b: '文字信息交流' },
+    { dim: 'EI', question: '在聚会中，你通常是？', a: '活跃气氛的人', b: '观察氛围的人' },
+    { dim: 'EI', question: '你更倾向于？', a: '结交新朋友', b: '维护老朋友' },
+    { dim: 'EI', question: '你更喜欢？', a: '广度接触各类事物', b: '深度钻研单一领域' },
+    { dim: 'EI', question: '你更容易通过什么理解问题？', a: '交谈', b: '阅读' },
+    { dim: 'EI', question: '当你兴奋时，你会？', a: '表现在外面', b: '藏在心里' },
+    { dim: 'EI', question: '你更擅长？', a: '同时处理多项任务', b: '专注完成一件事' },
+    { dim: 'EI', question: '你的想法通常？', a: '先说后想', b: '先想后说' },
+    { dim: 'EI', question: '你喜欢的工作环境是？', a: '开放热闹的', b: '安静独立的' },
+    { dim: 'EI', question: '在公众场合发言时，你会？', a: '即兴发挥更自如', b: '准备充分更安心' },
+
+    // S vs N 感觉-直觉 (20题)
+    { dim: 'SN', question: '你更关注事物的哪些方面？', a: '具体的事实和细节', b: '可能性和整体模式' },
+    { dim: 'SN', question: '你更喜欢什么样的知识？', a: '实实在在的技能', b: '概念和理论' },
+    { dim: 'SN', question: '解决问题时，你倾向于？', a: '使用经验和方法', b: '创新和新思路' },
+    { dim: 'SN', question: '你更容易记住什么？', a: '具体的事情和数据', b: '概念和想法' },
+    { dim: 'SN', question: '你更相信什么？', a: '亲眼所见的事实', b: '直觉和灵感' },
+    { dim: 'SN', question: '学习新事物时，你会？', a: '先了解具体操作', b: '先了解整体概念' },
+    { dim: 'SN', question: '什么更容易吸引你？', a: '实际可行的想法', b: '富有想象力的创意' },
+    { dim: 'SN', question: '你看重什么？', a: '实际经验和技能', b: '创新理念和可能性' },
+    { dim: 'SN', question: '阅读时你更注重什么？', a: '具体的事实和数据', b: '作者的见解和理念' },
+    { dim: 'SN', question: '你喜欢什么样的工作？', a: '按部就班的', b: '富有变化的' },
+    { dim: 'SN', question: '你更容易理解什么？', a: '具体可感的事物', b: '抽象复杂的概念' },
+    { dim: 'SN', question: '你更喜欢什么方式？', a: '传统可靠的方法', b: '新颖独特的方式' },
+    { dim: 'SN', question: '描述事物时，你倾向于？', a: '描述具体细节', b: '描述整体印象' },
+    { dim: 'SN', question: '你更容易？', a: '看到事物的现状', b: '预见未来的可能' },
+    { dim: 'SN', question: '你更相信什么？', a: '经过验证的经验', b: '新的可能性' },
+    { dim: 'SN', question: '学习时你更喜欢？', a: '动手实践', b: '理论研究' },
+    { dim: 'SN', question: '什么更能激励你？', a: '现实的利益', b: '未来的愿景' },
+    { dim: 'SN', question: '你更喜欢什么？', a: '确定已知的事物', b: '探索未知领域' },
+    { dim: 'SN', question: '你更关注什么？', a: '当前的实际问题', b: '未来的发展方向' },
+    { dim: 'SN', question: '你更容易发现什么？', a: '细节问题', b: '整体趋势' },
+
+    // T vs F 思考-情感 (20题)
+    { dim: 'TF', question: '做决定时你看重什么？', a: '逻辑和客观分析', b: '个人价值观和他人感受' },
+    { dim: 'TF', question: '当你不同意某人时，你会？', a: '直接指出问题', b: '考虑对方感受' },
+    { dim: 'TF', question: '你更容易被什么说服？', a: '有逻辑的论点', b: '情感化的诉求' },
+    { dim: 'TF', question: '在争论中你更倾向于？', a: '坚持原则，对事不对人', b: '迁就对方，维护和谐' },
+    { dim: 'TF', question: '评价一件事时你更在意什么？', a: '是否公平合理', b: '是否人性化' },
+    { dim: 'TF', question: '你更容易怎么做？', a: '客观地分析情况', b: '设身处地理解他人' },
+    { dim: 'TF', question: '你更欣赏什么？', a: '理性思考的能力', b: '情感丰富的特质' },
+    { dim: 'TF', question: '做决定时你倾向于？', a: '先思考再行动', b: '先感受再思考' },
+    { dim: 'TF', question: '你更容易怎么做？', a: '指出别人的错误', b: '照顾别人的情绪' },
+    { dim: 'TF', question: '你看重什么？', a: '效率和结果', b: '过程中的关系' },
+    { dim: 'TF', question: '在冲突中你更关注什么？', a: '问题的对错', b: '双方的感受' },
+    { dim: 'TF', question: '你更容易怎么做？', a: '理性地拒绝他人', b: '因人情而妥协' },
+    { dim: 'TF', question: '你更认同什么？', a: '公正无私的原则', b: '因人而异的关怀' },
+    { dim: 'TF', question: '当你安慰别人时，你会？', a: '分析问题给出建议', b: '倾听并表示理解' },
+    { dim: 'TF', question: '你更容易被什么打动？', a: '理性的分析', b: '真诚的情感' },
+    { dim: 'TF', question: '工作中你更注重什么？', a: '任务完成的质量', b: '团队氛围的和谐' },
+    { dim: 'TF', question: '你更愿意怎么做？', a: '说出真实的看法', b: '维护良好的人际关系' },
+    { dim: 'TF', question: '看到不公平的事，你会？', a: '立即指出并纠正', b: '考虑各方感受再处理' },
+    { dim: 'TF', question: '你更容易根据什么做判断？', a: '事实', b: '人的因素' },
+    { dim: 'TF', question: '批评他人时，你会？', a: '对事不对人', b: '顾虑对方感受' },
+
+    // J vs P 判断-知觉 (20题)
+    { dim: 'JP', question: '面对一个重要任务，你通常会？', a: '先制定详细计划再行动', b: '先开始做，边做边调整' },
+    { dim: 'JP', question: '你更喜欢哪种工作方式？', a: '按部就班，有清晰的步骤', b: '灵活应变，随时调整方向' },
+    { dim: 'JP', question: '当别人问你一个问题时，你倾向于？', a: '给出一个明确的答案', b: '提供多个可能的选项' },
+    { dim: 'JP', question: '你的房间或工作区域通常是？', a: '整洁有序，所有物品各归其位', b: '稍显凌乱，但自己知道东西在哪' },
+    { dim: 'JP', question: '你如何看待"计划赶不上变化"这句话？', a: '应该尽量让计划赶上变化', b: '变化是正常的，计划只是参考' },
+    { dim: 'JP', question: '当你约好一个时间，你会？', a: '严格遵守，几乎从不迟到', b: '时间只是参考，偶尔会有些弹性' },
+    { dim: 'JP', question: '你喜欢什么样的旅行方式？', a: '提前规划好每一天的行程', b: '随性走到哪算哪' },
+    { dim: 'JP', question: '做决定时，你更倾向于？', a: '尽快做出决定并执行', b: '保持开放，等待更多信息' },
+    { dim: 'JP', question: '当你列了一个待办清单，你会？', a: '严格按照清单一项项完成', b: '清单只是提醒，完成顺序很灵活' },
+    { dim: 'JP', question: '你更喜欢哪种生活节奏？', a: '稳定可预测的日程安排', b: '充满变化和可能性' },
+    { dim: 'JP', question: '面对规则和制度，你通常？', a: '尊重并严格执行', b: '保留灵活处理的空间' },
+    { dim: 'JP', question: '你更喜欢完成工作的时间是？', a: '截止日期前预留充足时间', b: '截止日期前最后一刻' },
+    { dim: 'JP', question: '当有人邀请你参加一个临时活动，你会？', a: '提前安排好的时间更安心', b: '随时可以改变计划，很乐意参加' },
+    { dim: 'JP', question: '你更看重工作中的什么？', a: '明确的目标和完成标准', b: '自由发挥和创造的空间' },
+    { dim: 'JP', question: '如果你迟到了，你会？', a: '非常在意并尽快补救', b: '觉得没什么大不了' },
+    { dim: 'JP', question: '你更喜欢哪种社交活动？', a: '有明确主题和安排的聚会', b: '没有特定议程，大家随意交流' },
+    { dim: 'JP', question: '当你学习一个新技能时，你倾向于？', a: '按照教材或课程顺序系统学习', b: '自己摸索，边用边学' },
+    { dim: 'JP', question: '你更希望别人如何评价你？', a: '可靠、守时、言出必行', b: '灵活、创意、随和' },
+    { dim: 'JP', question: '面对生活中的不确定性，你会？', a: '尽量减少不确定因素', b: '接受并享受不确定性带来的可能' },
+    { dim: 'JP', question: '你更喜欢"完成"还是"开始"的感觉？', a: '完成一件事带来的成就感', b: '开始新事物带来的兴奋感' }
+];
+
+const dimensionNames = {
+    'EI': '外向 vs 内向',
+    'SN': '感觉 vs 直觉',
+    'TF': '思考 vs 情感',
+    'JP': '判断 vs 知觉'
+};
+
+let questions = [];
+let currentQuestion = 0;
+let answers = [];
+let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+function showTestChoice() {
+    document.getElementById('testChoiceModal').classList.remove('hidden');
+}
+
+function closeTestChoice() {
+    document.getElementById('testChoiceModal').classList.add('hidden');
+}
+
+function getQuestions(count) {
+    const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+}
+
+function startTest(count) {
+    closeTestChoice();
+    questions = getQuestions(count);
+    currentQuestion = 0;
+    answers = [];
+    scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+    document.getElementById('homePage').classList.remove('active');
+    document.getElementById('testPage').classList.add('active');
+    document.getElementById('resultPage').classList.remove('active');
+
+    document.getElementById('totalNum').textContent = questions.length;
+    showQuestion();
+    window.scrollTo(0, 0);
+}
+
+function showQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('currentNum').textContent = currentQuestion + 1;
+    document.getElementById('questionNumber').textContent = currentQuestion + 1;
+    document.getElementById('questionText').textContent = q.question;
+    document.getElementById('optionAText').textContent = q.a;
+    document.getElementById('optionBText').textContent = q.b;
+    document.getElementById('dimensionName').textContent = dimensionNames[q.dim];
+
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+
+    document.getElementById('prevBtn').classList.toggle('hidden', currentQuestion === 0);
+
+    // 清除之前的选中状态
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('border-primary', 'bg-primary/10');
+    });
+
+    // 恢复之前的选择
+    if (answers[currentQuestion]) {
+        const selected = answers[currentQuestion];
+        const btn = document.getElementById('option' + selected);
+        if (btn) {
+            btn.classList.add('border-primary', 'bg-primary/10');
         }
+    }
+}
 
-        // 16种MBTI类型详细描述
-        const typeDescriptions = {
-            'INTJ': {
-                name: '建筑师',
-                desc: '富有想象力和战略性的思想家，一切都在他们的掌控之中。',
-                trait: '理性、独立、追求效率、完美主义',
-                learn: '喜欢独立学习和深度思考，擅长通过阅读和研究掌握复杂概念。对不感兴趣的事物缺乏耐心，但一旦找到学习的内在动力，会展现出惊人的专注力和毅力。适合需要长期深入钻研的领域。',
-                work: '追求高效和专业，讨厌无效会议和官僚程序。适合担任战略规划、技术研发、管理咨询等需要独立思考和系统思维的工作。在团队中往往成为提供客观分析和长远规划的关键人物。',
-                love: '对感情专一但表达含蓄，倾向于寻找智力相当的伴侣。不会轻易展开恋情，但一旦认定会非常忠诚。需要在保持个人空间与亲密关系之间找到平衡。建议多表达情感，让伴侣感受到你的关心。',
-                social: '倾向于少数深入的朋友关系，而非广泛的社交圈。欣赏有能力、有思想的人。不擅长small talk，更喜欢有深度的交流。对社交场合会感到不自在，但可以表现得体。',
-                advice: '学会接受不完美，有时"完成"比"完美"更重要。多关注他人的情感需求，不要总是用理性分析一切。适当表达自己的感受和想法，让他人更好地理解你。'
-            },
-            'INTP': {
-                name: '逻辑学家',
-                desc: '具有创造力的发明家，对知识有着永不满足的渴望。',
-                trait: '好奇、理性、创新、专注',
-                learn: '天生喜欢探索知识，对感兴趣的话题会深入研究。喜欢理论与实际的结合，但有时会过于专注理论而忽视实践应用。适合需要逻辑分析和创新思维的学科。',
-                work: '追求智识挑战，讨厌重复性的工作。适合科研、技术开发、金融分析、咨询等需要创新解决方案的工作。需要足够的自主空间，不喜欢被过度管理。',
-                love: '在感情上往往被动，需要时间来建立信任。欣赏伴侣的智识和独立性。倾向于寻找能够理解并支持他们思考习惯的伴侣。学会表达情感会让关系更加亲密。',
-                social: '享受深入的讨论但对社交活动兴趣缺缺。朋友数量不多但友谊深厚。常常沉浸在自己的思考中，可能给人疏离感。学会在适当时候展现热情会改善人际关系。',
-                advice: '关注现实世界的需求，不要过度沉迷于抽象理论。学会处理人际关系中的情感因素。行动力是你的短板，试着将想法付诸实践。'
-            },
-            'ENTJ': {
-                name: '指挥官',
-                desc: '大胆、富有想象力的领导者，总是寻求改进的方法。',
-                trait: '果断、自信、领导力、目标导向',
-                learn: '喜欢有挑战性和竞争性的学习环境。善于制定学习计划并严格执行，享受快速掌握新技能的感觉。不喜欢被动接受知识，偏好主动探索和应用。',
-                work: '天生领导者，善于组织和激励团队。适合创业、高层管理、战略咨询等需要决策力和影响力的工作。追求效率和成果，讨厌拖泥带水和无效努力。',
-                love: '在感情中主动积极，倾向于快速确定关系。欣赏有能力和独立性的伴侣。愿意为关系付出，但有时会过于主导。学会倾听和尊重伴侣的感受很重要。',
-                social: '自信坦率，善于在社交场合中展现魅力。喜欢组织活动并担任领导者角色。朋友广泛但真正深入的不多。学会更加包容不同类型的人和观点。',
-                advice: '学会放慢脚步，给他人表达意见的机会。控制你的支配欲，尊重他人的选择和节奏。多培养耐心，学习用更温和的方式与人相处。'
-            },
-            'ENTP': {
-                name: '辩论家',
-                desc: '聪明、好奇的思想者，喜欢提出挑战性问题。',
-                trait: '创新、好奇、善于沟通、思维敏捷',
-                learn: '喜欢多样化的学习内容，讨厌单一重复的学习方式。善于从不同角度思考问题，适合需要创意和批判性思维的学科。学习动力来自兴趣，需要找到与自身兴趣的连接点。',
-                work: '适合需要创新、沟通和多任务处理的工作，如营销、咨询、创业、公关等。善于看到可能性并快速行动，但有时会虎头蛇尾。需要能够发挥创意和灵活性的环境。',
-                love: '在感情中需要智识刺激和新鲜感，讨厌一成不变。欣赏幽默感和机智的伴侣。倾向于避免承诺，但一旦认定会很投入。学会为关系带来稳定感很重要。',
-                social: '社交能力强，喜欢辩论和讨论各种话题。朋友众多但关系深度参差不齐。善于将人们联系起来，但有时会显得不够真诚。学会倾听而非总是表达观点。',
-                advice: '培养专注力和持久力，不要轻易放弃正在进行的事。学会对重要的事情做出承诺并坚持到底。关注他人的情感需求，而不仅仅是逻辑上的对错。'
-            },
-            'INFJ': {
-                name: '提倡者',
-                desc: '安静而有魅力的理想主义者，始终坚持自己的原则。',
-                trait: '理想主义、有洞察力、富有同情心、坚定不移',
-                learn: '学习动力来自内在价值观和意义感。善于理解复杂概念，喜欢有深度和人文关怀的学习内容。适合需要洞察力和创造力的学术领域。',
-                work: '追求工作的意义和价值，渴望帮助他人或改善世界。适合心理咨询、教育、社会工作、创意写作等领域。善于洞察他人需求，但在职场中可能过于追求完美而给自己压力。',
-                love: '对感情专一且投入，倾向于寻找灵魂伴侣。非常注重情感的深度和精神的契合。愿意为伴侣付出很多，但有时会过度牺牲自己。学会设立边界很重要。',
-                social: '虽然安静但很有魅力，容易与他人建立深层次的连接。朋友不多但友谊深厚持久。善于倾听和理解他人，但有时会过度承担他人的情绪。学会说"不"是成长课题。',
-                advice: '学会照顾自己的需求，不要总是把他人放在第一位。接受自己不可能让所有人满意的事实。适当展现你的能力，不要总是低调隐藏。'
-            },
-            'INFP': {
-                name: '调停者',
-                desc: '富有诗意的善良者，始终在寻找生活的意义。',
-                trait: '理想主义、敏感、创造性、富有同情心',
-                learn: '学习需要与个人价值观和兴趣相关联。喜欢有创意和自我表达空间的学习方式，不喜欢过于结构化和竞争性的环境。文字和艺术类学科通常是强项。',
-                work: '追求工作的意义和个人价值的实现。适合创意艺术、心理咨询、教育、写作、社会工作等领域。善于洞察人心，但可能在职场中过于理想主义而碰壁。',
-                love: '浪漫主义者，渴望找到真正的灵魂伴侣。在感情中非常投入和忠诚，但有时会过度理想化伴侣。需要学会接受伴侣的不完美，以及处理现实中的冲突。',
-                social: '安静内敛但真诚热情，容易与志同道合的人建立深厚友谊。重视精神层面的交流，不喜欢表面的社交。学会在保持真实自我的同时适应社交场合。',
-                advice: '学会在现实世界中实现理想，而不仅仅是停留在想象层面。培养决断力和行动力，不要总是拖延。适当展现自己的能力，建立自信。'
-            },
-            'ENFJ': {
-                name: '主人公',
-                desc: '富有魅力的领导者，能够启发和激励他人。',
-                trait: '热情、有魅力、正能量、领导力',
-                learn: '喜欢在团队中学习，互相支持和激励。善于组织和带动学习氛围，擅长帮助他人进步。学习动力来自于能够帮助他人的意义感。',
-                work: '天生适合需要人际互动和领导力的工作，如教育、培训、人力资源、管理、咨询等。善于激励团队成员，擅长协调各方关系。追求工作中的成就感和认可。',
-                love: '在感情中热情投入，倾向于照顾和支持伴侣。欣赏有潜力且愿意成长的伴侣。有时会对伴侣有过高期望，需要学会接受对方的真实面貌。',
-                social: '社交能力强，容易与各种人建立联系。朋友众多且真诚待人。善于调解冲突和凝聚团队，但有时会为了和谐而回避必要的矛盾。学会设立健康的边界。',
-                advice: '学会关注自己的需求，不要总是为他人而活。接受不是所有人都值得你付出的事实。培养独立思考的能力，不要过度依赖他人的认可。'
-            },
-            'ENFP': {
-                name: '竞选者',
-                desc: '热情洋溢的创意者，总是寻找支持他人的方式。',
-                trait: '热情、创意、乐观、善于激励',
-                learn: '喜欢创新性和启发性的学习方式，讨厌死记硬背。善于联想和创意表达，适合需要想象力和表达能力的学科。需要找到学习的乐趣和意义才能保持动力。',
-                work: '适合需要创意、沟通和灵活性的工作，如营销、创意设计、公关、咨询、教育等。善于发现可能性并激励他人，但有时会缺乏持续性。',
-                love: '浪漫且热情，需要伴侣能跟上他们的节奏和想象力。欣赏独特、有趣、有深度的伴侣。需要在自由与承诺之间找到平衡，避免因为害怕失去自由而逃避关系。',
-                social: '社交高手，容易与人打成一片。朋友众多，擅长让每个人感到被重视。善于激励和启发他人，但有时会过于关注新朋友而忽视老朋友。学会深度经营友谊。',
-                advice: '培养专注力和持久力，学会对重要的事情坚持到底。学会面对负面情绪，而不是总是逃避。制定计划并严格执行，避免总是依赖灵感。'
-            },
-            'ISTJ': {
-                name: '物流师',
-                desc: '务实且注重事实的可靠者，可以信赖他们完成任务。',
-                trait: '可靠、勤奋、有责任感、注重细节',
-                learn: '喜欢结构化和系统化的学习方式，擅长记忆和理解具体信息。勤奋踏实，学习成绩通常稳定。适合需要扎实基础和精确知识的学科。',
-                work: '可靠性和责任感是最大优点，适合需要准确性和稳定性的工作，如会计、审计、质量管理、行政等。善于按计划执行，擅长处理细节。但可能缺乏灵活性和创新思维。',
-                love: '在感情上忠诚可靠，倾向于寻找长期稳定的伴侣。表达感情较为含蓄，但会用实际行动表达关心。需要学会表达情感，让伴侣感受到你的爱意。',
-                social: '朋友不多但友谊稳固，倾向于与志趣相投的人交往。重视承诺和责任，是值得信赖的朋友。但不擅长主动社交，可能给人冷漠的印象。',
-                advice: '学会接受变化和不确定性，不要过于抗拒新事物。培养创造力和灵活性。适当放松标准，不要对自己和他人过于苛刻。'
-            },
-            'ISFJ': {
-                name: '守卫者',
-                desc: '非常专注且温暖的守护者，总是时刻准备保护他人。',
-                trait: '温暖、忠诚、细心、乐于助人',
-                learn: '勤奋认真，擅长记忆和理解具体知识。喜欢有组织和系统的学习方式，不喜欢不确定性和变化。适合需要细心和耐心的学科。',
-                work: '细心周到，擅长照顾他人需求。适合护理、教育、行政、服务等领域。勤奋可靠，是团队中稳定的力量。但可能过度承担责任而忽视自己。',
-                love: '在感情中忠诚投入，倾向于照顾和迁就伴侣。表达方式往往是实际行动而非甜言蜜语。需要学会表达自己的需求和感受，不要总是默默付出。',
-                social: '温暖亲切，是朋友的坚强后盾。善于照顾他人，但有时会过度牺牲自己。重视传统和稳定，友谊往往是长期的。学会说"不"是重要课题。',
-                advice: '学会照顾自己，不要总是把他人需求放在第一位。接受他人的感谢和回报。培养自信心，相信自己的价值。学会表达真实想法。'
-            },
-            'ESTJ': {
-                name: '总经理',
-                desc: '出色的管理者，在组织和管理方面天赋异禀。',
-                trait: '组织能力强、果断、实际、负责任',
-                learn: '喜欢有结构和目标明确的学习，擅长组织材料和管理时间。成绩导向，善于通过努力获得好结果。不喜欢模糊和不确定的学习内容。',
-                work: '天生管理者，善于组织和协调。适合运营管理、行政、财务、企业等领域。执行力强，擅长制定和执行计划。但可能过于严厉，缺乏灵活性。',
-                love: '在感情中倾向于主导角色，期望伴侣尊重和支持自己的决定。忠诚负责，但表达方式可能过于直接。需要学会更加温柔和体贴地表达感情。',
-                social: '善于组织社交活动，擅长管理团队和人际网络。朋友广泛但可能显得功利。重视传统价值和家庭观念。学会更加包容和理解不同观点。',
-                advice: '学会倾听他人的感受和意见，不要总是坚持自己的方式。培养耐心和同理心。接受并非所有事情都能被控制和计划。'
-            },
-            'ESFJ': {
-                name: '执政官',
-                desc: '出色的照顾者，喜欢帮助和支持身边的人。',
-                trait: '热情、关怀、社交、组织能力强',
-                learn: '喜欢在合作和互助的环境中学习，擅长通过讨论和交流加深理解。成绩通常不错，尤其是需要人际互动的学科。',
-                work: '善于照顾他人需求，适合需要人际沟通和服务意识的工作，如人力资源、销售、服务业、教育等。团队合作能力强，擅长营造和谐的工作氛围。',
-                love: '在感情中投入且忠诚，倾向于照顾和支持伴侣。渴望稳定的长期关系，重视家庭和传统价值。需要学会接受伴侣的缺点，不要试图改变对方。',
-                social: '社交活跃，朋友众多且善于维护关系。热情好客，是聚会中的组织者。重视他人的认可和接纳。学会在帮助他人的同时保持自我价值。',
-                advice: '学会设立边界，不要总是取悦所有人。接受自己不可能让所有人喜欢的现实。培养独立思考，不要过度依赖他人的认可。'
-            },
-            'ISTP': {
-                name: '鉴赏家',
-                desc: '大胆而实用的实验者，是解决难题的专家。',
-                trait: '冷静、实用、动手能力强、善于分析',
-                learn: '喜欢动手实践的学习方式，擅长通过实际操作掌握技能。善于分析问题和找到实用解决方案，适合需要动手能力和技术性的学科。',
-                work: '动手能力强，善于解决实际问题。适合工程、技术、维修、医疗等领域。独立工作能力强，不喜欢被过度管理。但可能缺乏长远规划。',
-                love: '在感情上较为独立，需要个人空间。倾向于用行动而非言语表达感情。欣赏独立自信的伴侣。需要学会表达情感，让关系更加亲密。',
-                social: '朋友不多但友谊深厚，倾向于通过共同活动建立联系。安静但并非冷漠，只是更喜欢行动而非言语。学会更多表达内心想法。',
-                advice: '学会规划和考虑长远，不要只关注眼前。培养人际关系技巧，多表达情感。学习表达自己的需求和想法，而不仅仅是默默做事。'
-            },
-            'ISFP': {
-                name: '探险家',
-                desc: '灵活有魅力的艺术家，随时准备探索和新体验。',
-                trait: '艺术感、灵活、敏感、热爱自由',
-                learn: '喜欢有创意和艺术性的学习方式，讨厌 rigid 的结构。善于观察和感受，适合需要审美和创造力的学科。往往在艺术类学科表现出色。',
-                work: '追求工作的意义和个人表达，适合创意艺术、设计、音乐、摄影等领域。灵活适应变化，但可能缺乏长期规划。需要能够发挥个人审美和创意的工作环境。',
-                love: '浪漫且追求自由，在感情中需要保持个人空间。倾向于用美感和仪式感表达爱意。需要学会为关系做出承诺，并处理现实中的责任。',
-                social: '安静但友好，容易与艺术气息相投的人建立联系。重视个人空间和自由，不喜欢被束缚。友谊往往是基于 shared experiences。学会更加主动联系朋友。',
-                advice: '培养责任感和持久力，学会坚持完成承诺的事情。学会处理现实中的责任，而不仅仅是追求当下的快乐。建立长期规划和目标。'
-            },
-            'ESTP': {
-                name: '企业家',
-                desc: '聪明、精力充沛的冒险者，善于分析形势。',
-                trait: '活力充沛、冒险精神、实际、善于社交',
-                learn: '喜欢动手实践和互动学习，讨厌被动听讲。善于快速学习和适应新情况，适合需要灵活性和社交性的学科。学习动力来自即时反馈和成果。',
-                work: '善于抓住机会和冒险，适合创业、销售、营销、商务拓展等领域。行动力强，善于在压力下做出决策。但可能缺乏长期规划和耐心。',
-                love: '在感情中热情主动，喜欢充满活力和新鲜感的关系。倾向于用行动和惊喜表达爱意。需要学会对关系负责，并处理承诺带来的责任。',
-                social: '社交高手，善于在各种场合交际。朋友众多且善于维护关系。喜欢成为焦点和受到关注。学会倾听而不仅仅是讲述。',
-                advice: '培养耐心和长期规划，不要总是追求即时满足。学会考虑后果再做决定。关注他人的感受，而不仅仅是结果。'
-            },
-            'ESFP': {
-                name: '表演者',
-                desc: '自发、精力充沛的表演者，喜欢带给别人欢乐。',
-                trait: '热情、活泼、爱表演、善于激励',
-                learn: '喜欢互动和实践学习，讨厌枯燥的理论。善于通过表演和展示来掌握知识，适合需要表达和表演的学科。学习环境需要有趣和活跃。',
-                work: '充满活力和热情，适合需要人际互动和展示能力的工作，如表演、服务、销售、教育等。善于激励和带动氛围，但可能缺乏长期规划。',
-                love: '在感情中热情浪漫，喜欢创造惊喜和快乐。倾向于用言行表达爱意，渴望伴侣的欣赏和关注。需要学会处理关系中的困难时刻。',
-                social: '社交明星，善于让每个人都感到开心和受欢迎。朋友众多，聚会的主导者。善于即时互动，但可能忽视长期友谊的培养。学会在热闹中也能独处。',
-                advice: '培养专注力和持久力，学会对重要的事情保持投入。三思而后行，考虑行动的后果。学会处理负面情绪，而不仅仅是逃避。'
-            }
-        };
+function selectOption(option) {
+    answers[currentQuestion] = option;
 
-        // 16种类型的关键字（用于匹配度计算）
-        const typeKeywords = {
-            'INTJ': { E: 0, I: 7, S: 0, N: 7, T: 7, F: 0, J: 7, P: 0 },
-            'INTP': { E: 0, I: 7, S: 0, N: 7, T: 7, F: 0, J: 0, P: 7 },
-            'ENTJ': { E: 7, I: 0, S: 0, N: 7, T: 7, F: 0, J: 7, P: 0 },
-            'ENTP': { E: 7, I: 0, S: 0, N: 7, T: 7, F: 0, J: 0, P: 7 },
-            'INFJ': { E: 0, I: 7, S: 0, N: 7, T: 0, F: 7, J: 7, P: 0 },
-            'INFP': { E: 0, I: 7, S: 0, N: 7, T: 0, F: 7, J: 0, P: 7 },
-            'ENFJ': { E: 7, I: 0, S: 0, N: 7, T: 0, F: 7, J: 7, P: 0 },
-            'ENFP': { E: 7, I: 0, S: 0, N: 7, T: 0, F: 7, J: 0, P: 7 },
-            'ISTJ': { E: 0, I: 7, S: 7, N: 0, T: 7, F: 0, J: 7, P: 0 },
-            'ISFJ': { E: 0, I: 7, S: 7, N: 0, T: 0, F: 7, J: 7, P: 0 },
-            'ESTJ': { E: 7, I: 0, S: 7, N: 0, T: 7, F: 0, J: 7, P: 0 },
-            'ESFJ': { E: 7, I: 0, S: 7, N: 0, T: 0, F: 7, J: 7, P: 0 },
-            'ISTP': { E: 0, I: 7, S: 7, N: 0, T: 7, F: 0, J: 0, P: 7 },
-            'ISFP': { E: 0, I: 7, S: 7, N: 0, T: 0, F: 7, J: 0, P: 7 },
-            'ESTP': { E: 7, I: 0, S: 7, N: 0, T: 7, F: 0, J: 0, P: 7 },
-            'ESFP': { E: 7, I: 0, S: 7, N: 0, T: 0, F: 7, J: 0, P: 7 }
-        };
+    // 更新分数
+    const dim = questions[currentQuestion].dim;
+    if (dim === 'EI') {
+        scores[option === 'A' ? 'E' : 'I']++;
+    } else if (dim === 'SN') {
+        scores[option === 'A' ? 'S' : 'N']++;
+    } else if (dim === 'TF') {
+        scores[option === 'A' ? 'T' : 'F']++;
+    } else if (dim === 'JP') {
+        scores[option === 'A' ? 'J' : 'P']++;
+    }
 
-        const dimensionNames = {
-            'EI': '外向 vs 内向',
-            'SN': '感觉 vs 直觉',
-            'TF': '思考 vs 情感',
-            'JP': '判断 vs 知觉'
-        };
+    // 更新UI
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('border-primary', 'bg-primary/10');
+    });
+    document.getElementById('option' + option).classList.add('border-primary', 'bg-primary/10');
 
-        // 测试状态
-        let currentQuestion = 0;
-        let answers = [];
-        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-
-        // 页面导航
-        function showPage(pageId) {
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('testPage').classList.remove('active');
-            document.getElementById('resultPage').classList.remove('active');
-
-            document.getElementById(pageId).style.display = pageId === 'homePage' ? 'block' : '';
-            if (pageId === 'testPage') {
-                document.getElementById('testPage').classList.add('active');
-            } else if (pageId === 'resultPage') {
-                document.getElementById('resultPage').classList.add('active');
-            }
-        }
-
-        function goHome() {
-            showPage('homePage');
-            return false;
-        }
-
-        // 进度管理
-        let testStarted = false;
-
-        // 开始测试 - 清除旧进度
-        function startTest(count) {
-            currentQuestionCount = count || 40;
-            questions = getQuestions(currentQuestionCount);
-            testStarted = true;
-            currentQuestion = 0;
-            answers = [];
-            scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-            // 清除URL参数
-            history.replaceState(null, '', window.location.pathname);
+    // 延迟进入下一题
+    setTimeout(() => {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
             showQuestion();
-            showPage('testPage');
+        } else {
+            showResult();
         }
+    }, 300);
+}
 
-        // 鼓励语录
-        const encouragements = [
-            { threshold: 0, text: "🎯 加油！开始你的性格探索之旅吧！" },
-            { threshold: 10, text: "🚀 不错！你已经开始了这段旅程，继续加油！" },
-            { threshold: 25, text: "💪 继续保持！你对自己的了解越来越深入了！" },
-            { threshold: 50, text: "🌟 太棒了！你已经完成一半了！胜利在望！" },
-            { threshold: 75, text: "🔥 加油！你马上就能看到完整的性格报告了！" },
-            { threshold: 90, text: "🏆 就要完成了！你的性格画像即将呈现！" }
-        ];
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+    }
+}
 
-        function getEncouragement(progress) {
-            for (let i = encouragements.length - 1; i >= 0; i--) {
-                if (progress >= encouragements[i].threshold) {
-                    return encouragements[i].text;
-                }
-            }
-            return encouragements[0].text;
+function showResult() {
+    document.getElementById('testPage').classList.remove('active');
+    document.getElementById('resultPage').classList.add('active');
+
+    // 计算结果
+    const eiPercent = Math.round((scores.I / 10) * 100);
+    const snPercent = Math.round((scores.N / 10) * 100);
+    const tfPercent = Math.round((scores.F / 10) * 100);
+    const jpPercent = Math.round((scores.P / 10) * 100);
+
+    let mbti = '';
+    mbti += scores.E >= scores.I ? 'E' : 'I';
+    mbti += scores.S >= scores.N ? 'S' : 'N';
+    mbti += scores.T >= scores.F ? 'T' : 'F';
+    mbti += scores.J >= scores.P ? 'J' : 'P';
+
+    document.getElementById('resultType').textContent = mbti;
+    document.getElementById('resultTypeName').textContent = typeDescriptions[mbti]?.name || '';
+
+    document.getElementById('eiValue').textContent = (100 - eiPercent) + '% ' + (scores.I > scores.E ? 'I' : 'E');
+    document.getElementById('snValue').textContent = (100 - snPercent) + '% ' + (scores.N > scores.S ? 'N' : 'S');
+    document.getElementById('tfValue').textContent = (100 - tfPercent) + '% ' + (scores.F > scores.T ? 'F' : 'T');
+    document.getElementById('jpValue').textContent = (100 - jpPercent) + '% ' + (scores.P > scores.J ? 'P' : 'J');
+
+    document.getElementById('eiBar').style.width = (100 - eiPercent) + '%';
+    document.getElementById('snBar').style.width = (100 - snPercent) + '%';
+    document.getElementById('tfBar').style.width = (100 - tfPercent) + '%';
+    document.getElementById('jpBar').style.width = (100 - jpPercent) + '%';
+
+    document.getElementById('typeDescription').textContent = typeDescriptions[mbti]?.desc || '';
+
+    window.scrollTo(0, 0);
+}
+
+function restartTest() {
+    document.getElementById('resultPage').classList.remove('active');
+    document.getElementById('homePage').classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+// 人格类型筛选
+function filterTypes(category) {
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('text-warm-gray');
+    });
+    event.target.classList.add('bg-primary', 'text-white');
+    event.target.classList.remove('text-warm-gray');
+
+    document.querySelectorAll('.type-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
         }
-
-        // 显示题目
-        function showQuestion() {
-            const q = questions[currentQuestion];
-            const totalQuestions = questions.length;
-
-            document.getElementById('currentNum').textContent = currentQuestion + 1;
-            document.getElementById('totalNum').textContent = totalQuestions;
-            document.getElementById('questionNumber').textContent = `第 ${currentQuestion + 1} 题`;
-            document.getElementById('questionText').textContent = q.question;
-            document.getElementById('optionAText').textContent = q.a;
-            document.getElementById('optionBText').textContent = q.b;
-            document.getElementById('dimensionName').textContent = dimensionNames[q.dim];
-
-            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-
-            // 更新鼓励语录
-            document.getElementById('encouragement').textContent = getEncouragement(progress);
-
-            // 显示/隐藏上一题按钮
-            const prevBtn = document.getElementById('prevBtn');
-            if (currentQuestion > 0) {
-                prevBtn.style.display = 'block';
-            } else {
-                prevBtn.style.display = 'none';
-            }
-
-            // 恢复当前题目的选择状态
-            document.getElementById('optionA').classList.remove('selected');
-            document.getElementById('optionB').classList.remove('selected');
-            if (answers[currentQuestion]) {
-                document.getElementById('option' + answers[currentQuestion]).classList.add('selected');
-            }
-
-            // 显示淡入动画
-            document.querySelector('.question-card').classList.add('fade-in');
-            setTimeout(() => {
-                document.querySelector('.question-card').classList.remove('fade-in');
-            }, 600);
-        }
-
-        // 返回上一题
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                // 移除当前题目的答案
-                const removedAnswer = answers.pop();
-                // 恢复分数
-                const dim = questions[currentQuestion].dim;
-                const preference = removedAnswer === 'A' ? dim.charAt(0) : dim.charAt(1);
-                scores[preference]--;
-
-                currentQuestion--;
-                showQuestion();
-                saveProgress();
-            }
-        }
-
-        // 保存进度到URL
-        function saveProgress() {
-            const url = new URL(window.location);
-            url.searchParams.set('q', currentQuestion + 1);
-            url.searchParams.set('a', answers.join(''));
-            url.searchParams.set('n', currentQuestionCount);
-            history.replaceState(null, '', url);
-        }
-
-        // 选择选项 - 保存进度
-        function selectOption(option) {
-            // 如果当前题目已经有答案，先移除旧答案的分数
-            if (answers[currentQuestion]) {
-                const oldAnswer = answers[currentQuestion];
-                const oldDim = questions[currentQuestion].dim;
-                const oldPreference = oldAnswer === 'A' ? oldDim.charAt(0) : oldDim.charAt(1);
-                scores[oldPreference]--;
-            }
-
-            // 设置新答案
-            answers[currentQuestion] = option;
-
-            // 记录当前维度的分数
-            const q = questions[currentQuestion];
-            const dim = q.dim;
-            const preference = option === 'A' ? dim.charAt(0) : dim.charAt(1);
-            scores[preference]++;
-
-            // 保存进度到URL
-            saveProgress();
-
-            // 高亮选中项
-            document.getElementById('optionA').classList.remove('selected');
-            document.getElementById('optionB').classList.remove('selected');
-            document.getElementById('option' + option).classList.add('selected');
-
-            // 延迟进入下一题
-            setTimeout(() => {
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    showQuestion();
-                } else {
-                    calculateResult();
-                }
-            }, 300);
-        }
-
-        // 计算结果
-        function calculateResult() {
-            // 每个维度的题目数
-            const dimCount = currentQuestionCount / 4;
-
-            // 计算每个维度的分数
-            const eiScore = scores.I; // I的分数越高越偏I
-            const snScore = scores.N; // N的分数越高越偏N
-            const tfScore = scores.F; // F的分数越高越偏F
-            const jpScore = scores.P; // P的分数越高越偏P
-
-            // 转换为百分比（0-100）
-            const eiPercent = (eiScore / dimCount) * 100;
-            const snPercent = (snScore / dimCount) * 100;
-            const tfPercent = (tfScore / dimCount) * 100;
-            const jpPercent = (jpScore / dimCount) * 100;
-
-            // 构建MBTI类型
-            const mbtiType = (eiPercent >= 50 ? 'I' : 'E') +
-                            (snPercent >= 50 ? 'N' : 'S') +
-                            (tfPercent >= 50 ? 'F' : 'T') +
-                            (jpPercent >= 50 ? 'P' : 'J');
-
-            // 显示结果
-            displayResult(mbtiType, eiPercent, snPercent, tfPercent, jpPercent);
-        }
-
-        // 显示结果
-        function displayResult(type, ei, sn, tf, jp) {
-            const typeInfo = typeDescriptions[type];
-
-            document.getElementById('resultType').textContent = type;
-            document.getElementById('resultTypeName').textContent = typeInfo.name;
-
-            // 设置维度值
-            const eiValue = ei >= 50 ? Math.round(ei) + '% I' : Math.round(100 - ei) + '% E';
-            const snValue = sn >= 50 ? Math.round(sn) + '% N' : Math.round(100 - sn) + '% S';
-            const tfValue = tf >= 50 ? Math.round(tf) + '% F' : Math.round(100 - tf) + '% T';
-            const jpValue = jp >= 50 ? Math.round(jp) + '% P' : Math.round(100 - jp) + '% J';
-
-            document.getElementById('eiValue').textContent = eiValue;
-            document.getElementById('snValue').textContent = snValue;
-            document.getElementById('tfValue').textContent = tfValue;
-            document.getElementById('jpValue').textContent = jpValue;
-
-            // 设置进度条
-            setTimeout(() => {
-                document.getElementById('eiBar').style.width = (ei >= 50 ? ei : 100 - ei) + '%';
-                document.getElementById('snBar').style.width = (sn >= 50 ? sn : 100 - sn) + '%';
-                document.getElementById('tfBar').style.width = (tf >= 50 ? tf : 100 - tf) + '%';
-                document.getElementById('jpBar').style.width = (jp >= 50 ? jp : 100 - jp) + '%';
-            }, 100);
-
-            // 生成性格描述
-            const descriptions = generateDescription(type, ei, sn, tf, jp);
-            document.getElementById('typeDescription').innerHTML = descriptions;
-
-            // 计算所有类型的匹配度
-            displayAllTypes(type, ei, sn, tf, jp);
-
-            showPage('resultPage');
-        }
-
-        // 生成性格描述
-        function generateDescription(type, ei, sn, tf, jp) {
-            const eiPref = ei >= 50 ? '内向' : '外向';
-            const snPref = sn >= 50 ? '直觉' : '感觉';
-            const tfPref = tf >= 50 ? '情感' : '思考';
-            const jpPref = jp >= 50 ? '知觉' : '判断';
-            const typeInfo = typeDescriptions[type];
-
-            let desc = `<h4>性格特点</h4>`;
-            desc += `<p>你是典型的${typeInfo.name}（${type}）类型。${typeInfo.desc}</p>`;
-            desc += `<p>核心特质：${typeInfo.trait}</p>`;
-
-            desc += `<h4>学习风格</h4>`;
-            desc += `<p>${typeInfo.learn}</p>`;
-
-            desc += `<h4>职业发展</h4>`;
-            desc += `<p>${typeInfo.work}</p>`;
-
-            desc += `<h4>恋爱关系</h4>`;
-            desc += `<p>${typeInfo.love}</p>`;
-
-            desc += `<h4>人际关系</h4>`;
-            desc += `<p>${typeInfo.social}</p>`;
-
-            desc += `<h4>成长建议</h4>`;
-            desc += `<p>${typeInfo.advice}</p>`;
-
-            return desc;
-        }
-
-        // 显示所有类型匹配度
-        function displayAllTypes(currentType, ei, sn, tf, jp) {
-            const typesGrid = document.getElementById('typesGrid');
-            typesGrid.innerHTML = '';
-
-            const types = ['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP',
-                          'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
-
-            // 计算每个类型与测试结果的匹配度
-            const matches = types.map(t => {
-                const keywords = typeKeywords[t];
-                let match = 0;
-
-                // 计算每个维度的匹配度
-                if ((ei >= 50 && keywords.I > 0) || (ei < 50 && keywords.E > 0)) match += 25;
-                if ((sn >= 50 && keywords.N > 0) || (sn < 50 && keywords.S > 0)) match += 25;
-                if ((tf >= 50 && keywords.F > 0) || (tf < 50 && keywords.T > 0)) match += 25;
-                if ((jp >= 50 && keywords.P > 0) || (jp < 50 && keywords.J > 0)) match += 25;
-
-                return { type: t, match: match };
-            });
-
-            // 按匹配度排序
-            matches.sort((a, b) => b.match - a.match);
-
-            matches.forEach(m => {
-                const div = document.createElement('div');
-                div.className = 'type-item' + (m.type === currentType ? ' current' : '');
-                div.innerHTML = `
-                    <div class="type-letter">${m.type}</div>
-                    <div class="match-percent">${m.match}%</div>
-                `;
-                typesGrid.appendChild(div);
-            });
-        }
-
-        // 重新测试
-        function restartTest() {
-            startTest();
-        }
-
-        // 初始化 - 检查URL恢复进度
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const q = params.get('q');
-            const a = params.get('a');
-            const n = params.get('n'); // 题目数量
-
-            if (q !== null && a !== null && a.length > 0) {
-                // 恢复题目数量并加载题目
-                currentQuestionCount = parseInt(n) || 40;
-                questions = getQuestions(currentQuestionCount);
-
-                // 有保存的进度，恢复它
-                testStarted = true;
-                currentQuestion = parseInt(q);
-                answers = a.split('');
-
-                // 恢复分数
-                scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-                for (let i = 0; i < answers.length; i++) {
-                    const dim = questions[i].dim;
-                    const preference = answers[i] === 'A' ? dim.charAt(0) : dim.charAt(1);
-                    scores[preference]++;
-                }
-
-                // 如果已答完，显示结果
-                if (answers.length >= questions.length) {
-                    calculateResult();
-                } else {
-                    // 恢复已选状态
-                    showQuestion();
-                    // 高亮已选的选项
-                    if (answers[currentQuestion]) {
-                        document.getElementById('option' + answers[currentQuestion]).classList.add('selected');
-                    }
-                    showPage('testPage');
-                }
-            } else {
-                showPage('homePage');
-            }
-        });
-    </script>
+    });
+}
+</script>
 </body>
 </html>
