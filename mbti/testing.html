@@ -357,8 +357,22 @@ function showResult() {
     mbti += scores.T >= scores.F ? 'T' : 'F';
     mbti += scores.J >= scores.P ? 'J' : 'P';
 
+    // 计算各维度百分比
+    const totalI = scores.I + scores.E;
+    const totalS = scores.S + scores.N;
+    const totalT = scores.T + scores.F;
+    const totalJ = scores.J + scores.P;
+
+    const dim1Percent = totalI > 0 ? Math.round((scores.I / totalI) * 100) : 50; // I
+    const dim2Percent = totalS > 0 ? Math.round((scores.N / totalS) * 100) : 50; // N
+    const dim3Percent = totalT > 0 ? Math.round((scores.T / totalT) * 100) : 50; // T
+    const dim4Percent = totalJ > 0 ? Math.round((scores.J / totalJ) * 100) : 50; // J
+
+    // 将分数数据编码到URL
+    const scoresData = `${dim1Percent},${dim2Percent},${dim3Percent},${dim4Percent}`;
+
     // 跳转到结果页显示结果
-    window.location.href = 'https://mbti.7373.com.cn/result.html?result=' + mbti;
+    window.location.href = 'https://mbti.7373.com.cn/result.html?result=' + mbti + '&scores=' + scoresData;
 }
 
 // 初始化

@@ -1020,10 +1020,26 @@ function initResult() {
 
 // 更新维度数据
 function updateDimensions(mbti) {
-    const dim1Percent = mbti[0] === 'I' ? 70 : 30;
-    const dim2Percent = mbti[1] === 'N' ? 85 : 15;
-    const dim3Percent = mbti[2] === 'T' ? 75 : 25;
-    const dim4Percent = mbti[3] === 'J' ? 60 : 40;
+    // 从URL获取用户实际测试分数
+    const params = new URLSearchParams(window.location.search);
+    const scoresParam = params.get('scores');
+
+    let dim1Percent, dim2Percent, dim3Percent, dim4Percent;
+
+    if (scoresParam) {
+        // 解析从testing.html传来的分数数据
+        const scores = scoresParam.split(',');
+        dim1Percent = parseInt(scores[0]) || 50;
+        dim2Percent = parseInt(scores[1]) || 50;
+        dim3Percent = parseInt(scores[2]) || 50;
+        dim4Percent = parseInt(scores[3]) || 50;
+    } else {
+        // 如果没有分数数据，使用默认值
+        dim1Percent = mbti[0] === 'I' ? 70 : 30;
+        dim2Percent = mbti[1] === 'N' ? 85 : 15;
+        dim3Percent = mbti[2] === 'T' ? 75 : 25;
+        dim4Percent = mbti[3] === 'J' ? 60 : 40;
+    }
 
     document.getElementById('dim1-left').style.width = dim1Percent + '%';
     document.getElementById('dim1-right').style.width = (100 - dim1Percent) + '%';
