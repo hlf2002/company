@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 用户中心 - 账号设置与密钥管理</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --warm-beige: #F9F7F2;
+            --soft-white: #FFFFFF;
+            --sage-green: #7A9478;
+            --sage-light: #E8EDE7;
+            --terracotta: #D98E73;
+            --terracotta-light: #F7EAE5;
+            --text-main: #4A4A4A;
+            --sidebar-beige: #F2EFE9;
+        }
+        body {
+            font-family: 'Quicksand', 'Noto Sans SC', sans-serif;
+            color: var(--text-main);
+            background-color: var(--warm-beige);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            color: var(--sage-green);
+        }
+        .active-nav {
+            background-color: var(--sage-light);
+            color: var(--sage-green);
+            font-weight: 600;
+        }
+        .active-nav .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(122, 148, 120, 0.08);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "warm-beige": "#F9F7F2",
+                        "sage-green": "#7A9478",
+                        "terracotta": "#D98E73",
+                        "text-main": "#4A4A4A",
+                        "sidebar-beige": "#F2EFE9",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-warm-beige text-text-main">
+<div class="flex min-h-screen overflow-hidden">
+<aside class="w-64 bg-sidebar-beige flex flex-col shrink-0 border-r border-[#E5E1D8]">
+<div class="p-8 flex items-center gap-3">
+<div class="size-10 bg-sage-green rounded-xl flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined !text-white !fill-1">psychology</span>
+</div>
+<div>
+<h1 class="text-sage-green text-lg font-bold leading-tight">MBTI Admin</h1>
+<p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold">User Center</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/50 transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium opacity-80 group-hover:opacity-100">控制台</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/50 transition-colors group" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-sm font-medium opacity-80 group-hover:opacity-100">数据统计</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/50 transition-colors group" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium opacity-80 group-hover:opacity-100">充值中心</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/50 transition-colors group" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-sm font-medium opacity-80 group-hover:opacity-100">充值记录</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl active-nav transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">账号设置</span>
+</a>
+</nav>
+<div class="p-6">
+<div class="bg-white/40 rounded-2xl p-4 border border-white/60">
+<p class="text-[10px] text-gray-500 mb-2 font-bold uppercase tracking-tighter">API Status</p>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-sage-green animate-pulse"></div>
+<span class="text-xs font-medium text-sage-green">服务连接正常</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<header class="h-16 bg-warm-beige flex items-center justify-between px-10 sticky top-0 z-10 border-b border-[#E5E1D8]/50">
+<div class="flex items-center gap-4 w-1/3">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-lg">search</span>
+<input class="w-full bg-white border-none rounded-full pl-10 text-sm focus:ring-2 focus:ring-sage-green/20 placeholder:text-gray-400 custom-shadow" placeholder="搜索功能或记录..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative p-2 text-sage-green hover:bg-white rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-1.5 bg-terracotta rounded-full"></span>
+</button>
+<div class="flex items-center gap-4 pl-6 border-l border-gray-200">
+<div class="text-right">
+<p class="text-sm font-bold text-gray-700">演示合作方</p>
+<p class="text-[10px] text-sage-green font-bold uppercase tracking-wider">Enterprise Partner</p>
+</div>
+<div class="size-10 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-sage-light">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFUyoA7L4CbTGWECWvgumWaeNydIWF37xV0QHiiY0MXSJRE2FJ5FmJINv3_7FfcKG-B9E-SpaRsYqSDYvJQNBPJlwyY1zrdg6GV0xxwcqi0rZpPKdAcGwQkchXeTVzffKLE_ek3Ia9srVWbP09t86ATH4czzVXcUpPRdaq0Sm-jS8GZfegWhzw9M-qhG-zFNUKRvknzbFqhF2cd60qqMm5SpLqpt5seoeXEgtldH-aaQxMbREoruj1fHQNoj3aOuBnPyCGLUhhsPM"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-10 space-y-8">
+<div>
+<h2 class="text-2xl font-bold text-gray-800">账号设置</h2>
+<p class="text-gray-500 text-sm mt-1">管理您的账号安全与 API 接入配置</p>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<section class="bg-white rounded-3xl custom-shadow border border-white overflow-hidden">
+<div class="px-8 py-6 border-b border-warm-beige bg-sage-light/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">shield</span>
+<h3 class="font-bold text-gray-800">安全性设置</h3>
+</div>
+</div>
+<div class="p-8 space-y-8">
+<div class="flex items-center justify-between pb-6 border-b border-warm-beige">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-sage-light/30 rounded-2xl">
+<span class="material-symbols-outlined !text-sage-green">lock</span>
+</div>
+<div>
+<h4 class="font-bold text-gray-700">修改密码</h4>
+<p class="text-sm text-gray-400 mt-1 flex items-center gap-2">
+                                        当前安全等级：<span class="text-sage-green font-bold">高</span>
+<span class="flex gap-0.5">
+<span class="w-3 h-1 bg-sage-green rounded-full"></span>
+<span class="w-3 h-1 bg-sage-green rounded-full"></span>
+<span class="w-3 h-1 bg-sage-green rounded-full"></span>
+</span>
+</p>
+</div>
+</div>
+<button class="px-6 py-2 border-2 border-sage-green text-sage-green font-bold text-sm rounded-xl hover:bg-sage-green hover:text-white transition-all">
+                                立即修改
+                            </button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-sage-light/30 rounded-2xl">
+<span class="material-symbols-outlined !text-sage-green">history</span>
+</div>
+<div>
+<h4 class="font-bold text-gray-700">登录活动</h4>
+<div class="flex flex-col gap-1 mt-1">
+<p class="text-sm text-gray-500">最近登录时间：<span class="text-gray-700 font-medium">2023-10-25 14:22:10</span></p>
+<p class="text-xs text-gray-400">登录地点：上海市 (IP: 182.xxx.xx.42)</p>
+</div>
+</div>
+</div>
+<button class="text-sm font-bold text-sage-green hover:underline">查看详情</button>
+</div>
+</div>
+</section>
+<section class="bg-white rounded-3xl custom-shadow border border-white overflow-hidden">
+<div class="px-8 py-6 border-b border-warm-beige bg-sage-light/10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">code</span>
+<h3 class="font-bold text-gray-800">开发者设置</h3>
+</div>
+<a class="text-xs font-bold text-sage-green flex items-center gap-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">description</span>
+                                查看开发文档
+                            </a>
+</div>
+</div>
+<div class="p-8">
+<div class="mb-6">
+<h4 class="font-bold text-gray-700 mb-2">密钥管理</h4>
+<div class="bg-warm-beige/50 border border-warm-beige rounded-2xl p-5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-white rounded-xl flex items-center justify-center border border-sage-light">
+<span class="material-symbols-outlined !text-sage-green">vpn_key</span>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Secret API Key</p>
+<p class="font-mono text-gray-700 tracking-wider mt-0.5">sk-••••••••••••4d2a</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-sage-light text-sage-green text-sm font-bold rounded-xl hover:bg-sage-light/30 transition-all">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+                                        复制
+                                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-terracotta/10 border border-terracotta/20 text-terracotta text-sm font-bold rounded-xl hover:bg-terracotta/20 transition-all">
+<span class="material-symbols-outlined text-lg !text-terracotta">refresh</span>
+                                        重置密钥
+                                    </button>
+</div>
+</div>
+</div>
+<div class="bg-terracotta-light/30 p-4 rounded-2xl border border-terracotta/10 flex items-start gap-3">
+<span class="material-symbols-outlined !text-terracotta !fill-1 text-lg">info</span>
+<div class="text-xs text-gray-500 leading-relaxed">
+<p class="font-bold text-terracotta mb-1">安全提示</p>
+                                API 密钥具有很高的权限，请务必妥善保管。切勿在公开的代码库中泄露您的密钥。如发现密钥可能泄露，请立即点击"重置密钥"以保证账号安全。
+                            </div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<div class="p-10 mt-auto text-center">
+<p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">© 2023 MBTI Personality Analysis Platform - B-side Partner Console</p>
+</div>
+</main>
+</div>
+
+</body></html>

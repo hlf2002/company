@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 用户中心 - 企业合作注册</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --warm-beige: #F9F7F2;
+            --soft-white: #FFFFFF;
+            --sage-green: #7A9478;
+            --sage-light: #E8EDE7;
+            --text-main: #4A4A4A;
+        }
+        body {
+            font-family: 'Quicksand', 'Noto Sans SC', sans-serif;
+            color: var(--text-main);
+            background-color: var(--warm-beige);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            color: var(--sage-green);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "warm-beige": "#F9F7F2",
+                        "sage-green": "#7A9478",
+                        "text-main": "#4A4A4A",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "3xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-warm-beige min-h-screen flex">
+<!-- Left Side - Blue Background -->
+<div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#1a5fb4] to-[#0d3d73] relative overflow-hidden">
+<div class="absolute inset-0">
+<div class="absolute top-20 left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-40 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+<div class="relative z-10 flex flex-col justify-center px-16 py-12 text-white">
+<div class="flex items-center gap-3 mb-8">
+<div class="size-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined !text-white !fill-1 text-2xl">psychology</span>
+</div>
+<div>
+<h1 class="text-white text-2xl font-bold">MBTI Admin</h1>
+<p class="text-white/60 text-xs uppercase tracking-widest font-semibold">User Center</p>
+</div>
+</div>
+<div class="space-y-6">
+<h2 class="text-4xl font-bold leading-tight">开启企业级<br/>人格分析服务</h2>
+<p class="text-white/70 text-lg max-w-md">为您的企业提供精准的 MBTI 人格分析 API 服务，助力业务增长与人才管理。</p>
+<div class="flex items-center gap-3 pt-4">
+<div class="flex -space-x-2">
+<div class="w-10 h-10 rounded-full bg-white/30 border-2 border-white/50 flex items-center justify-center text-xs font-bold">A</div>
+<div class="w-10 h-10 rounded-full bg-white/30 border-2 border-white/50 flex items-center justify-center text-xs font-bold">B</div>
+<div class="w-10 h-10 rounded-full bg-white/30 border-2 border-white/50 flex items-center justify-center text-xs font-bold">C</div>
+</div>
+<p class="text-white/60 text-sm">500+ 企业已注册使用</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Right Side - Registration Form -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center items-center px-8 py-12">
+<div class="w-full max-w-md">
+<div class="text-center mb-8">
+<h2 class="text-3xl font-bold text-gray-800">欢迎注册</h2>
+<p class="text-gray-500 mt-2">企业合作</p>
+</div>
+
+<form class="space-y-5">
+<div>
+<label class="block text-sm font-bold text-gray-700 mb-2">企业名称</label>
+<input class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请输入企业名称" type="text"/>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 mb-2">手机号</label>
+<input class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请输入手机号" type="tel"/>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 mb-2">邮箱</label>
+<input class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请输入邮箱地址" type="email"/>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 mb-2">密码</label>
+<input class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请设置登录密码" type="password"/>
+</div>
+
+<div>
+<label class="block text-sm font-bold text-gray-700 mb-2">确认密码</label>
+<input class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请再次输入密码" type="password"/>
+</div>
+
+<button class="w-full py-3.5 bg-sage-green text-white font-bold text-base rounded-xl shadow-lg shadow-sage-green/20 hover:opacity-90 transition-all">
+注册
+</button>
+</form>
+
+<div class="text-center mt-6">
+<p class="text-gray-500 text-sm">已有账号？<a class="text-sage-green font-bold hover:underline" href="#">立即登录</a></p>
+</div>
+</div>
+</div>
+</body></html>

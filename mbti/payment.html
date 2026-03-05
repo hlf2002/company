@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;family=Zhi+Mang+Xing&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="//at.alicdn.com/t/c/font_5133828_65zskj8vn3v.css" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "sage": "#788f77",
+                        "warm-beige": "#f9f6f1",
+                        "charcoal": "#2d2d2d",
+                        "soft-clay": "#e8e1d9",
+                        "primary": "#788f77",
+                    },
+                    fontFamily: {
+                        "sans": ["Noto Sans SC", "sans-serif"],
+                        "serif": ["Zhi Mang Xing", "serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-warm-beige text-charcoal font-sans antialiased;
+            }
+        }
+        .organic-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .payment-card-selected {
+            @apply border-sage bg-sage/5 ring-1 ring-sage;
+        }
+    </style>
+<title>解锁深度性格报告 - MBTI性格测试</title>
+</head>
+<body class="bg-warm-beige min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<main class="flex-1 flex flex-col items-center py-16 px-6 relative">
+<div class="absolute top-40 left-10 w-64 h-64 bg-sage/5 organic-shape -z-10 blur-3xl"></div>
+<div class="absolute bottom-40 right-10 w-80 h-80 bg-sage/5 organic-shape -z-10 blur-3xl" style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
+<div class="text-center mb-12 max-w-2xl">
+<h1 class="text-charcoal text-4xl font-bold mb-4 tracking-tight">即将解锁报告，准确度99%</h1>
+<p class="text-charcoal/60 text-lg leading-relaxed">获取人格详细分析，开启自我探索之旅。</p>
+</div>
+<div class="w-full max-w-4xl grid md:grid-cols-2 gap-8 items-start">
+<div class="bg-white rounded-3xl p-10 shadow-xl shadow-charcoal/5 border border-charcoal/5">
+<div class="mb-8">
+<span class="text-charcoal/40 text-sm font-bold uppercase tracking-widest">限时优惠报告</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-4xl font-bold text-charcoal">¥49</span>
+<span class="text-charcoal/30 line-through text-lg">¥99.0</span>
+</div>
+</div>
+<div class="space-y-5 mb-8">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-sage/10 rounded-full p-0.5">
+<span class="material-symbols-outlined text-sage text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="text-charcoal font-bold text-sm">核心人格深度解析</h4>
+<p class="text-charcoal/50 text-xs mt-0.5">挖掘行为背后的认知功能与潜意识动机</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-sage/10 rounded-full p-0.5">
+<span class="material-symbols-outlined text-sage text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="text-charcoal font-bold text-sm">职业发展与指南</h4>
+<p class="text-charcoal/50 text-xs mt-0.5">基于性格优势推荐最匹配的行业与岗位</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-sage/10 rounded-full p-0.5">
+<span class="material-symbols-outlined text-sage text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="text-charcoal font-bold text-sm">恋爱与人际建议</h4>
+<p class="text-charcoal/50 text-xs mt-0.5">理解您的情感表达方式，提升沟通效率</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-sage/10 rounded-full p-0.5">
+<span class="material-symbols-outlined text-sage text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="text-charcoal font-bold text-sm">压力应对与成长路径</h4>
+<p class="text-charcoal/50 text-xs mt-0.5">识别压力触发点，提供专属的心灵成长方案</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-charcoal/5">
+<h3 class="text-charcoal font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sage">payments</span>
+                            选择支付方式
+                        </h3>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<button onclick="selectPayment('alipay')" id="alipay-btn" class="flex flex-col items-center justify-center p-6 border-2 border-[#1677FF] rounded-2xl hover:border-[#1677FF]/70 transition-all group bg-white payment-alipay-selected">
+<i class="iconfont icon-zhifubaozhifu text-3xl text-[#1677FF] mb-3"></i>
+<span class="text-charcoal font-medium text-sm">支付宝</span>
+</button>
+<button onclick="selectPayment('wechat')" id="wechat-btn" class="flex flex-col items-center justify-center p-6 border-2 border-[#d1d5db] rounded-2xl hover:border-[#09BB07]/70 transition-all group bg-white">
+<i class="iconfont icon-weixinzhifu text-3xl text-[#09BB07] mb-3"></i>
+<span class="text-charcoal font-medium text-sm">微信支付</span>
+</button>
+</div>
+<script>
+function selectPayment(method) {
+    var alipayBtn = document.getElementById('alipay-btn');
+    var wechatBtn = document.getElementById('wechat-btn');
+    if (method === 'alipay') {
+        alipayBtn.style.borderColor = '#1677FF';
+        wechatBtn.style.borderColor = '#d1d5db';
+    } else {
+        wechatBtn.style.borderColor = '#09BB07';
+        alipayBtn.style.borderColor = '#d1d5db';
+    }
+}
+</script>
+<button class="w-full bg-sage hover:bg-sage/90 text-white font-bold py-5 rounded-2xl shadow-lg shadow-sage/20 transition-all flex items-center justify-center gap-2 mb-6" onclick="window.location.href='https://mbti.7373.com.cn/result.html' + window.location.search">
+                            立即支付并查看报告
+                            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-6 opacity-40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">安全支付保障</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">隐私保护承诺</span>
+</div>
+</div>
+</div>
+<div class="px-4 py-2 border-l-2 border-sage/20">
+<p class="text-charcoal/50 text-xs italic leading-relaxed">
+                            "这份报告真的帮我理清了许多职业上的困惑，支付的每一分钱都物超所值。推荐给每一个正在寻找自我的朋友。" —— 某匿名 INFJ 用户
+                        </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
