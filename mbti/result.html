@@ -16,7 +16,9 @@
               colors: {
                 "primary": "#4e6e5d","accent": "#d97706","background-light": "#fdfbf7","background-dark": "#1a1c1a",
                 "sage-light": "#e8edeb",
-                "warm-gray": "#71716a"
+                "warm-gray": "#71716a",
+                "success": "#2d6a4f",
+                "warning": "#e67e22"
               },
               fontFamily: {
                 "display": ["Inter", "Noto Sans SC", "sans-serif"]
@@ -33,7 +35,12 @@
             .progress-fill-right { @apply h-full bg-slate-300 dark:bg-slate-600 transition-all duration-500; }
             .trait-label { @apply text-sm font-bold text-slate-700 dark:text-slate-300; }
             .trait-value { @apply text-xs font-medium text-warm-gray dark:text-slate-400 mt-1; }
+            .section-card { @apply bg-white dark:bg-slate-800 rounded-3xl p-8 lg:p-12 shadow-sm border border-primary/5 mb-12; }
+            .nav-link-sub { @apply px-4 py-2 text-sm font-medium text-warm-gray hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary/30 whitespace-nowrap; }
+            .bullet-item { @apply flex items-start gap-3 mb-4; }
+            .icon-box { @apply flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center; }
         }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -60,7 +67,7 @@
 </div>
 </div>
 </header>
-<main class="flex-1">
+
 <!-- 简版报告 -->
 <section id="simple-report" class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
 <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
@@ -84,7 +91,7 @@
 </h1>
 </div>
 <p id="result-desc" class="max-w-xl text-lg leading-relaxed text-warm-gray dark:text-slate-400">
-                            作为"建筑师"，你拥有一种与生俱来的求知欲和极其严谨的思维方式。你不仅是天生的策略家，更是能够将宏伟蓝图转化为现实的行动派。虽然你可能更倾向于独立思考，但你对世界深刻的洞察力常常让周围的人感到惊叹。
+                            作为"建筑师"，你拥有一种与生俱来的求知欲和极其严谨的思维方式。
                         </p>
 </div>
 <div class="flex flex-wrap gap-4">
@@ -193,13 +200,252 @@
 </div>
 </div>
 </section>
+
 <!-- 详细报告区域（默认隐藏） -->
-<section id="detailed-report" class="hidden mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
-<!-- 详细报告内容将在这里显示 -->
-<div class="text-center py-20">
-<h2 class="text-3xl font-bold mb-4">详细报告</h2>
-<p class="text-warm-gray">详细报告模板即将推出...</p>
+<section id="detailed-report" class="hidden mx-auto max-w-7xl px-6 py-12 lg:px-10">
+<div class="flex flex-col lg:flex-row items-center gap-8 bg-white/50 dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
+<div class="relative flex-shrink-0">
+<div class="h-32 w-32 md:h-40 md:w-40 rounded-2xl bg-sage-light dark:bg-primary/10 flex items-center justify-center border border-accent/10 overflow-hidden">
+<img id="detailed-image" alt="Character" class="h-4/5 w-4/5 object-contain" src=""/>
 </div>
+<div class="absolute -bottom-2 -right-2 h-10 w-10 bg-accent rounded-full flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center lg:text-left">
+<span class="inline-block rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary mb-3">深度性格分析档案</span>
+<h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-5xl mb-4">
+                    <span id="detailed-type">INTJ</span> <span id="detailed-name">建筑师</span>：<span class="text-primary">详细性格报告</span>
+</h1>
+<p class="text-lg text-warm-gray dark:text-slate-400 max-w-2xl">
+                    本报告基于您的测试结果，为您提供全方位的性格深度解读，帮助您更好地了解自己的天赋、挑战与成长路径。
+                </p>
+</div>
+<div class="flex-shrink-0">
+<button class="flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined">download</span>
+<span>下载 PDF 报告</span>
+</button>
+</div>
+</div>
+<nav class="sticky top-[73px] z-40 w-full border-b border-primary/5 bg-background-light/95 backdrop-blur-md dark:bg-background-dark/95 mt-8">
+<div class="mx-auto max-w-7xl px-6 lg:px-10 overflow-x-auto no-scrollbar">
+<div class="flex items-center gap-2 py-2">
+<a class="nav-link-sub" href="#overview">性格概览</a>
+<a class="nav-link-sub" href="#traits">优势与弱点</a>
+<a class="nav-link-sub" href="#career">职业生涯</a>
+<a class="nav-link-sub" href="#relationships">恋爱与社交</a>
+<a class="nav-link-sub" href="#growth">成长建议</a>
+</div>
+</div>
+</nav>
+
+<!-- 详细报告内容 -->
+<main class="flex-1 mx-auto max-w-7xl px-6 py-12 lg:px-10">
+<!-- 性格概览 -->
+<section class="section-card" id="overview">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h2 class="text-3xl font-bold">性格概览</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+<div class="space-y-6 text-lg leading-relaxed text-warm-gray dark:text-slate-300" id="overview-content">
+<p>建筑师（INTJ）是人格类型中最稀少且最具战略能力的类型之一。他们天生具有强烈的求知欲，对知识的渴望几乎贯穿其一生。在他们眼中，世界就像一盘复杂的棋局，每一个行动都必须经过深思熟虑，每一次进步都应该是战略蓝图的一部分。</p>
+<p>这种类型的人通常极其独立。他们更愿意相信自己的直觉和严密的逻辑分析，而不是社会习俗或他人的权威。虽然这种独立性可能让他们在社交场合显得有些冷淡或难以接近，但实际上，他们只是更专注于内心世界的构思与创造。</p>
+<p>INTJ 不仅仅是梦想家，更是实干家。他们拥有将抽象的概念转化为可执行计划的罕见能力。对于平庸和低效率，他们几乎没有任何耐性。他们总是不断地寻找改进系统、提高效率的方法，无论是在工作中还是在个人生活中。</p>
+</div>
+<div class="bg-sage-light/20 dark:bg-primary/5 p-8 rounded-2xl border border-primary/10">
+<h3 class="text-xl font-bold mb-6 text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">psychology_alt</span>
+核心认知模式
+</h3>
+<div class="space-y-6" id="cognitive-functions">
+<div class="flex gap-4">
+<div class="font-bold text-primary">Ni</div>
+<div>
+<div class="font-bold text-slate-800 dark:text-slate-200">主导：内向直觉</div>
+<div class="text-sm text-warm-gray mt-1">负责捕捉未来的可能性与深层规律。</div>
+</div>
+<div class="flex gap-4">
+<div class="font-bold text-primary">Te</div>
+<div>
+<div class="font-bold text-slate-800 dark:text-slate-200">辅助：外向思考</div>
+<div class="text-sm text-warm-gray mt-1">负责逻辑评估、组织计划并执行。</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 优势与弱点 -->
+<section class="section-card" id="traits">
+<div class="flex items-center gap-4 mb-10">
+<div class="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+<span class="material-symbols-outlined">balance</span>
+</div>
+<h2 class="text-3xl font-bold">优势与弱点</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+<div class="space-y-6">
+<h3 class="text-xl font-bold text-success flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined">add_circle</span>
+性格优势
+</h3>
+<div id="strengths-list">
+<div class="bullet-item">
+<div class="icon-box bg-success/10 text-success">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div>
+<span class="font-bold block">快速学习能力</span>
+<span class="text-warm-gray dark:text-slate-400 text-sm">能够迅速掌握复杂的新知识和技能，并发现其中的内在逻辑。</span>
+</div>
+</div>
+<div class="bullet-item">
+<div class="icon-box bg-success/10 text-success">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div>
+<span class="font-bold block">高度独立</span>
+<span class="text-warm-gray dark:text-slate-400 text-sm">不依赖他人的肯定，有坚定的信念去追求自己认为正确的目标。</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h3 class="text-xl font-bold text-warning flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined">remove_circle</span>
+潜在弱点
+</h3>
+<div id="weaknesses-list">
+<div class="bullet-item">
+<div class="icon-box bg-warning/10 text-warning">
+<span class="material-symbols-outlined text-sm">close</span>
+</div>
+<div>
+<span class="font-bold block">过于吹毛求疵</span>
+<span class="text-warm-gray dark:text-slate-400 text-sm">对自己和他人都有极高的标准，有时会显得刻薄或缺乏同情心。</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 职业生涯 -->
+<section class="section-card" id="career">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<h2 class="text-3xl font-bold">职业生涯</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+<div class="p-8 rounded-2xl bg-sage-light/10 border border-primary/5">
+<h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">home_work</span>
+理想工作环境
+</h4>
+<ul class="space-y-3 text-warm-gray" id="ideal-work-env">
+<li class="flex items-center gap-2 italic">• 能够独立自主工作的空间</li>
+<li class="flex items-center gap-2 italic">• 逻辑清晰、非官僚化的管理体系</li>
+<li class="flex items-center gap-2 italic">• 具有挑战性的复杂问题</li>
+<li class="flex items-center gap-2 italic">• 与同样聪明且敬业的同事共事</li>
+</ul>
+</div>
+<div class="p-8 rounded-2xl bg-sage-light/10 border border-primary/5">
+<h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">stars</span>
+核心职场价值
+</h4>
+<ul class="space-y-3 text-warm-gray" id="work-values">
+<li class="flex items-center gap-2 italic">• 能力至上，反对裙带关系</li>
+<li class="flex items-center gap-2 italic">• 效率为王，杜绝重复劳动</li>
+<li class="flex items-center gap-2 italic">• 创新思维，打破旧有框架</li>
+</ul>
+</div>
+</div>
+<h4 class="text-lg font-bold mb-6">推荐职业领域</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="career-paths">
+<div class="p-5 rounded-xl border border-primary/10 hover:shadow-md transition-shadow bg-white dark:bg-slate-700">
+<span class="material-symbols-outlined text-primary mb-2">terminal</span>
+<p class="font-bold">系统架构师</p>
+<p class="text-xs text-warm-gray mt-1">负责复杂系统的逻辑设计</p>
+</div>
+<div class="p-5 rounded-xl border border-primary/10 hover:shadow-md transition-shadow bg-white dark:bg-slate-700">
+<span class="material-symbols-outlined text-primary mb-2">strategy</span>
+<p class="font-bold">战略顾问</p>
+<p class="text-xs text-warm-gray mt-1">为企业制定长远发展计划</p>
+</div>
+</div>
+</section>
+
+<!-- 恋爱与社交 -->
+<section class="section-card" id="relationships">
+<div class="flex items-center gap-4 mb-8">
+<div class="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<h2 class="text-3xl font-bold">恋爱与社交</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<div class="space-y-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">diversity_1</span>
+在友谊中
+</h3>
+<p class="text-warm-gray leading-relaxed" id="friendship-desc">
+INTJ 的朋友圈子通常很小。他们寻找的是能够进行深度智力交流的知己，而非泛泛之交。
+</p>
+</div>
+<div class="space-y-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">favorite_border</span>
+在恋爱中
+</h3>
+<p class="text-warm-gray leading-relaxed" id="relationship-desc">
+恋爱对于建筑师来说也是一个需要"研究"和"优化"的课题。
+</p>
+</div>
+</div>
+</section>
+
+<!-- 成长建议 -->
+<section class="section-card mb-20" id="growth">
+<div class="flex items-center gap-4 mb-10">
+<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<h2 class="text-3xl font-bold">成长建议</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="growth-suggestions">
+<div class="p-8 rounded-2xl bg-white dark:bg-slate-700 border border-primary/10 shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 text-primary/5 group-hover:text-primary/10 transition-colors">
+<span class="material-symbols-outlined text-8xl">forum</span>
+</div>
+<div class="relative">
+<h4 class="text-lg font-bold mb-3">学会表达情感</h4>
+<p class="text-sm text-warm-gray leading-relaxed">逻辑不是沟通的全部。试着偶尔放下你的逻辑盔甲，向重要的人表达你的感激与脆弱。</p>
+</div>
+</div>
+</div>
+</section>
+
+<div class="text-center py-10 bg-primary/5 rounded-3xl border border-primary/10 mb-20">
+<h3 class="text-2xl font-bold mb-4">对这个结果有共鸣吗？</h3>
+<p class="text-warm-gray mb-8">分享给你的朋友，看看他们眼中的你是否也是这样的。</p>
+<div class="flex justify-center gap-4">
+<button class="h-12 px-8 rounded-xl bg-white border border-primary/20 text-primary font-bold flex items-center gap-2 hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined">share</span>分享结果
+</button>
+<button onclick="location.href='testing.html'" class="h-12 px-8 rounded-xl bg-primary text-white font-bold flex items-center gap-2 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined">refresh</span>重新测试
+</button>
+</div>
+</div>
+</main>
 </section>
 </main>
 <footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
@@ -229,8 +475,8 @@
 </div>
 
 <script>
-// MBTI 类型数据
-const mbtiData = {
+// MBTI 基础数据
+const mbtiBaseData = {
     'INTJ': { name: '建筑师', desc: '富有想象力且具备战略眼光的思考者，他们对万事皆有计划。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY', strengths: '独立、目标明确、逻辑性极强，能够高效解决复杂问题。', weaknesses: '有时可能过于批判，或因过度理性而忽略了他人的情感需求。', career: '适合需要战略规划、数据分析或复杂系统设计的专业领域。' },
     'INTP': { name: '逻辑学家', desc: '具有创造力的发明家，对知识有着永无止境的渴望。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6Ne0JYslbKE6vQ2fN-xBTQDM2NLVvkrVH1KfhUdb44k6wLRR30oGoBvsvJZviW2LL8Es8ECUOs1kb5TZicN1fCZXeFVSu9pU5ZvPa3qs4sXNwfw86oV22Nx8mQlUaOt1r8nj0vcGNyEZq1yGGWg9uUK6Jzp55iyrPZ2qseAVq02eNRpkSubTWGcjReciSL4X3X2Z5PgW5kI6T-raDGgTsT3YIuwDHjsiYrO8XUIWxiTG4nBsg-rUXhDtL7jXj8Ft3TbFYCcQD4Ko', strengths: '分析能力强、善于思考、富有创造力。', weaknesses: '可能过于理论化，不善于实际执行。', career: '适合科研、技术开发、数据分析等领域。' },
     'ENTJ': { name: '指挥官', desc: '天生的领导者，果断、坚定，有强大的执行力。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkt7gnAWJyrfWgF5WV94vIFEbXWkt2g0MKiOCFUlh7E7jvF8XYloEtys13HN1StuML8tNbDzeHBBy_coq3jK3g8J59YSwV_h6VP4bIcH66RRLd6J8SdlFa6lHgwWbdSJfkOV1XfN6i2oqresHNafhWH9tEgwtSrioKNQJEvu0RoIWQ6McgDSdYhnvuSYNoG7-l3mcRfS2hGgLw7BdymYIc4kPrURDFao8veDgmT4cbhazZ9neQQUIWkFg6wciXGt37OxJPggAA_wg', strengths: '领导力强、决策果断、目标导向。', weaknesses: '可能过于严厉，缺乏耐心。', career: '适合企业管理、创业、法律等领域。' },
@@ -249,6 +495,66 @@ const mbtiData = {
     'ESFP': { name: '表演者', desc: '自发的、精力充沛的表演者，他们的生活充满乐趣。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '热情、表演天赋、善于激励他人。', weaknesses: '可能过于冲动，缺乏计划性。', career: '适合表演、销售、娱乐等领域。' }
 };
 
+// 详细报告数据（简化版，用于演示）
+const detailedData = {
+    'INTJ': {
+        overview: `<p>建筑师（INTJ）是人格类型中最稀少且最具战略能力的类型之一。他们天生具有强烈的求知欲，对知识的渴望几乎贯穿其一生。在他们眼中，世界就像一盘复杂的棋局，每一个行动都必须经过深思熟虑，每一次进步都应该是战略蓝图的一部分。</p>
+<p>这种类型的人通常极其独立。他们更愿意相信自己的直觉和严密的逻辑分析，而不是社会习俗或他人的权威。虽然这种独立性可能让他们在社交场合显得有些冷淡或难以接近，但实际上，他们只是更专注于内心世界的构思与创造。</p>
+<p>INTJ 不仅仅是梦想家，更是实干家。他们拥有将抽象的概念转化为可执行计划的罕见能力。对于平庸和低效率，他们几乎没有任何耐性。</p>`,
+        cognitiveFunctions: [
+            { func: 'Ni', name: '内向直觉', desc: '负责捕捉未来的可能性与深层规律。' },
+            { func: 'Te', name: '外向思考', desc: '负责逻辑评估、组织计划并执行。' },
+            { func: 'Fi', name: '内向情感', desc: '内在的价值观系统，虽然深沉但不常外露。' }
+        ],
+        strengths: [
+            { title: '快速学习能力', desc: '能够迅速掌握复杂的新知识和技能，并发现其中的内在逻辑。' },
+            { title: '高度独立', desc: '不依赖他人的肯定，有坚定的信念去追求自己认为正确的目标。' },
+            { title: '战略眼光', desc: '擅长从长远考虑问题，预判未来的发展趋势并提前布局。' }
+        ],
+        weaknesses: [
+            { title: '过于吹毛求疵', desc: '对自己和他人都有极高的标准，有时会显得刻薄或缺乏同情心。' },
+            { title: '社交上的迟钝', desc: '可能觉得社交礼仪是无谓的浪费时间，容易在不经意间冒犯他人。' }
+        ],
+        idealWorkEnv: ['能够独立自主工作的空间', '逻辑清晰、非官僚化的管理体系', '具有挑战性的复杂问题', '与同样聪明且敬业的同事共事'],
+        workValues: ['能力至上，反对裙带关系', '效率为王，杜绝重复劳动', '创新思维，打破旧有框架'],
+        careerPaths: ['系统架构师', '战略顾问', '科学研究员', '精算师/金融分析'],
+        friendshipDesc: 'INTJ 的朋友圈子通常很小。他们寻找的是能够进行深度智力交流的知己，而非泛泛之交。对于他们而言，一个能够理解其复杂思想的灵魂伴侣胜过成百上千的社交点头之交。',
+        relationshipDesc: '恋爱对于建筑师来说也是一个需要"研究"和"优化"的课题。他们会以极大的诚意和认真态度对待伴侣，但也可能因为过于理性而显得有些不解风情。',
+        growthSuggestions: [
+            { title: '学会表达情感', desc: '逻辑不是沟通的全部。试着偶尔放下你的逻辑盔甲，向重要的人表达你的感激与脆弱。' },
+            { title: '接受不完美', desc: '世界并不总是按照最优路径运行。学会包容那些不可控的、甚至是有缺陷的过程。' },
+            { title: '提升团队协作', desc: '虽然你一个人可以走得很快，但一群人才能走得更远。试着理解并接纳他人不同的思维方式。' }
+        ]
+    },
+    // 为其他类型添加简化数据...
+    'INTP': {
+        overview: `<p>逻辑学家（INTP）是具有创造力的发明家，对知识有着永无止境的渴望。他们喜欢理论性的思考，善于分析复杂的问题，并寻找创新的解决方案。</p>
+<p>这种类型的人通常内敛且独立，更喜欢独自思考而不是社交活动。他们对知识和真理的追求使他们成为出色的研究者和思考者。</p>`,
+        cognitiveFunctions: [
+            { func: 'Ti', name: '内向思考', desc: '负责逻辑分析和构建理论框架。' },
+            { func: 'Ne', name: '外向直觉', desc: '负责探索各种可能性和关联。' }
+        ],
+        strengths: [
+            { title: '分析能力强', desc: '善于分析复杂问题，找出逻辑漏洞。' },
+            { title: '富有创造力', desc: '能够想出独特的创新解决方案。' }
+        ],
+        weaknesses: [
+            { title: '理论与实践脱节', desc: '可能过于关注理论而忽视实际操作。' },
+            { title: '社交障碍', desc: '可能不善于表达自己，难以与他人建立联系。' }
+        ],
+        idealWorkEnv: ['独立研究的空间', '允许自由探索的环境', '有挑战性的复杂问题'],
+        workValues: ['追求真理', '创新思维', '学术自由'],
+        careerPaths: ['科研人员', '数据分析师', '软件工程师', '大学教授'],
+        friendshipDesc: 'INTP 寻找的是能够进行深度智力交流的朋友。他们更喜欢小圈子但有深度的友谊。',
+        relationshipDesc: '在恋爱中，INTP 可能需要很长时间才能打开心扉，但他们一旦认定一个人，就会非常忠诚。',
+        growthSuggestions: [
+            { title: '注重实践', desc: '将你的理论知识应用到实际生活中去。' },
+            { title: '学会表达', desc: '不要只在脑子里思考，也要学会表达自己的想法。' }
+        ]
+    }
+    // 其他类型可以继续添加...
+};
+
 // 从URL获取MBTI类型
 function getMBTIFromURL() {
     const params = new URLSearchParams(window.location.search);
@@ -258,9 +564,9 @@ function getMBTIFromURL() {
 // 初始化结果页面
 function initResult() {
     const mbti = getMBTIFromURL().toUpperCase();
-    const data = mbtiData[mbti] || mbtiData['INTJ'];
+    const data = mbtiBaseData[mbti] || mbtiBaseData['INTJ'];
 
-    // 更新基本信息
+    // 更新简版报告
     document.getElementById('result-name').textContent = data.name;
     document.getElementById('result-type').textContent = `(${mbti}-A)`;
     document.getElementById('result-desc').textContent = data.desc;
@@ -272,8 +578,17 @@ function initResult() {
     document.getElementById('weaknesses').textContent = data.weaknesses;
     document.getElementById('career').textContent = data.career;
 
-    // 更新维度数据（暂时使用示例数据，实际应该从testing页面传递）
+    // 更新详细报告
+    document.getElementById('detailed-type').textContent = mbti;
+    document.getElementById('detailed-name').textContent = data.name;
+    document.getElementById('detailed-image').src = data.image;
+    document.getElementById('detailed-image').alt = `${data.name} ${mbti}`;
+
+    // 更新维度数据
     updateDimensions(mbti);
+
+    // 更新详细报告内容
+    updateDetailedReport(mbti);
 
     // 更新页面标题
     document.title = `MBTI 测试结果 - ${data.name} (${mbti})`;
@@ -281,19 +596,11 @@ function initResult() {
 
 // 更新维度数据
 function updateDimensions(mbti) {
-    // 解析MBTI类型
-    const dim1 = mbti[0] === 'E' ? 'I' : 'E'; // I vs E
-    const dim2 = mbti[1] === 'N' ? 'S' : 'N'; // N vs S
-    const dim3 = mbti[2] === 'T' ? 'F' : 'T'; // T vs F
-    const dim4 = mbti[3] === 'J' ? 'P' : 'J'; // J vs P
-
-    // 示例数据 - 实际应该从测试结果计算
     const dim1Percent = mbti[0] === 'I' ? 70 : 30;
     const dim2Percent = mbti[1] === 'N' ? 85 : 15;
     const dim3Percent = mbti[2] === 'T' ? 75 : 25;
     const dim4Percent = mbti[3] === 'J' ? 60 : 40;
 
-    // 更新DOM
     document.getElementById('dim1-left').style.width = dim1Percent + '%';
     document.getElementById('dim1-right').style.width = (100 - dim1Percent) + '%';
     document.getElementById('dim1-left-val').textContent = dim1Percent + '%';
@@ -315,6 +622,93 @@ function updateDimensions(mbti) {
     document.getElementById('dim4-right-val').textContent = (100 - dim4Percent) + '%';
 }
 
+// 更新详细报告内容
+function updateDetailedReport(mbti) {
+    const detailed = detailedData[mbti] || detailedData['INTJ'];
+
+    // 更新性格概览
+    document.getElementById('overview-content').innerHTML = detailed.overview;
+
+    // 更新认知功能
+    const cognitiveHtml = detailed.cognitiveFunctions.map(f => `
+        <div class="flex gap-4">
+            <div class="font-bold text-primary">${f.func}</div>
+            <div>
+                <div class="font-bold text-slate-800 dark:text-slate-200">${f.name}</div>
+                <div class="text-sm text-warm-gray mt-1">${f.desc}</div>
+            </div>
+        </div>
+    `).join('');
+    document.getElementById('cognitive-functions').innerHTML = cognitiveHtml;
+
+    // 更新优势列表
+    const strengthsHtml = detailed.strengths.map(s => `
+        <div class="bullet-item">
+            <div class="icon-box bg-success/10 text-success">
+                <span class="material-symbols-outlined text-sm">check</span>
+            </div>
+            <div>
+                <span class="font-bold block">${s.title}</span>
+                <span class="text-warm-gray dark:text-slate-400 text-sm">${s.desc}</span>
+            </div>
+        </div>
+    `).join('');
+    document.getElementById('strengths-list').innerHTML = strengthsHtml;
+
+    // 更新弱点列表
+    const weaknessesHtml = detailed.weaknesses.map(w => `
+        <div class="bullet-item">
+            <div class="icon-box bg-warning/10 text-warning">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </div>
+            <div>
+                <span class="font-bold block">${w.title}</span>
+                <span class="text-warm-gray dark:text-slate-400 text-sm">${w.desc}</span>
+            </div>
+        </div>
+    `).join('');
+    document.getElementById('weaknesses-list').innerHTML = weaknessesHtml;
+
+    // 更新理想工作环境
+    const envHtml = detailed.idealWorkEnv.map(e => `<li class="flex items-center gap-2 italic">• ${e}</li>`).join('');
+    document.getElementById('ideal-work-env').innerHTML = envHtml;
+
+    // 更新职场价值
+    const valuesHtml = detailed.workValues.map(v => `<li class="flex items-center gap-2 italic">• ${v}</li>`).join('');
+    document.getElementById('work-values').innerHTML = valuesHtml;
+
+    // 更新职业路径
+    const careerHtml = detailed.careerPaths.map((c, i) => {
+        const icons = ['terminal', 'strategy', 'science', 'analytics'];
+        return `
+        <div class="p-5 rounded-xl border border-primary/10 hover:shadow-md transition-shadow bg-white dark:bg-slate-700">
+            <span class="material-symbols-outlined text-primary mb-2">${icons[i] || 'work'}</span>
+            <p class="font-bold">${c}</p>
+        </div>`;
+    }).join('');
+    document.getElementById('career-paths').innerHTML = careerHtml;
+
+    // 更新友谊描述
+    document.getElementById('friendship-desc').textContent = detailed.friendshipDesc;
+
+    // 更新恋爱描述
+    document.getElementById('relationship-desc').textContent = detailed.relationshipDesc;
+
+    // 更新成长建议
+    const growthHtml = detailed.growthSuggestions.map(g => `
+        <div class="p-8 rounded-2xl bg-white dark:bg-slate-700 border border-primary/10 shadow-sm relative overflow-hidden group">
+            <div class="absolute -right-4 -top-4 text-primary/5 group-hover:text-primary/10 transition-colors">
+                <span class="material-symbols-outlined text-8xl">forum</span>
+            </div>
+            <div class="relative">
+                <h4 class="text-lg font-bold mb-3">${g.title}</h4>
+                <p class="text-sm text-warm-gray leading-relaxed">${g.desc}</p>
+            </div>
+        </div>
+    `).join('');
+    document.getElementById('growth-suggestions').innerHTML = growthHtml;
+}
+
 // 显示详细报告
 function showDetailedReport() {
     document.getElementById('simple-report').classList.add('hidden');
@@ -324,6 +718,14 @@ function showDetailedReport() {
 
     // 滚动到详细报告
     document.getElementById('detailed-report').scrollIntoView({ behavior: 'smooth' });
+}
+
+// 返回简版报告
+function showSimpleReport() {
+    document.getElementById('detailed-report').classList.add('hidden');
+    document.getElementById('simple-report').classList.remove('hidden');
+    document.getElementById('dimensions-section').classList.remove('hidden');
+    document.getElementById('suggestions-section').classList.remove('hidden');
 }
 
 // 页面加载时初始化
