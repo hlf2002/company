@@ -368,11 +368,16 @@ function showResult() {
     const dim3Percent = totalT > 0 ? Math.round((scores.T / totalT) * 100) : 50; // T
     const dim4Percent = totalJ > 0 ? Math.round((scores.J / totalJ) * 100) : 50; // J
 
-    // 将分数数据编码到URL
+    // 计算-A或-T：基于各维度的"坚定程度"（离50%的平均距离）
+    // 距离50%越远越坚定(-A)，越近越犹豫(-T)
+    const confidence = (Math.abs(dim1Percent - 50) + Math.abs(dim2Percent - 50) + Math.abs(dim3Percent - 50) + Math.abs(dim4Percent - 50)) / 4;
+    const assertive = confidence >= 20 ? 'A' : 'T'; // 平均偏差>=20%为坚定型
+
+    // 将分数数据编码到URL（包含-A/-T）
     const scoresData = `${dim1Percent},${dim2Percent},${dim3Percent},${dim4Percent}`;
 
     // 跳转到结果页显示结果
-    window.location.href = 'https://mbti.7373.com.cn/result.html?result=' + mbti + '&scores=' + scoresData;
+    window.location.href = 'https://mbti.7373.com.cn/result.html?result=' + mbti + assertive + '&scores=' + scoresData;
 }
 
 // 初始化

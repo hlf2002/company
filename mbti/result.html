@@ -93,6 +93,9 @@
 <p id="result-desc" class="max-w-xl text-lg leading-relaxed text-warm-gray dark:text-slate-400">
                             作为"建筑师"，你拥有一种与生俱来的求知欲和极其严谨的思维方式。
                         </p>
+                        <p id="assertive-desc" class="text-sm text-warm-gray dark:text-slate-400 italic">
+                            <!-- -A/-T 说明将由JS动态填充 -->
+                        </p>
 </div>
 <div class="flex flex-wrap gap-4">
 <button onclick="showDetailedReport()" class="h-14 rounded-xl bg-primary px-10 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
@@ -979,23 +982,33 @@ const detailedData = {
     }
 };
 
-// 从URL获取MBTI类型
+// 从URL获取MBTI类型和-A/-T后缀
 function getMBTIFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('result') || 'INTJ';
+    const result = params.get('result') || 'INTJ';
+    // 分离4字母类型和-A/-T后缀
+    const type = result.replace(/-[AT]$/i, '');
+    const suffix = result.match(/-([AT])$/i)?.[1] || 'A';
+    return { type: type.toUpperCase(), suffix: suffix.toUpperCase() };
 }
 
 // 初始化结果页面
 function initResult() {
-    const mbti = getMBTIFromURL().toUpperCase();
+    const { type: mbti, suffix } = getMBTIFromURL();
     const data = mbtiBaseData[mbti] || mbtiBaseData['INTJ'];
 
     // 更新简版报告
     document.getElementById('result-name').textContent = data.name;
-    document.getElementById('result-type').textContent = `(${mbti}-A)`;
+    document.getElementById('result-type').textContent = `(${mbti}-${suffix})`;
     document.getElementById('result-desc').textContent = data.desc;
     document.getElementById('result-image').src = data.image;
-    document.getElementById('result-image').alt = `${data.name} ${mbti}`;
+    document.getElementById('result-image').alt = `${data.name} ${mbti}-${suffix}`;
+
+    // 更新-A/-T说明
+    const assertiveDesc = suffix === 'A'
+        ? '坚定型 - 您对自己的信念充满信心，不易受他人影响'
+        : '犹豫型 - 您善于自我反思，有时会对自己的决定产生怀疑';
+    document.getElementById('assertive-desc').textContent = assertiveDesc;
 
     // 更新优势盲点职业建议
     document.getElementById('strengths').textContent = data.strengths;
@@ -1003,10 +1016,10 @@ function initResult() {
     document.getElementById('career').textContent = data.career;
 
     // 更新详细报告
-    document.getElementById('detailed-type').textContent = mbti;
+    document.getElementById('detailed-type').textContent = `${mbti}-${suffix}`;
     document.getElementById('detailed-name').textContent = data.name;
     document.getElementById('detailed-image').src = data.image;
-    document.getElementById('detailed-image').alt = `${data.name} ${mbti}`;
+    document.getElementById('detailed-image').alt = `${data.name} ${mbti}-${suffix}`;
 
     // 更新维度数据
     updateDimensions(mbti);
@@ -1015,7 +1028,7 @@ function initResult() {
     updateDetailedReport(mbti);
 
     // 更新页面标题
-    document.title = `MBTI 测试结果 - ${data.name} (${mbti})`;
+    document.title = `MBTI 测试结果 - ${data.name} (${mbti}-${suffix})`;
 }
 
 // 更新维度数据
