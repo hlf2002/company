@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = '请输入工作邮箱';
     } elseif (empty($code)) {
         $error = '请输入验证码';
+    } elseif (!verifyCode($phone, $code)) {
+        $error = '验证码错误或已过期';
     } elseif (empty($password)) {
         $error = '请设置密码';
     } elseif (strlen($password) < 8) {
@@ -114,8 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
-<body class="min-h-screen flex overflow-hidden">
-<div class="hidden lg:flex flex-1 relative overflow-hidden illustration-bg items-center justify-center p-12" style="max-width: 600px;">
+<body class="min-h-screen flex flex-col lg:flex-row overflow-auto">
+<!-- Left Side - 插图区域 -->
+<div class="hidden lg:flex lg:w-1/2 relative overflow-hidden illustration-bg items-center justify-center p-12 flex-shrink-0">
 <div class="absolute inset-0 opacity-10 pointer-events-none">
 <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -143,11 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </div>
 </div>
-</div>
-<main class="w-full lg:w-[600px] bg-background-warm flex items-center justify-center p-6 md:p-12 overflow-y-auto">
+<main class="w-full lg:w-1/2 bg-background-warm flex items-center justify-center p-6 md:p-12 overflow-y-auto">
 <div class="w-full max-w-md bg-white rounded-3xl shadow-xl shadow-primary/5 p-8 md:p-10 border border-slate-100">
 <div class="mb-8">
-<h3 class="text-2xl font-bold text-slate-900 mb-2">成为合作伙伴</h3>
+<h3 class="text-2xl font-bold text-slate-900 mb-2">注册开放平台账号</h3>
 <p class="text-slate-500">解锁专业测评能力，助力企业与团队成长。</p>
 </div>
 
@@ -181,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <label class="block text-sm font-semibold text-slate-700 mb-1.5">手机号码</label>
 <div class="flex gap-2">
 <input name="phone" class="form-input-custom flex-1" placeholder="请输入手机号" required="" type="tel" value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>"/>
-<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors whitespace-nowrap" type="button">获取验证码</button>
+<button class="px-4 py-2 text-sm font-semibold text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors whitespace-nowrap" type="button" id="sendCodeBtn" onclick="sendCode()">获取验证码</button>
 </div>
 </div>
 <div>
@@ -216,5 +218,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </div>
 </main>
+
+<script>
+let countdown = 0;
+function sendCode() {
+    const phoneInput = document.querySelector('input[name="phone"]');
+    const phone = phoneInput.value.trim();
+    const btn = document.getElementById('sendCodeBtn');
+
+    if (!phone) {
+        alert('请输入手机号');
+        return;
+    }
+
+    if (!/^1[3-9]\d{9}$/.test(phone)) {
+        alert('请输入正确的手机号');
+        return;
+    }
+
+    if (countdown > 0) return;
+
+    btn.disabled = true;
+    btn.textContent = '发送中...';
+
+    fetch('send_code.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'phone=' + encodeURIComponent(phone)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            btn.disabled = false;
+            btn.textContent = '获取验证码';
+        } else {
+            alert('验证码已发送');
+            countdown = 60;
+            btn.textContent = countdown + '秒后重发';
+            const timer = setInterval(() => {
+                countdown--;
+                btn.textContent = countdown + '秒后重发';
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.textContent = '获取验证码';
+                }
+            }, 1000);
+        }
+    })
+    .catch(err => {
+        alert('发送失败，请稍后重试');
+        btn.disabled = false;
+        btn.textContent = '获取验证码';
+    });
+}
+</script>
 
 </body></html>

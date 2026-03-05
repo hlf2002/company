@@ -6,6 +6,10 @@ define('DB_NAME', 'mbti_business');
 define('DB_USER', 'mbti_user');
 define('DB_PASS', 'Mbti2024!@#');
 
+// 短信配置（聚合数据）
+define('JUHE_SMS_APPKEY', '105e41edd818b92da18a959888f12cb4');
+define('JUHE_SMS_TEMPLATE_ID', 1); // 短信模板ID
+
 // 创建数据库连接
 function getDB() {
     static $pdo = null;
@@ -70,4 +74,61 @@ function logLogin($company_id, $ip, $location) {
     $pdo = getDB();
     $stmt = $pdo->prepare("INSERT INTO login_logs (company_id, login_ip, login_location) VALUES (?, ?, ?)");
     $stmt->execute([$company_id, $ip, $location]);
+}
+
+// 生成6位数字验证码
+function generateCode() {
+    return str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+}
+
+// 发送短信验证码
+function sendSMS($phone, $code) {
+    $url = 'https://v.juhe.cn/sms/send';
+    $params = [
+        'mobile' => $phone,
+        'tpl_id' => JUHE_SMS_TEMPLATE_ID,
+        'tpl_value' => urlencode('#code#=' . $code),
+        'key' => JUHE_SMS_APPKEY
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+    return $result;
+}
+
+// 保存验证码到数据库
+function saveVerificationCode($phone, $code) {
+    $pdo = getDB();
+
+    // 先删除该手机号之前的验证码
+    $stmt = $pdo->prepare("DELETE FROM sms_codes WHERE phone = ?");
+    $stmt->execute([$phone]);
+
+    // 插入新验证码
+    $expires_at = date('Y-m-d H:i:s', time() + 600); // 10分钟有效
+    $stmt = $pdo->prepare("INSERT INTO sms_codes (phone, code, expires_at) VALUES (?, ?, ?)");
+    $stmt->execute([$phone, $code, $expires_at]);
+}
+
+// 验证验证码
+function verifyCode($phone, $code) {
+    $pdo = getDB();
+    $stmt = $pdo->prepare("SELECT * FROM sms_codes WHERE phone = ? AND code = ? AND expires_at > NOW()");
+    $stmt->execute([$phone, $code]);
+    $result = $stmt->fetch();
+
+    if ($result) {
+        // 验证成功后删除验证码
+        $stmt = $pdo->prepare("DELETE FROM sms_codes WHERE phone = ?");
+        $stmt->execute([$phone]);
+        return true;
+    }
+    return false;
 }
