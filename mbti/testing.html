@@ -223,8 +223,19 @@ const questions = [
     { dim: 'JP', text: '我习惯把事情做完后再开始新的事情，而不是同时进行多项任务' }
 ];
 
-// 随机打乱题目顺序，增加多样性
-questions.sort(() => Math.random() - 0.5);
+// 随机打乱题目顺序，增加多样性（只打乱一次，保存到localStorage）
+let savedOrder = localStorage.getItem('mbti_question_order');
+if (savedOrder) {
+    const order = JSON.parse(savedOrder);
+    const shuffled = order.map(i => questions[i]);
+    questions.splice(0, questions.length, ...shuffled);
+} else {
+    const order = questions.map((_, i) => i);
+    order.sort(() => Math.random() - 0.5);
+    const shuffled = order.map(i => questions[i]);
+    questions.splice(0, questions.length, ...shuffled);
+    localStorage.setItem('mbti_question_order', JSON.stringify(order));
+}
 
 // 存储答案
 let answers = {};
