@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 性格详情页 - 鉴赏家 (ISTP)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="../favicon.png"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4e6e5d", // Sage Green
+                        "accent": "#d97706",
+                        "background-light": "#fdfbf7", // Warm Beige
+                        "background-dark": "#1a1c1a",
+                        "sage-light": "#e8edeb",
+                        "warm-gray": "#71716a"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300;
+            }
+        }
+        .trait-bar-bg { @apply h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden; }
+        .trait-bar-fill { @apply h-full bg-primary rounded-full transition-all duration-500; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl icon-fill">psychology</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 首页</h2>
+</a>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="../index.html">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">文章</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">联系我们</a>
+</nav>
+<div class="flex items-center gap-4">
+<a href="../testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+<span>开始测试</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<div class="h-10 w-10 rounded-full bg-sage-light dark:bg-slate-800 flex items-center justify-center border border-primary/10 overflow-hidden">
+<img alt="用户头像" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Z8MJpJuA4NTNkjdHV4Y_lfOqEXLPbAlp6-prK0Ab49gJ_V_0ggDOh2fi2KXyJWiffHLcX54l93Nj0lYN_eewAAV0QEfzXEbRetUJOz8beV4cte2m-5fPAERraxN1Wj1sCpTpT8eKAQoE720Sn1x9KgdzRVIjXjt9Y8kdUDB7oik15ewxqP0sFUBwdpg3gTifbWAJG1A4Xz6iXuQMxykg6HoqANf3LTnKH43etz99ufm5y6sC0tx9DrCG9rNk4nH6unJAOjVFYgU"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+<div class="relative flex justify-center lg:justify-start">
+<div class="relative h-[440px] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-sage-light dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-2xl">
+<img alt="鉴赏家 ISTP" class="h-4/5 w-4/5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+<div class="rounded-xl bg-white/90 dark:bg-slate-900/90 px-4 py-2 backdrop-blur shadow-sm">
+<span class="text-lg font-bold text-primary">鉴赏家</span>
+</div>
+<div class="rounded-xl bg-primary px-4 py-2 shadow-lg">
+<span class="text-sm font-bold text-white">ISTP-A / ISTP-T</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<h1 class="text-5xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">鉴赏家</h1>
+<p class="text-xl leading-relaxed text-warm-gray dark:text-slate-400">
+                            大胆且务实的实验者，擅长使用各类工具。
+                        </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-lg">share</span>
+                            分享结果
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white/50 dark:bg-slate-900/50 py-16 border-y border-primary/5">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">build</span>
+</div>
+<h3 class="text-xl font-bold">动手能力</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">生来就是创造者，喜欢拆解并重新组装事物以了解其运作方式。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">ac_unit</span>
+</div>
+<h3 class="text-xl font-bold">冷静理性</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">即使在最混乱的情况下，也能保持惊人的镇定，用逻辑解决危机。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">explore</span>
+</div>
+<h3 class="text-xl font-bold">随性而为</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">热爱自由，不愿被过于死板的计划束缚，随时准备迎接新挑战。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 space-y-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h2 class="text-3xl font-bold border-l-4 border-primary pl-4">性格特质分析</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>精神 (Mind)</span>
+<span class="text-primary">内向型 (68%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 68%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>能量 (Energy)</span>
+<span class="text-primary">现实型 (75%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 75%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>本性 (Nature)</span>
+<span class="text-primary">理性型 (82%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 82%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>战术 (Tactics)</span>
+<span class="text-primary">探寻型 (71%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 71%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>身份 (Identity)</span>
+<span class="text-primary">动荡型 (54%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 54%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-3xl bg-slate-900 p-8 lg:p-12 text-white shadow-xl">
+<h3 class="text-2xl font-bold mb-4">为什么叫"鉴赏家"?</h3>
+<p class="text-white/80 text-lg leading-relaxed mb-8">
+                        鉴赏家喜欢用双手和眼睛去探索世界。他们通过冷静的理性主义和强烈的好奇心去感知周围的一切。他们是机械方面的天才，不仅能修好坏掉的机器，更能通过不断的实验和试错，创造出更加实用的新工具。
+                    </p>
+<div class="flex flex-wrap gap-3 text-sm font-bold">
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">实用主义</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">机械天赋</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">乐观</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">随机应变</span>
+</div>
+</div>
+</div>
+<div class="space-y-12 py-10">
+<h2 class="text-3xl font-bold text-center">代表人物</h2>
+<div class="flex flex-wrap justify-center gap-12 lg:gap-20">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="贝尔·格里尔斯" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNAj0ao1DQzUlvSsSApNQaJqfMUAXlgHkCdtb5DVF-HaaL0XSZ5zIAgJTU2nf0r9KaPc4pmJZ-ClT1sp0mDh4NLS5KJDyQz2gfeVFSeneVj0SoGIoqMMfugyIF94b3NQ36Ty4mKyAaDf899X-hYR3-GKqk9paM7R43bKYRkSZ1bkaMRFqMbZ5tbjkMJ8NIeDz2r2HXDMk37lerP49Llcm4FTAg7c7Upks5WLUOLPfNxQCS1umeyVEypNSEZ-C4G0fwgbDtSaxF_rQ"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">贝尔·格里尔斯</p>
+<p class="text-sm text-primary font-medium">探险家</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="迈克尔·乔丹" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODyusoGiX9Q2TIExw1aBOvkB2fAMkNyWH1G0b5Y6W8NB5jGKIAR0Fd2f_bL-ARWk6eaCSrsvPOdriS1zQ5uqp35LcvRTo2Lpm24rtY4PlMnwi8ybfAttka9axGA2MRD86IcV-IyU61StLIyKuacUrz5i8BhVbzS7nIkfS7Yg53iEToWZ7pMItbvf3o2b-S3dyBQN8nA8C8fxmmJMLS56fv3AQfmJqsDWv0omv9DY5x4BU-29vNwteRWntD3i35UU-X5MAOvCde2g"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">迈克尔·乔丹</p>
+<p class="text-sm text-primary font-medium">篮球运动员</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="克林特·伊斯特伍德" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeS612A6KtFNWf5JP9hBPHB-Y2ya-wORQ8LVcHQ3rce5mWB7JPMKk8of9EEMkpuXGb6y0GBSbz06MIOEdXuCk14xA1T2KXxNGDsqY6Q1ruHohWba3EicDQOJE-r_3kNMnD2qG--64ffakWAt7TvnXrPh9MY55No16LXdJjOpcweYkt3VFzduDSj3ZEIof-ZVg9dCM6vACYK49w8fyea81u8_tv0CC3sVL_LuXt7_u-vNJLQd7Ahg1LNV95LpXDVSl3vDrJmdeLkk0"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">克林特·伊斯特伍德</p>
+<p class="text-sm text-primary font-medium">演员 / 导演</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="米拉·乔沃维奇" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZuqFRmTYP5_CEu8e2StFHUepuAeMwkcDb0OqZ7mu3NNx-l2tyT0iAfFURfs5DRzn19LDYvc6sbCLIN0h62bvm-h4uyiAQ2OPkmUgvCB7jNwRe3FzY2x242yekgHMXYsOMvkU8X0alwQHX25-hi4oeKqyuSezaRLc5oe6E-4DqkH-xDbhplRuC0rnMhwQSKjv72tgL9X9Lcx4b7pspbYs9BOxbfz3puXuoT-DWtboI8W9ipBao1MwJLj8cEr-D1xOJ_Lh4aN3qNw"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">米拉·乔沃维奇</p>
+<p class="text-sm text-primary font-medium">演员</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-12">
+<h2 class="text-3xl font-bold text-center">优势与弱点</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="rounded-3xl bg-emerald-50/50 dark:bg-emerald-900/10 p-8 border border-emerald-100 dark:border-emerald-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">check_circle</span> 核心优势
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">务实且高效：</b> 面对问题直击要害，绝不拖泥带水。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">乐观开朗：</b> 即使面临危机，也能保持一种积极探索的心态。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">优秀的危机处理：</b> 擅长在压力下寻找创新的物理解决方案。</span>
+</li>
+</ul>
+</div>
+<div class="rounded-3xl bg-orange-50/50 dark:bg-orange-900/10 p-8 border border-orange-100 dark:border-orange-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-orange-800 dark:text-orange-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">warning</span> 潜在弱点
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">固执：</b> 容易陷入自己的逻辑中，很难被迫改变决定。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">容易厌倦：</b> 讨厌枯燥的理论和长期计划，渴望即时新鲜感。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">私密倾向：</b> 过于保护私人空间，有时会让身边的人感到疏远。</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl icon-fill">work</span> 职业路径
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        鉴赏家在需要技能实操、故障排除和快速反应的职业中得心应手。他们是天然的工程师、机械师、特种警察、赛车手或应急响应人员。他们享受能看到立竿见影效果的工作。
+                    </p>
+</div>
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-rose-500 text-3xl icon-fill">favorite</span> 人际关系
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        鉴赏家在关系中追求自由和个人空间。他们可能不擅长情感表达，但他们愿意与伴侣一起分享感官体验——无论是极限运动还是共同手工制作。他们通过实际行动而非甜言蜜语来表达爱意。
+                    </p>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
+<div class="rounded-[3rem] bg-slate-900 px-8 py-16 text-center text-white lg:py-24 relative overflow-hidden shadow-2xl">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 left-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+</div>
+<div class="relative z-10 space-y-10">
+<h2 class="text-4xl font-black lg:text-5xl">想知道你的性格类型吗？</h2>
+<p class="mx-auto max-w-2xl text-xl text-slate-300 font-light">
+                        只需 10 分钟，即可获得关于你个性的深度分析报告，<br class="hidden md:block"/>帮助你开启一段更好地了解自我的旅程。
+                    </p>
+<a href="../testing.html" class="rounded-full bg-white px-12 py-5 text-lg font-black text-slate-900 hover:bg-sage-light transition-all shadow-xl hover:scale-105 active:scale-95 inline-block">
+                        立即开始免费测试
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-lg icon-fill">psychology</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100">MBTI 首页</span>
+</a>
+<div class="flex gap-10 text-sm font-medium text-warm-gray">
+<a class="hover:text-primary transition-colors" href="../index.html">人格类型</a>
+<a class="hover:text-primary transition-colors" href="#">隐私政策</a>
+<a class="hover:text-primary transition-colors" href="#">服务条款</a>
+</div>
+<div class="flex gap-6">
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+<p class="mt-8 text-center text-sm text-warm-gray/60 dark:text-slate-500">
+                © 2024 MBTI 首页。基于 16 Personalities 理论。保留所有权利。
+            </p>
+</div>
+</footer>
+</div>
+
+</body></html>

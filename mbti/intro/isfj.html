@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 性格详情页 - 守卫者 (ISFJ)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="../favicon.png"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5a7a6a",
+                        "accent": "#d97706",
+                        "background-light": "#fdfbf7",
+                        "background-dark": "#1a1c1a",
+                        "sage-light": "#eef2f0",
+                        "warm-gray": "#71716a"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300;
+            }
+        }
+        .trait-bar-bg { @apply h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden; }
+        .trait-bar-fill { @apply h-full bg-primary rounded-full transition-all duration-500; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl icon-fill">shield_with_heart</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 首页</h2>
+</a>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="../index.html">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">文章</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">联系我们</a>
+</nav>
+<div class="flex items-center gap-4">
+<a href="../testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+<span>开始测试</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<div class="h-10 w-10 rounded-full bg-sage-light dark:bg-slate-800 flex items-center justify-center border border-primary/10 overflow-hidden">
+<img alt="用户头像" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Z8MJpJuA4NTNkjdHV4Y_lfOqEXLPbAlp6-prK0Ab49gJ_V_0ggDOh2fi2KXyJWiffHLcX54l93Nj0lYN_eewAAV0QEfzXEbRetUJOz8beV4cte2m-5fPAERraxN1Wj1sCpTpT8eKAQoE720Sn1x9KgdzRVIjXjt9Y8kdUDB7oik15ewxqP0sFUBwdpg3gTifbWAJG1A4Xz6iXuQMxykg6HoqANf3LTnKH43etz99ufm5y6sC0tx9DrCG9rNk4nH6unJAOjVFYgU"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+<div class="relative flex justify-center lg:justify-start">
+<div class="relative h-[440px] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-[#f2ede4] dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-2xl">
+<img alt="守卫者 ISFJ" class="h-4/5 w-4/5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+<div class="rounded-xl bg-white/90 dark:bg-slate-900/90 px-4 py-2 backdrop-blur shadow-sm">
+<span class="text-lg font-bold text-primary">守卫者</span>
+</div>
+<div class="rounded-xl bg-primary px-4 py-2 shadow-lg">
+<span class="text-sm font-bold text-white">ISFJ-A / ISFJ-T</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-8">
+<div class="space-y-4">
+<h1 class="text-5xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">守卫者</h1>
+<p class="text-xl leading-relaxed text-warm-gray dark:text-slate-400">
+                            非常专注且温暖的守护者，时刻准备着保护他们爱的人。
+                        </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-lg">share</span>
+                            分享结果
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white/50 dark:bg-slate-900/50 py-16 border-y border-primary/5">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">guardian</span>
+</div>
+<h3 class="text-xl font-bold">守护本能</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">对他人的需求有着敏锐的洞察力，总是默默地为家人和朋友提供全方位的支持。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">fact_check</span>
+</div>
+<h3 class="text-xl font-bold">细致耐心</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">在处理事务时追求极致的精确与周全，能够耐心地处理那些繁琐却重要的细节。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">verified</span>
+</div>
+<h3 class="text-xl font-bold">稳定可靠</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">是周围人眼中最值得信赖的基石，一旦承诺便会不遗余力地去履行职责。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 space-y-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h2 class="text-3xl font-bold border-l-4 border-primary pl-4">性格特质分析</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>精神 (Mind)</span>
+<span class="text-primary">内向型 (I - 65%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 65%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>能量 (Energy)</span>
+<span class="text-primary">现实型 (S - 74%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 74%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>本性 (Nature)</span>
+<span class="text-primary">感受型 (F - 81%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 81%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>战术 (Tactics)</span>
+<span class="text-primary">评判型 (J - 77%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 77%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>身份 (Identity)</span>
+<span class="text-primary">坚定型 (72%)</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 72%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-3xl bg-primary p-8 lg:p-12 text-white shadow-xl">
+<h3 class="text-2xl font-bold mb-4">为什么叫"守卫者"?</h3>
+<p class="text-white/80 text-lg leading-relaxed mb-8">
+                        ISFJ 类型的人是真正的利他主义者，他们对他人的善意总是以更伟大的善意作为回报。他们虽然低调，却有着强烈的责任感。称他们为"守卫者"，是因为他们总是站在最前线保护社会的稳定与家庭的温暖，是和谐关系的坚实守护。
+                    </p>
+<div class="flex flex-wrap gap-3 text-sm font-bold">
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">奉献</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">温和</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">忠诚</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">务实</span>
+</div>
+</div>
+</div>
+<div class="space-y-12 py-10">
+<h2 class="text-3xl font-bold text-center">代表人物</h2>
+<div class="flex flex-wrap justify-center gap-12 lg:gap-20">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="伊丽莎白二世" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNAj0ao1DQzUlvSsSApNQaJqfMUAXlgHkCdtb5DVF-HaaL0XSZ5zIAgJTU2nf0r9KaPc4pmJZ-ClT1sp0mDh4NLS5KJDyQz2gfeVFSeneVj0SoGIoqMMfugyIF94b3NQ36Ty4mKyAaDf899X-hYR3-GKqk9paM7R43bKYRkSZ1bkaMRFqMbZ5tbjkMJ8NIeDz2r2HXDMk37lerP49Llcm4FTAg7c7Upks5WLUOLPfNxQCS1umeyVEypNSEZ-C4G0fwgbDtSaxF_rQ"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">伊丽莎白二世</p>
+<p class="text-sm text-primary font-medium">前英国女王</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="碧昂丝" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODyusoGiX9Q2TIExw1aBOvkB2fAMkNyWH1G0b5Y6W8NB5jGKIAR0Fd2f_bL-ARWk6eaCSrsvPOdriS1zQ5uqp35LcvRTo2Lpm24rtY4PlMnwi8ybfAttka9axGA2MRD86IcV-IyU61StLIyKuacUrz5i8BhVbzS7nIkfS7Yg53iEToWZ7pMItbvf3o2b-S3dyBQN8nA8C8fxmmJMLS56fv3AQfmJqsDWv0omv9DY5x4BU-29vNwteRWntD3i35UU-X5MAOvCde2g"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">碧昂丝</p>
+<p class="text-sm text-primary font-medium">歌手 / 词曲作者</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="安妮·海瑟薇" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeS612A6KtFNWf5JP9hBPHB-Y2ya-wORQ8LVcHQ3rce5mWB7JPMKk8of9EEMkpuXGb6y0GBSbz06MIOEdXuCk14xA1T2KXxNGDsqY6Q1ruHohWba3EicDQOJE-r_3kNMnD2qG--64ffakWAt7TvnXrPh9MY55No16LXdJjOpcweYkt3VFzduDSj3ZEIof-ZVg9dCM6vACYK49w8fyea81u8_tv0CC3sVL_LuXt7_u-vNJLQd7Ahg1LNV95LpXDVSl3vDrJmdeLkk0"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">安妮·海瑟薇</p>
+<p class="text-sm text-primary font-medium">演员</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
+<img alt="范·迪塞尔" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZuqFRmTYP5_CEu8e2StFHUepuAeMwkcDb0OqZ7mu3NNx-l2tyT0iAfFURfs5DRzn19LDYvc6sbCLIN0h62bvm-h4uyiAQ2OPkmUgvCB7jNwRe3FzY2x242yekgHMXYsOMvkU8X0alwQHX25-hi4oeKqyuSezaRLc5oe6E-4DqkH-xDbhplRuC0rnMhwQSKjv72tgL9X9Lcx4b7pspbYs9BOxbfz3puXuoT-DWtboI8W9ipBao1MwJLj8cEr-D1xOJ_Lh4aN3qNw"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">范·迪塞尔</p>
+<p class="text-sm text-primary font-medium">演员</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-12">
+<h2 class="text-3xl font-bold text-center">优势与弱点</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="rounded-3xl bg-emerald-50/50 dark:bg-emerald-900/10 p-8 border border-emerald-100 dark:border-emerald-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">check_circle</span> 核心优势
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">乐于助人：</b> 总是慷慨地分享自己的时间和精力。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">可靠稳重：</b> 无论是家务还是职场任务，都能持之以恒。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">敏锐的观察力：</b> 特别擅长注意到他人情绪和需求的变化。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">一丝不苟：</b> 对细节的关注确保了工作的高质量完成。</span>
+</li>
+</ul>
+</div>
+<div class="rounded-3xl bg-orange-50/50 dark:bg-orange-900/10 p-8 border border-orange-100 dark:border-orange-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-orange-800 dark:text-orange-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">warning</span> 潜在弱点
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">过于谦逊：</b> 常常低估自己的贡献，甚至拒绝应得的称赞。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">情感包袱：</b> 容易将外界的批评私有化，感到受伤害。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">过度承担：</b> 因为不忍心拒绝他人，常使自己陷入过度劳累。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">抗拒改变：</b> 过于依赖传统和习惯，有时会错过创新的机会。</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl icon-fill">work</span> 职业路径
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        守卫者在能够提供具体服务、有明确组织架构且能改善他人生活的岗位上最能发挥所长。他们是出色的医疗保健专业人士、教育工作者、行政管理人员或社区志愿者。
+                    </p>
+</div>
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-rose-500 text-3xl icon-fill">favorite</span> 人际关系
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        在亲密关系中，守卫者极其忠诚且体贴。他们会细心记住爱人的喜好和纪念日。他们追求和谐的家庭生活，并愿意为了爱人的幸福而做出巨大的个人牺牲。
+                    </p>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
+<div class="rounded-[3rem] bg-slate-900 px-8 py-16 text-center text-white lg:py-24 relative overflow-hidden shadow-2xl">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 left-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+</div>
+<div class="relative z-10 space-y-10">
+<h2 class="text-4xl font-black lg:text-5xl">想知道你的性格类型吗？</h2>
+<p class="mx-auto max-w-2xl text-xl text-slate-300 font-light">
+                        只需 10 分钟，即可获得关于你个性的深度分析报告，<br class="hidden md:block"/>帮助你开启一段更好地了解自我的旅程。
+                    </p>
+<a href="../testing.html" class="rounded-full bg-white px-12 py-5 text-lg font-black text-slate-900 hover:bg-sage-light transition-all shadow-xl hover:scale-105 active:scale-95 inline-block">
+                        立即开始免费测试
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-lg icon-fill">psychology</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100">MBTI 首页</span>
+</a>
+<div class="flex gap-10 text-sm font-medium text-warm-gray">
+<a class="hover:text-primary transition-colors" href="../index.html">人格类型</a>
+<a class="hover:text-primary transition-colors" href="#">隐私政策</a>
+<a class="hover:text-primary transition-colors" href="#">服务条款</a>
+</div>
+<div class="flex gap-6">
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+<p class="mt-8 text-center text-sm text-warm-gray/60 dark:text-slate-500">
+                © 2024 MBTI 首页。基于 16 Personalities 理论。保留所有权利。
+            </p>
+</div>
+</footer>
+</div>
+
+</body></html>

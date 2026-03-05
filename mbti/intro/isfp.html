@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 性格详情页 - 探险家 (ISFP)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="../favicon.png"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4e6e5d", // Sage Green
+                        "accent": "#d97706",
+                        "background-light": "#fdfbf7", // Warm Beige
+                        "background-dark": "#1a1c1a",
+                        "sage-light": "#e8edeb",
+                        "warm-gray": "#71716a"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300;
+            }
+        }
+        .trait-bar-bg { @apply h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden; }
+        .trait-bar-fill { @apply h-full bg-primary rounded-full transition-all duration-500; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl icon-fill">palette</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 探险家</h2>
+</a>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="../index.html">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">艺术洞察</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">探索指南</a>
+</nav>
+<div class="flex items-center gap-4">
+<a href="../testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+<span>开始测试</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<div class="h-10 w-10 rounded-full bg-sage-light dark:bg-slate-800 flex items-center justify-center border border-primary/10 overflow-hidden">
+<img alt="用户头像" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1oRTeLS6tMqy5a5mVpGOKd-HhOonmi0G_i1PV9kL7naFwTHLapOvijQU-LkGFFvcf-Hsy9DO1V6yVg2EQVSmyIBSTxi0qIbUoRXDidkksPD60KMXFfSudcp0Kr9nh_O7EA8owVWelV_KHM8uqKXydX9Bi7_sYj4jSwEAcy6wpwsVNCt33wXJfSlSnKBN8oGs2fHEtxmmbFDM0fRNxoX_nnxHHX_JT0FhPPBdalMHZlccg7REtt2-eQaPBI6xEopj5WpUuTR9gZLA"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+<div class="relative flex justify-center lg:justify-start order-2 lg:order-1">
+<div class="relative h-[480px] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-sage-light dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-2xl">
+<img alt="探险家 ISFP" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+<div class="rounded-xl bg-white/90 dark:bg-slate-900/90 px-4 py-2 backdrop-blur shadow-sm">
+<span class="text-lg font-bold text-primary">探险家</span>
+</div>
+<div class="rounded-xl bg-primary px-4 py-2 shadow-lg">
+<span class="text-sm font-bold text-white">ISFP-A / ISFP-T</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-8 order-1 lg:order-2">
+<div class="space-y-6">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">Adventurer</span>
+<h1 class="text-5xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">探险家</h1>
+<p class="text-2xl leading-relaxed text-warm-gray dark:text-slate-400">
+                            灵活且富有魅力的艺术家，总是准备着探索和体验新事物。
+                        </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-lg">share</span>
+                            分享结果
+                        </button>
+<button class="flex items-center gap-2 rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-bold text-primary hover:bg-primary/5 transition-all">
+                            了解更多
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white/50 dark:bg-slate-900/50 py-16 border-y border-primary/5">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">auto_awesome</span>
+</div>
+<h3 class="text-xl font-bold">感官敏锐</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">善于捕捉周围世界的细微美感，对色彩、声音和质感有着天然的直觉。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">brush</span>
+</div>
+<h3 class="text-xl font-bold">艺术天赋</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">生活就是他们的画布，无论是穿着、创作还是表达方式都充满个人风格。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl icon-fill">festival</span>
+</div>
+<h3 class="text-xl font-bold">独立自由</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">渴望自由呼吸的空间，不喜欢被条条框框束缚，追求随性而发的生活。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 space-y-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h2 class="text-3xl font-bold border-l-4 border-primary pl-4">性格特质分析</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>精神 (Mind)</span>
+<span class="text-primary">内向型 (I) - 65%</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 65%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>能量 (Energy)</span>
+<span class="text-primary">观察型 (S) - 72%</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 72%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>本性 (Nature)</span>
+<span class="text-primary">情感型 (F) - 80%</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 80%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>战术 (Tactics)</span>
+<span class="text-primary">展望型 (P) - 88%</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 88%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>身份 (Identity)</span>
+<span class="text-primary">起伏型 (T) - 54%</span>
+</div>
+<div class="trait-bar-bg">
+<div class="trait-bar-fill" style="width: 54%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-3xl bg-slate-900 p-8 lg:p-12 text-white shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl">explore</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 relative z-10">为什么叫"探险家"?</h3>
+<p class="text-white/80 text-lg leading-relaxed mb-8 relative z-10">
+                        ISFP 并非总是指在山间跋涉的户外运动者，而是一种感官上的"探险家"。他们对美的追求、对新体验的渴望以及对当下瞬间的完全投入，使他们成为生活中最敏锐的观察者。他们通过打破常规来重新定义美学，用实际行动去体验生命中的每一种色彩。
+                    </p>
+<div class="flex flex-wrap gap-3 text-sm font-bold relative z-10">
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">感性</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">随机应变</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">好奇心</span>
+<span class="px-4 py-2 bg-white/10 rounded-lg border border-white/10 backdrop-blur">不墨守成规</span>
+</div>
+</div>
+</div>
+<div class="space-y-12 py-10">
+<h2 class="text-3xl font-bold text-center">代表人物</h2>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+<div class="flex flex-col items-center text-center space-y-4 group">
+<div class="h-40 w-40 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all group-hover:scale-105 group-hover:border-primary">
+<img alt="Lana Del Rey" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeS612A6KtFNWf5JP9hBPHB-Y2ya-wORQ8LVcHQ3rce5mWB7JPMKk8of9EEMkpuXGb6y0GBSbz06MIOEdXuCk14xA1T2KXxNGDsqY6Q1ruHohWba3EicDQOJE-r_3kNMnD2qG--64ffakWAt7TvnXrPh9MY55No16LXdJjOpcweYkt3VFzduDSj3ZEIof-ZVg9dCM6vACYK49w8fyea81u8_tv0CC3sVL_LuXt7_u-vNJLQd7Ahg1LNV95LpXDVSl3vDrJmdeLkk0"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">Lana Del Rey</p>
+<p class="text-sm text-primary font-medium">歌手 / 词曲作者</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4 group">
+<div class="h-40 w-40 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all group-hover:scale-105 group-hover:border-primary">
+<img alt="Jungkook" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Z8MJpJuA4NTNkjdHV4Y_lfOqEXLPbAlp6-prK0Ab49gJ_V_0ggDOh2fi2KXyJWiffHLcX54l93Nj0lYN_eewAAV0QEfzXEbRetUJOz8beV4cte2m-5fPAERraxN1Wj1sCpTpT8eKAQoE720Sn1x9KgdzRVIjXjt9Y8kdUDB7oik15ewxqP0sFUBwdpg3gTifbWAJG1A4Xz6iXuQMxykg6HoqANf3LTnKH43etz99ufm5y6sC0tx9DrCG9rNk4nH6unJAOjVFYgU"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">Jungkook (BTS)</p>
+<p class="text-sm text-primary font-medium">歌手 / 艺术家</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4 group">
+<div class="h-40 w-40 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all group-hover:scale-105 group-hover:border-primary">
+<img alt="Avril Lavigne" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODyusoGiX9Q2TIExw1aBOvkB2fAMkNyWH1G0b5Y6W8NB5jGKIAR0Fd2f_bL-ARWk6eaCSrsvPOdriS1zQ5uqp35LcvRTo2Lpm24rtY4PlMnwi8ybfAttka9axGA2MRD86IcV-IyU61StLIyKuacUrz5i8BhVbzS7nIkfS7Yg53iEToWZ7pMItbvf3o2b-S3dyBQN8nA8C8fxmmJMLS56fv3AQfmJqsDWv0omv9DY5x4BU-29vNwteRWntD3i35UU-X5MAOvCde2g"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">Avril Lavigne</p>
+<p class="text-sm text-primary font-medium">音乐人</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center space-y-4 group">
+<div class="h-40 w-40 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all group-hover:scale-105 group-hover:border-primary">
+<img alt="Kevin Costner" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZuqFRmTYP5_CEu8e2StFHUepuAeMwkcDb0OqZ7mu3NNx-l2tyT0iAfFURfs5DRzn19LDYvc6sbCLIN0h62bvm-h4uyiAQ2OPkmUgvCB7jNwRe3FzY2x242yekgHMXYsOMvkU8X0alwQHX25-hi4oeKqyuSezaRLc5oe6E-4DqkH-xDbhplRuC0rnMhwQSKjv72tgL9X9Lcx4b7pspbYs9BOxbfz3puXuoT-DWtboI8W9ipBao1MwJLj8cEr-D1xOJ_Lh4aN3qNw"/>
+</div>
+<div>
+<p class="text-lg font-bold text-slate-900 dark:text-white">Kevin Costner</p>
+<p class="text-sm text-primary font-medium">演员 / 导演</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-12">
+<h2 class="text-3xl font-bold text-center">优势与弱点</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="rounded-3xl bg-emerald-50/50 dark:bg-emerald-900/10 p-8 border border-emerald-100 dark:border-emerald-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">check_circle</span> 核心优势
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">favorite</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">富有魅力：</b> 极具亲和力，这种随性的魅力让人们感到非常放松。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">psychology</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">极富想象力：</b> 能够轻易地联结情感，并转化为具体的艺术表达。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">explore</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">好奇心旺盛：</b> 对于探索新的想法和体验有着永无止境的热情。</span>
+</li>
+</ul>
+</div>
+<div class="rounded-3xl bg-orange-50/50 dark:bg-orange-900/10 p-8 border border-orange-100 dark:border-orange-800/20 shadow-sm">
+<h3 class="text-xl font-bold text-orange-800 dark:text-orange-400 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">warning</span> 潜在弱点
+                        </h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">lock</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">极度独立：</b> 过分珍视个人自由，有时会导致在承诺或合作中感到窒息。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">bolt</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">容易产生压力：</b> 面对冲突或长期压力时，容易感到不堪重负而选择逃避。</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">timer</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">缺乏长期规划：</b> 过于沉浸在"当下"，有时会忽略未来的后果或长远目标。</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5 shadow-sm">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl icon-fill">work</span> 职业路径
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        探险家需要一个能让他们表达创意、观察细节的职业环境。他们不适合朝九晚五的死板工作，但在设计、音乐、手工艺或护理等需要"指尖温度"和同理心的领域中极具优势。
+                    </p>
+</div>
+<div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5 shadow-sm">
+<h3 class="text-2xl font-bold flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-rose-500 text-3xl icon-fill">favorite</span> 人际关系
+                    </h3>
+<p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
+                        在亲密关系中，他们温暖、忠诚且非常支持伴侣。虽然他们可能不常挂在嘴边，但会通过实际行动（如精心挑选的礼物或共同的冒险）来表达爱意。他们极其看重相互的个人空间。
+                    </p>
+</div>
+</div>
+</section>
+<section class="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
+<div class="rounded-[3rem] bg-slate-900 px-8 py-16 text-center text-white lg:py-24 relative overflow-hidden shadow-2xl">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 left-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-0 w-80 h-80 bg-primary rounded-full blur-[120px]"></div>
+</div>
+<div class="relative z-10 space-y-10">
+<h2 class="text-4xl font-black lg:text-5xl">想探索更深层的自我吗？</h2>
+<p class="mx-auto max-w-2xl text-xl text-slate-300 font-light">
+                        加入全球数百万测试者的行列，开启属于你的性格探险之旅。<br class="hidden md:block"/>获取免费的个性化性格评估报告。
+                    </p>
+<a href="../testing.html" class="rounded-full bg-white px-12 py-5 text-lg font-black text-slate-900 hover:bg-sage-light transition-all shadow-xl hover:scale-105 active:scale-95 inline-block">
+                        立即开始免费测试
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-lg icon-fill">palette</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100">MBTI 探险家指南</span>
+</a>
+<div class="flex gap-10 text-sm font-medium text-warm-gray">
+<a class="hover:text-primary transition-colors" href="../index.html">全部类型</a>
+<a class="hover:text-primary transition-colors" href="#">关于理论</a>
+<a class="hover:text-primary transition-colors" href="#">隐私政策</a>
+</div>
+<div class="flex gap-6">
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="text-warm-gray hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+<p class="mt-8 text-center text-sm text-warm-gray/60 dark:text-slate-500">
+                © 2024 MBTI 性格探索。探索未知的感官世界。
+            </p>
+</div>
+</footer>
+</div>
+
+</body></html>
