@@ -47,7 +47,7 @@
 </head>
 <body class="bg-warm-beige overflow-hidden">
 <div class="min-h-screen flex items-center justify-center">
-<div id="content-wrapper" class="flex flex-col items-center justify-center min-h-screen">
+<div id="content-wrapper" class="flex flex-col items-center justify-center min-h-screen w-full">
 <div class="absolute top-20 left-10 w-64 h-64 bg-sage/5 organic-shape -z-10 blur-3xl"></div>
 <div class="absolute bottom-20 right-10 w-80 h-80 bg-sage/5 organic-shape -z-10 blur-3xl" style="border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;"></div>
 <div class="max-w-[800px] w-full flex flex-col items-center text-center">
@@ -80,14 +80,14 @@
 </svg>
 <div class="absolute flex flex-col items-center">
 <span class="text-3xl font-bold text-charcoal" id="percent-text">0<span class="text-lg font-normal opacity-50">%</span></span>
-<span class="text-[10px] uppercase tracking-widest text-sage font-bold">MATCHING</span>
+<span class="text-[10px] uppercase tracking-widest text-sage font-bold" id="match-status">匹配中</span>
 </div>
 </div>
 <div class="w-full space-y-4">
 <div class="h-1.5 w-full bg-soft-clay rounded-full overflow-hidden">
 <div id="progress-bar" class="h-full bg-sage rounded-full" style="width: 0%;"></div>
 </div>
-<div class="flex justify-between items-center text-xs font-medium text-charcoal/40 tracking-widest">
+<div class="flex justify-between items-center text-xs font-medium text-charcoal/40 tracking-wider">
 <span id="progress-label">数据深度解析中</span>
 <span class="italic font-serif text-sm" id="progress-hint">即将揭晓</span>
 </div>
@@ -100,7 +100,6 @@
 // Animation sequence
 document.addEventListener('DOMContentLoaded', function() {
     var contentWrapper = document.getElementById('content-wrapper');
-    var loadingCircle = document.getElementById('loading-circle');
     var titleText = document.getElementById('title-text');
     var descText = document.getElementById('desc-text');
     var progressSection = document.getElementById('progress-section');
@@ -108,12 +107,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var progressBar = document.getElementById('progress-bar');
     var percentText = document.getElementById('percent-text');
     var progressLabel = document.getElementById('progress-label');
+    var matchStatus = document.getElementById('match-status');
 
     // Step 1: Wait 1 second after load
     setTimeout(function() {
-        // Step 2: Scroll up to center the loading circle (translate Y)
-        loadingCircle.style.transition = 'transform 0.8s ease-out';
-        loadingCircle.style.transform = 'translateY(-80px)';
+        // Step 2: Scroll entire page up (translate Y)
+        contentWrapper.style.transition = 'transform 0.8s ease-out';
+        contentWrapper.style.transform = 'translateY(-80px)';
 
         titleText.style.transition = 'opacity 0.5s ease-out';
         titleText.style.opacity = '0';
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
         descText.style.transition = 'opacity 0.5s ease-out';
         descText.style.opacity = '0';
 
-        // Step 3: Circle progress from 0 to 100% over 5 seconds (starts after 0.8s)
+        // Step 3: Circle progress from 0 to 100% over 3 seconds (starts after 0.8s)
         setTimeout(function() {
-            var circleDuration = 5000; // 5 seconds
+            var circleDuration = 3000; // 3 seconds
             var circleStartTime = Date.now();
             var circumference = 402.12;
 
@@ -135,6 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressCircle.style.strokeDashoffset = offset;
                 var percent = Math.round(progress * 100);
                 percentText.innerHTML = percent + '<span class="text-lg font-normal opacity-50">%</span>';
+
+                // Update status text
+                if (progress < 1) {
+                    matchStatus.textContent = '匹配中';
+                } else {
+                    matchStatus.textContent = '匹配成功';
+                }
 
                 if (progress < 1) {
                     requestAnimationFrame(animateCircle);
