@@ -347,19 +347,23 @@ function showResult() {
     questions.forEach((q, index) => {
         const answer = answers[index + 1];
         if (answer) {
-            // 7分制：1-3偏向第一个字母(E/S/T/J)，5-7偏向第二个字母(I/N/F/P)，4是中性
+            // 7分制：1-3偏向第一个字母(E/S/T/J)，5-7偏向第二个字母(I/N/F/P)，4是中性各得0.5分
             if (q.dim === 'EI') {
                 if (answer <= 3) scores.E += (4 - answer);
                 else if (answer >= 5) scores.I += (answer - 4);
+                else scores.E += 0.5, scores.I += 0.5; // answer === 4
             } else if (q.dim === 'SN') {
                 if (answer <= 3) scores.S += (4 - answer);
                 else if (answer >= 5) scores.N += (answer - 4);
+                else scores.S += 0.5, scores.N += 0.5; // answer === 4
             } else if (q.dim === 'TF') {
                 if (answer <= 3) scores.T += (4 - answer);
                 else if (answer >= 5) scores.F += (answer - 4);
+                else scores.T += 0.5, scores.F += 0.5; // answer === 4
             } else if (q.dim === 'JP') {
                 if (answer <= 3) scores.J += (4 - answer);
                 else if (answer >= 5) scores.P += (answer - 4);
+                else scores.J += 0.5, scores.P += 0.5; // answer === 4
             }
         }
     });
