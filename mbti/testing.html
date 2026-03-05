@@ -223,6 +223,9 @@ const questions = [
     { dim: 'JP', text: '我习惯把事情做完后再开始新的事情，而不是同时进行多项任务' }
 ];
 
+// 随机打乱题目顺序，增加多样性
+questions.sort(() => Math.random() - 0.5);
+
 // 存储答案
 let answers = {};
 
