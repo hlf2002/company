@@ -132,6 +132,104 @@ function sendSMS($phone, $code) {
     return $result;
 }
 
+// 邮件配置
+define('SMTP_HOST', 'smtp.feishu.cn');
+define('SMTP_PORT', 465);
+define('SMTP_USER', 'mbtisystem@7373.com.cn');
+define('SMTP_PASS', '9STsLynzXuOz3LE1');
+define('SMTP_FROM', 'mbtisystem@7373.com.cn');
+
+// 发送邮件验证码
+function sendEmail($email, $code) {
+    $subject = '=?UTF-8?B?' . base64_encode('MBTI 开放平台 - 验证码') . '?=';
+    $message = '
+    <html>
+    <body style="font-family: Arial, sans-serif; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background: #F9F7F2; padding: 30px; border-radius: 12px;">
+            <h2 style="color: #7A9478; text-align: center;">MBTI 开放平台</h2>
+            <p style="color: #4A4A4A; font-size: 16px;">您好，</p>
+            <p style="color: #4A4A4A; font-size: 16px;">您的验证码是：</p>
+            <div style="background: #7A9478; color: white; font-size: 32px; font-weight: bold; padding: 15px 30px; border-radius: 8px; text-align: center; letter-spacing: 5px; margin: 20px 0;">
+                ' . $code . '
+            </div>
+            <p style="color: #888; font-size: 14px;">验证码有效期为10分钟，请尽快完成验证。</p>
+            <p style="color: #888; font-size: 12px; margin-top: 30px;">如果这不是您的操作，请忽略此邮件。</p>
+        </div>
+    </body>
+    </html>
+    ';
+
+    $boundary = md5(uniqid(time()));
+    $headers = "From: " . SMTP_FROM . "\r\n";
+    $headers .= "Reply-To: " . SMTP_FROM . "\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: multipart/alternative; boundary=\"{$boundary}\"\r\n";
+
+    $body = "--{$boundary}\r\n";
+    $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $body .= chunk_split(base64_encode($message)) . "\r\n";
+    $body .= "--{$boundary}--";
+
+    // 使用 SMTP 连接发送邮件
+    $socket = @fsockopen('ssl://' . SMTP_HOST, SMTP_PORT, $errno, $errstr, 30);
+    if (!$socket) {
+        return false;
+    }
+
+    $response = fgets($socket, 515);
+    if (substr($response, 0, 3) != '220') {
+        fclose($socket);
+        return false;
+    }
+
+    // EHLO
+    fputs($socket, "EHLO " . SMTP_HOST . "\r\n");
+    while ($line = fgets($socket, 515)) {
+        if (substr($line, 3, 1) == ' ') break;
+    }
+
+    // AUTH LOGIN
+    fputs($socket, "AUTH LOGIN\r\n");
+    fgets($socket, 515);
+    fputs($socket, base64_encode(SMTP_USER) . "\r\n");
+    fgets($socket, 515);
+    fputs($socket, base64_encode(SMTP_PASS) . "\r\n");
+    $response = fgets($socket, 515);
+    if (substr($response, 0, 3) != '235') {
+        fclose($socket);
+        return false;
+    }
+
+    // MAIL FROM
+    fputs($socket, "MAIL FROM:<" . SMTP_FROM . ">\r\n");
+    fgets($socket, 515);
+
+    // RCPT TO
+    fputs($socket, "RCPT TO:<{$email}>\r\n");
+    fgets($socket, 515);
+
+    // DATA
+    fputs($socket, "DATA\r\n");
+    fgets($socket, 515);
+
+    $emailHeaders = "From: MBTI 开放平台 <" . SMTP_FROM . ">\r\n";
+    $emailHeaders .= "To: {$email}\r\n";
+    $emailHeaders .= "Subject: {$subject}\r\n";
+    $emailHeaders .= $headers . "\r\n";
+    $emailHeaders .= "\r\n";
+    $emailHeaders .= $body . "\r\n";
+
+    fputs($socket, $emailHeaders);
+    fputs($socket, ".\r\n");
+    $response = fgets($socket, 515);
+
+    fputs($socket, "QUIT\r\n");
+    fclose($socket);
+
+    return substr($response, 0, 3) == '250';
+}
+
 // 保存验证码到数据库
 function saveVerificationCode($phone, $code) {
     $pdo = getDB();
@@ -140,10 +238,9 @@ function saveVerificationCode($phone, $code) {
     $stmt = $pdo->prepare("DELETE FROM sms_codes WHERE phone = ?");
     $stmt->execute([$phone]);
 
-    // 插入新验证码
-    $expires_at = date('Y-m-d H:i:s', time() + 600); // 10分钟有效
-    $stmt = $pdo->prepare("INSERT INTO sms_codes (phone, code, expires_at) VALUES (?, ?, ?)");
-    $stmt->execute([$phone, $code, $expires_at]);
+    // 插入新验证码，使用MySQL的DATE_ADD确保时区一致
+    $stmt = $pdo->prepare("INSERT INTO sms_codes (phone, code, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 10 MINUTE))");
+    $stmt->execute([$phone, $code]);
 }
 
 // 验证验证码

@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <input name="remember" class="w-4 h-4 rounded text-primary focus:ring-primary border-slate-300" type="checkbox"/>
 <span class="text-sm text-slate-600 group-hover:text-primary transition-colors">记住登录</span>
 </label>
-<a class="text-sm font-medium text-primary hover:text-primary-dark transition-colors" href="#">忘记密码？</a>
+<a class="text-sm font-medium text-primary hover:text-primary-dark transition-colors" href="forgot_password.php">忘记密码？</a>
 </div>
 <button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-primary/20 transform active:scale-[0.98]" type="submit">
                     登录
