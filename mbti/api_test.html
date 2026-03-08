@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI性格测试 - 64道题精准分析 | 珠海换呗科技</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<meta name="description" content="开始您的MBTI性格测试，64道科学题目精准分析您的人格类型。探索16种MBTI人格，发现真实的自己。"/>
+<meta name="keywords" content="MBTI测试,性格测试,人格测评,在线测试,心理测评,16型人格"/>
+<meta name="robots" content="noindex,follow"/>
+<meta property="og:title" content="MBTI性格测试 - 64道题精准分析"/>
+<meta property="og:description" content="开始您的MBTI性格测试，64道科学题目精准分析您的人格类型。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://mbti.7373.com.cn/api_test.html"/>
+<link rel="canonical" href="https://mbti.7373.com.cn/api_test.html"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "warm-beige": "#F9F7F2",
+                        "sage-green": "#7A9478",
+                        "sage-light": "#F0F4F0",
+                        "muted-orange": "#E69A73",
+                        "muted-orange-light": "#FDF5F1",
+                        "text-main": "#3D4139",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            @apply bg-warm-beige text-text-main font-sans antialiased;
+        }
+        .likert-circle {
+            @apply transition-all duration-200 cursor-pointer flex items-center justify-center shrink-0;
+        }
+        .likert-circle:hover {
+            @apply scale-110;
+        }
+        .likert-circle.selected {
+            @apply ring-2 ring-offset-2;
+        }
+        .likert-circle[data-score="1"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="2"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="3"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="4"].selected { @apply bg-gray-400 border-gray-400 ring-gray-400; }
+        .likert-circle[data-score="5"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .likert-circle[data-score="6"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .likert-circle[data-score="7"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<main class="flex-grow flex flex-col items-center pt-8 pb-10 px-4">
+<div class="w-full max-w-3xl">
+<div class="mb-12">
+<div class="flex justify-between items-center mb-3 px-1">
+<span class="text-sm font-medium text-sage-green">第 <span id="currentNum">1</span> 题，共 <span id="totalNum">64</span> 题</span>
+<span class="text-sm font-bold text-sage-green" id="progressPercent">2%</span>
+</div>
+<div class="w-full h-2 bg-sage-light rounded-full overflow-hidden">
+<div class="h-full bg-sage-green transition-all duration-500" id="progressFill" style="width: 2%;"></div>
+</div>
+</div>
+<div class="bg-white rounded-2xl shadow-sm border border-sage-green/5 p-10 md:p-20 mb-12">
+<div class="text-center">
+<h2 class="text-2xl md:text-3xl font-bold text-text-main leading-relaxed mb-16" id="questionText">
+                    ""
+                </h2>
+<div class="flex flex-col items-center gap-8">
+<div class="flex items-center justify-center w-full max-w-2xl">
+<span class="text-sage-green font-bold text-lg hidden md:block w-16 text-left">同意</span>
+<div class="flex items-center justify-center flex-1 px-1 md:px-12 gap-1 md:gap-3">
+<button onclick="selectScore(1)" class="likert-circle size-14 md:size-16 rounded-full border-2 border-sage-green bg-sage-light/50 hover:bg-sage-light" data-score="1" title="非常同意"></button>
+<button onclick="selectScore(2)" class="likert-circle size-11 md:size-12 rounded-full border-2 border-sage-green/60 hover:bg-sage-light" data-score="2" title="同意"></button>
+<button onclick="selectScore(3)" class="likert-circle size-8 md:size-9 rounded-full border-2 border-sage-green/30 hover:bg-sage-light" data-score="3" title="略微同意"></button>
+<button onclick="selectScore(4)" class="likert-circle size-6 md:size-7 rounded-full border-2 border-gray-300 bg-gray-50" data-score="4" title="中立"></button>
+<button onclick="selectScore(5)" class="likert-circle size-8 md:size-9 rounded-full border-2 border-muted-orange/30 hover:bg-muted-orange-light" data-score="5" title="略微反对"></button>
+<button onclick="selectScore(6)" class="likert-circle size-11 md:size-12 rounded-full border-2 border-muted-orange/60 hover:bg-muted-orange-light" data-score="6" title="反对"></button>
+<button onclick="selectScore(7)" class="likert-circle size-14 md:size-16 rounded-full border-2 border-muted-orange bg-muted-orange-light/50 hover:bg-muted-orange-light" data-score="7" title="非常反对"></button>
+</div>
+<span class="text-muted-orange font-bold text-lg hidden md:block w-16 text-right">反对</span>
+</div>
+<div class="flex justify-between w-full px-4 md:hidden">
+<span class="text-sage-green font-bold text-sm">同意</span>
+<span class="text-gray-400 font-medium text-sm">中立</span>
+<span class="text-muted-orange font-bold text-sm">反对</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
+<div class="flex justify-start order-2 md:order-1">
+<button onclick="prevQuestion()" class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-gray-400 font-medium hover:text-sage-green hover:bg-sage-light/50 transition-all group">
+<span class="material-symbols-outlined text-xl transition-transform group-hover:-translate-x-1">arrow_back</span>
+                    上一题
+                </button>
+</div>
+<div class="flex justify-center order-1 md:order-2">
+<p class="text-sm text-gray-400 font-medium text-center">
+                    请诚实回答，尽量不要选择"中立"。
+                </p>
+</div>
+<div class="flex justify-end order-3 md:order-3">
+<button onclick="nextQuestion()" class="w-full md:w-auto flex items-center justify-center gap-2 px-10 py-3.5 rounded-xl bg-sage-green text-white font-bold hover:brightness-110 shadow-lg shadow-sage-green/20 transition-all group">
+                    下一题
+                    <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+// API参数
+const apiParams = {
+    external_user_id: new URLSearchParams(window.location.search).get('external_user_id') || '',
+    callback_url: new URLSearchParams(window.location.search).get('callback_url') || '',
+    access_key: new URLSearchParams(window.location.search).get('access_key') || '',
+    sign: new URLSearchParams(window.location.search).get('sign') || ''
+};
+
+// 验证必要参数
+function validateApiParams() {
+    if (!apiParams.external_user_id) {
+        return { valid: false, error: '缺少必要参数: external_user_id' };
+    }
+    if (!apiParams.access_key) {
+        return { valid: false, error: '缺少必要参数: access_key' };
+    }
+    if (!apiParams.sign) {
+        return { valid: false, error: '缺少必要参数: sign' };
+    }
+    return { valid: true };
+}
+
+// 64道MBTI测试题目
+const questions = [
+    // E vs I (16题) - 外向 vs 内向
+    { dim: 'EI', text: '在社交聚会中，我通常是活跃气氛的那个人' },
+    { dim: 'EI', text: '我更喜欢与很多人一起活动，而不是独处' },
+    { dim: 'EI', text: '我倾向于用口头表达而不是书面表达来分享想法' },
+    { dim: 'EI', text: '与他人交流能让我感到充满能量' },
+    { dim: 'EI', text: '我很容易和陌生人打开话题交谈' },
+    { dim: 'EI', text: '我更喜欢在团队中合作而不是独自工作' },
+    { dim: 'EI', text: '空闲时间我更愿意参加社交活动而不是独自待着' },
+    { dim: 'EI', text: '我倾向于先说再做，而不是先想后说' },
+    { dim: 'EI', text: '我更喜欢开放热闹的工作环境' },
+    { dim: 'EI', text: '我更容易通过交谈来理解问题，而不是独自思考' },
+    { dim: 'EI', text: '在公众场合发言对我来说是比较自然的事' },
+    { dim: 'EI', text: '我喜欢同时处理多个任务而不是专注单一工作' },
+    { dim: 'EI', text: '我倾向于结交许多新朋友' },
+    { dim: 'EI', text: '我的兴奋情绪会明显地表现在外面' },
+    { dim: 'EI', text: '我更喜欢广度接触各类事物而不是深度钻研' },
+    { dim: 'EI', text: '与陌生人交谈让我感到兴奋而不是紧张' },
+
+    // S vs N (16题) - 感觉 vs 直觉
+    { dim: 'SN', text: '我更关注事物的具体事实和细节，而不是想象和可能性' },
+    { dim: 'SN', text: '我更喜欢实实在在的技能而不是抽象的理论' },
+    { dim: 'SN', text: '解决问题时我倾向于使用经过验证的经验方法' },
+    { dim: 'SN', text: '我更容易记住具体的事情和数据，而不是抽象的概念' },
+    { dim: 'SN', text: '我更相信亲眼所见的事实而不是直觉' },
+    { dim: 'SN', text: '学习新事物时，我会先了解具体操作方法' },
+    { dim: 'SN', text: '我更看重实际经验和技能，而不是抽象的理论' },
+    { dim: 'SN', text: '我喜欢按部就班的工作而不是富有变化的' },
+    { dim: 'SN', text: '我更容易理解具体可感的事物，而不是抽象的概念' },
+    { dim: 'SN', text: '我倾向于描述具体细节而不是整体印象' },
+    { dim: 'SN', text: '我喜欢传统可靠的方法而不是新颖独特的方式' },
+    { dim: 'SN', text: '我更容易看到事物的现状而不是预见未来可能' },
+    { dim: 'SN', text: '我喜欢确定已知的事物而不是探索未知领域' },
+    { dim: 'SN', text: '我更容易发现细节问题而不是整体趋势' },
+    { dim: 'SN', text: '我决策时更依赖过往的数据和信息，而不是直觉和灵感' },
+    { dim: 'SN', text: '我更关注现在而不是未来的可能性' },
+
+    // T vs F (16题) - 思考 vs 情感
+    { dim: 'TF', text: '做决定时我更看重逻辑和客观分析，而不是个人情感' },
+    { dim: 'TF', text: '当我不同意某人时，我会直接指出问题' },
+    { dim: 'TF', text: '我更容易被有逻辑的论点说服，而不是被情感打动' },
+    { dim: 'TF', text: '在争论中我更倾向于坚持原则，对事不对人' },
+    { dim: 'TF', text: '评价一件事时我更在意是否公平合理，而不是是否让人愉快' },
+    { dim: 'TF', text: '我更容易客观地分析情况而不是设身处地理解他人' },
+    { dim: 'TF', text: '我更欣赏理性思考的能力，而不是感性的直觉' },
+    { dim: 'TF', text: '做决定时我倾向于先思考再行动' },
+    { dim: 'TF', text: '我更容易指出别人的错误而不是照顾别人的情绪' },
+    { dim: 'TF', text: '我看重效率和结果而不是过程中的关系' },
+    { dim: 'TF', text: '在冲突中我更关注问题的对错而不是双方的感受' },
+    { dim: 'TF', text: '我更认同公正无私的原则而不是因人而异的关怀' },
+    { dim: 'TF', text: '当我安慰别人时，我会分析问题给出建议' },
+    { dim: 'TF', text: '我更容易被理性的分析打动而不是真诚的情感' },
+    { dim: 'TF', text: '工作中我更注重任务完成的质量而不是团队氛围' },
+    { dim: 'TF', text: '我倾向于用逻辑说服别人而不是用情感打动人' },
+
+    // J vs P (16题) - 判断 vs 知觉
+    { dim: 'JP', text: '面对重要任务，我会先制定详细计划再行动' },
+    { dim: 'JP', text: '我更喜欢按部就班、有清晰步骤的工作方式' },
+    { dim: 'JP', text: '当别人问我问题时，我倾向于给出一个明确的答案' },
+    { dim: 'JP', text: '我的房间或工作区域通常是整洁有序的' },
+    { dim: 'JP', text: '我严格遵守约定的时间，几乎从不迟到' },
+    { dim: 'JP', text: '我更喜欢提前规划好行程而不是随性走到哪算哪' },
+    { dim: 'JP', text: '做决定时我倾向于尽快做出决定并执行' },
+    { dim: 'JP', text: '当我列出待办清单，我会严格按照清单完成' },
+    { dim: 'JP', text: '我喜欢稳定可预测的生活节奏' },
+    { dim: 'JP', text: '面对规则和制度，我会尊重并严格执行' },
+    { dim: 'JP', text: '我更倾向于在截止日期前预留充足时间完成工作，而不是等到最后一刻' },
+    { dim: 'JP', text: '我更看重工作中的明确目标而不是自由发挥空间' },
+    { dim: 'JP', text: '我更希望别人评价我可靠、守时、言出必行，而不是有创意、灵活' },
+    { dim: 'JP', text: '面对生活中的不确定性，我会尽量减少不确定因素' },
+    { dim: 'JP', text: '我喜欢完成一件事带来的成就感而不是开始新事物带来的兴奋感' },
+    { dim: 'JP', text: '我习惯把事情做完后再开始新的事情，而不是同时进行多项任务' }
+];
+
+// 使用与testing.html相同的题目顺序（基于localStorage中的mbti_question_order）
+let savedOrder = localStorage.getItem('mbti_question_order');
+if (savedOrder) {
+    const order = JSON.parse(savedOrder);
+    const shuffled = order.map(i => questions[i]);
+    questions.splice(0, questions.length, ...shuffled);
+} else {
+    const order = questions.map((_, i) => i);
+    order.sort(() => Math.random() - 0.5);
+    const shuffled = order.map(i => questions[i]);
+    questions.splice(0, questions.length, ...shuffled);
+    localStorage.setItem('mbti_question_order', JSON.stringify(order));
+}
+
+// 存储答案
+let answers = {};
+
+// 从URL获取当前题目
+function getCurrentQuestion() {
+    const params = new URLSearchParams(window.location.search);
+    const q = parseInt(params.get('q')) || 1;
+    return Math.max(1, Math.min(q, questions.length));
+}
+
+// 加载保存的答案
+function loadAnswers() {
+    // API模式下使用不同的key存储，避免与普通testing页面冲突
+    const storageKey = 'mbti_api_answers_' + apiParams.external_user_id;
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+        answers = JSON.parse(saved);
+    }
+}
+
+// 保存答案
+function saveAnswers() {
+    const storageKey = 'mbti_api_answers_' + apiParams.external_user_id;
+    localStorage.setItem(storageKey, JSON.stringify(answers));
+}
+
+// 显示当前题目
+function showQuestion() {
+    const q = getCurrentQuestion();
+    const question = questions[q - 1];
+
+    document.getElementById('currentNum').textContent = q;
+    document.getElementById('totalNum').textContent = questions.length;
+    document.getElementById('questionText').textContent = question.text;
+
+    const progress = (q / questions.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+
+    // 恢复之前的选择
+    document.querySelectorAll('.likert-circle').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    if (answers[q]) {
+        const selectedBtn = document.querySelector(`[data-score="${answers[q]}"]`);
+        if (selectedBtn) {
+            selectedBtn.classList.add('selected');
+        }
+    }
+}
+
+// 选择分数
+function selectScore(score) {
+    const q = getCurrentQuestion();
+    answers[q] = score;
+    saveAnswers();
+
+    // 移除所有选中状态
+    document.querySelectorAll('.likert-circle').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+
+    // 添加选中状态
+    const selectedBtn = document.querySelector(`[data-score="${score}"]`);
+    if (selectedBtn) {
+        selectedBtn.classList.add('selected');
+    }
+
+    // 自动进入下一题
+    setTimeout(() => {
+        if (q < questions.length) {
+            goToQuestion(q + 1);
+        } else {
+            submitResults();
+        }
+    }, 300);
+}
+
+// 前往指定题目
+function goToQuestion(q) {
+    window.location.href = '?q=' + q + '&external_user_id=' + apiParams.external_user_id + '&callback_url=' + encodeURIComponent(apiParams.callback_url) + '&access_key=' + apiParams.access_key + '&sign=' + apiParams.sign;
+}
+
+// 上一题
+function prevQuestion() {
+    const q = getCurrentQuestion();
+    if (q > 1) {
+        goToQuestion(q - 1);
+    }
+}
+
+// 下一题
+function nextQuestion() {
+    const q = getCurrentQuestion();
+    if (!answers[q]) {
+        alert('请选择一个选项');
+        return;
+    }
+    if (q < questions.length) {
+        goToQuestion(q + 1);
+    } else {
+        submitResults();
+    }
+}
+
+// 计算MBTI结果
+function calculateMBTI() {
+    let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+    questions.forEach((q, index) => {
+        const answer = answers[index + 1];
+        if (answer) {
+            if (q.dim === 'EI') {
+                if (answer <= 3) scores.E += (4 - answer);
+                else if (answer >= 5) scores.I += (answer - 4);
+                else scores.E += 0.5, scores.I += 0.5;
+            } else if (q.dim === 'SN') {
+                if (answer <= 3) scores.S += (4 - answer);
+                else if (answer >= 5) scores.N += (answer - 4);
+                else scores.S += 0.5, scores.N += 0.5;
+            } else if (q.dim === 'TF') {
+                if (answer <= 3) scores.T += (4 - answer);
+                else if (answer >= 5) scores.F += (answer - 4);
+                else scores.T += 0.5, scores.F += 0.5;
+            } else if (q.dim === 'JP') {
+                if (answer <= 3) scores.J += (4 - answer);
+                else if (answer >= 5) scores.P += (answer - 4);
+                else scores.J += 0.5, scores.P += 0.5;
+            }
+        }
+    });
+
+    let mbti = '';
+    mbti += scores.E >= scores.I ? 'E' : 'I';
+    mbti += scores.S >= scores.N ? 'S' : 'N';
+    mbti += scores.T >= scores.F ? 'T' : 'F';
+    mbti += scores.J >= scores.P ? 'J' : 'P';
+
+    // 计算各维度百分比
+    const totalI = scores.I + scores.E;
+    const totalS = scores.S + scores.N;
+    const totalT = scores.T + scores.F;
+    const totalJ = scores.J + scores.P;
+
+    const dim1Percent = totalI > 0 ? Math.round((scores.I / totalI) * 100) : 50;
+    const dim2Percent = totalS > 0 ? Math.round((scores.N / totalS) * 100) : 50;
+    const dim3Percent = totalT > 0 ? Math.round((scores.T / totalT) * 100) : 50;
+    const dim4Percent = totalJ > 0 ? Math.round((scores.J / totalJ) * 100) : 50;
+
+    // 计算-A或-T
+    const confidence = (Math.abs(dim1Percent - 50) + Math.abs(dim2Percent - 50) + Math.abs(dim3Percent - 50) + Math.abs(dim4Percent - 50)) / 4;
+    const assertive = confidence >= 20 ? 'A' : 'T';
+
+    const mbtiType = mbti + assertive;
+    const scoresData = `${dim1Percent},${dim2Percent},${dim3Percent},${dim4Percent}`;
+
+    return { mbtiType, scoresData };
+}
+
+// 提交结果到API
+async function submitResults() {
+    // 验证API参数
+    const validation = validateApiParams();
+    if (!validation.valid) {
+        alert(validation.error);
+        return;
+    }
+
+    // 计算MBTI结果
+    const { mbtiType, scoresData } = calculateMBTI();
+
+    // 显示加载状态
+    const btn = document.querySelector('button[onclick="nextQuestion()"]');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> 提交中...';
+    btn.disabled = true;
+
+    try {
+        // 准备提交数据 - 使用complete_test.php接口
+        const formData = new FormData();
+        formData.append('token', testToken);
+        formData.append('mbti_type', mbtiType);
+        formData.append('test_data', JSON.stringify({
+            answers: answers,
+            scores: scoresData
+        }));
+
+        const response = await fetch('https://mbti.7373.com.cn/api/complete_test.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.code === 200 || result.code === 0) {
+            // 如果有回调URL，提示用户
+            if (apiParams.callback_url) {
+                alert('测试完成！结果将发送到: ' + apiParams.callback_url);
+            }
+
+            // 跳转到结果页显示结果
+            window.location.href = 'https://mbti.7373.com.cn/analyzing.html?result=' + mbtiType + '&scores=' + scoresData;
+        } else {
+            alert('提交失败: ' + (result.message || '未知错误'));
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    } catch (error) {
+        console.error('提交错误:', error);
+        alert('提交失败，请检查网络连接');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
+
+// 存储测试token（从API获取）
+let testToken = '';
+
+// 初始化测试token
+async function initTestToken() {
+    const validation = validateApiParams();
+    if (!validation.valid) {
+        console.warn(validation.error);
+        return;
+    }
+
+    try {
+        // 调用API获取测试token
+        const params = new URLSearchParams({
+            access_key: apiParams.access_key,
+            external_user_id: apiParams.external_user_id,
+            sign: apiParams.sign
+        });
+        if (apiParams.callback_url) {
+            params.append('callback_url', apiParams.callback_url);
+        }
+
+        const response = await fetch('https://mbti.7373.com.cn/api/v1/test.php?' + params.toString());
+        const result = await response.json();
+
+        if (result.success && result.data && result.data.test_token) {
+            testToken = result.data.test_token;
+            console.log('Test token obtained:', testToken);
+        } else {
+            console.warn('Failed to get test token:', result.message);
+        }
+    } catch (error) {
+        console.error('Error initializing test token:', error);
+    }
+}
+
+// 初始化
+loadAnswers();
+showQuestion();
+initTestToken();
+</script>
+
+</body></html>
