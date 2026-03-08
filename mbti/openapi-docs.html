@@ -76,24 +76,50 @@
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-800">
 <!-- Header -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-4 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
 <a href="/" class="flex items-center gap-3 text-primary shrink-0 hover:opacity-80 transition-opacity">
 <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
 <span class="material-symbols-outlined">psychology</span>
 </div>
-<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">MBTI性格测试</h2>
+<h2 class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight tracking-tight lg:text-lg">MBTI性格测试</h2>
 </a>
-<div class="flex items-center gap-4 shrink-0">
+<div class="flex items-center gap-2 lg:gap-4 shrink-0">
 <nav class="hidden lg:flex items-center gap-6 mr-6">
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="/">首页</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="business/">控制台</a>
 <a class="text-primary text-sm font-bold" href="#">API 文档</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="business/settings.php">系统设置</a>
 </nav>
-<a href="business/" class="size-9 rounded-full border-2 border-primary overflow-hidden">
+<a href="business/" class="hidden lg:block size-9 rounded-full border-2 border-primary overflow-hidden">
 <img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUtp3MiZWQTZMlj8gEVymG-bCHnmiTqrSydcJFrUXo0-D34abBMJ9P3TRGjEL_UIR_j1JvlAhUlKwBg_j_UqIfVTVQQ8NZFRBtXzyDRHYGqzTRS2nO8BZq2VwJsCDtGYkTwsM7bdIePB65s3VA3YbOEb6hSlNqa5X3PoG_3ufPqnTb9buiPDZeWtieDU6ldTXo4A4vOFfQ0fBaO0s1mkZ9KjWUZy3moY3svEmd5uWKktk-Y6nIBvnPxyXb6DljRXZAwts0YvDCQQ"/>
 </a>
+<!-- Mobile menu button -->
+<button id="mobile-menu-btn-openapi" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" onclick="toggleMobileMenuOpenapi()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </div>
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu-openapi" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-sage-200 dark:border-slate-800 shadow-lg">
+<div class="px-4 py-3 space-y-2">
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="/">首页</a>
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="business/">控制台</a>
+<a class="block py-2 text-sm font-bold text-primary" href="#">API 文档</a>
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="business/settings.php">系统设置</a>
+</div>
+</div>
+<script>
+function toggleMobileMenuOpenapi() {
+var menu = document.getElementById('mobile-menu-openapi');
+var btn = document.getElementById('mobile-menu-btn-openapi');
+if (menu.classList.contains('hidden')) {
+menu.classList.remove('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'close';
+} else {
+menu.classList.add('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'menu';
+}
+}
+</script>
 </header>
 <div class="flex flex-1 w-full">
 <!-- Sidebar -->

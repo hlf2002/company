@@ -3,18 +3,22 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="MBTI API错误码说明文档，详细列出接口调用过程中可能返回的状态码及含义，帮助开发者快速定位并解决问题"/>
-<meta name="keywords" content="MBTI API,错误码,API错误,状态码,错误说明"/>
+<meta name="description" content="MBTI人格测试API接口文档，详细说明如何通过API集成MBTI性格测试，包括请求参数、签名算法、回调机制等"/>
+<meta name="keywords" content="MBTI API,人格测试接口,API文档,MBTI集成,性格测试API,开发者文档"/>
 <meta name="author" content="MBTI Platform"/>
 <meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://mbti.7373.com.cn/openapi-errors.html"/>
+<link rel="canonical" href="https://mbti.7373.com.cn/openapi-docs.html"/>
 
 <!-- Open Graph -->
-<meta property="og:title" content="错误码说明 - MBTI API 文档"/>
-<meta property="og:description" content="MBTI API错误码说明文档"/>
+<meta property="og:title" content="人格测试接口 - MBTI API 文档"/>
+<meta property="og:description" content="MBTI人格测试API接口文档，详细说明如何通过API集成MBTI性格测试"/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://mbti.7373.com.cn/openapi-errors.html"/>
+<meta property="og:url" content="https://mbti.7373.com.cn/openapi-docs.html"/>
 <meta property="og:site_name" content="MBTI性格测试"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="人格测试接口 - MBTI API 文档"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -26,8 +30,8 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#7A9478",
-                        "background-light": "#F9F7F2",
+                        "primary": "#7A9478", // Sage Green
+                        "background-light": "#F9F7F2", // Beige/Cream
                         "background-dark": "#1A1C19",
                         "sage": {
                             "50": "#f4f6f4",
@@ -53,40 +57,69 @@
             },
         }
     </script>
-<title>错误码说明 - MBTI API 文档</title>
+<title>人格测试接口说明 - MBTI API 文档</title>
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "MBTI API错误码说明",
-  "description": "MBTI API错误码说明文档",
-  "url": "https://mbti.7373.com.cn/openapi-errors.html",
-  "publisher": {"@type": "Organization", "name": "MBTI Platform"}
+  "headline": "MBTI人格测试API接口文档",
+  "description": "详细说明如何通过API集成MBTI性格测试，包括请求参数、签名算法、回调机制等",
+  "url": "https://mbti.7373.com.cn/openapi-docs.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "MBTI Platform"
+  }
 }
 </script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-800">
 <!-- Header -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-4 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
 <a href="/" class="flex items-center gap-3 text-primary shrink-0 hover:opacity-80 transition-opacity">
 <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
 <span class="material-symbols-outlined">psychology</span>
 </div>
-<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">MBTI性格测试</h2>
+<h2 class="text-slate-900 dark:text-slate-100 text-base font-bold leading-tight tracking-tight lg:text-lg">MBTI性格测试</h2>
 </a>
-<div class="flex items-center gap-4 shrink-0">
+<div class="flex items-center gap-2 lg:gap-4 shrink-0">
 <nav class="hidden lg:flex items-center gap-6 mr-6">
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="/">首页</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="business/">控制台</a>
 <a class="text-primary text-sm font-bold" href="#">API 文档</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="business/settings.php">系统设置</a>
 </nav>
-<a href="business/" class="size-9 rounded-full border-2 border-primary overflow-hidden">
+<a href="business/" class="hidden lg:block size-9 rounded-full border-2 border-primary overflow-hidden">
 <img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUtp3MiZWQTZMlj8gEVymG-bCHnmiTqrSydcJFrUXo0-D34abBMJ9P3TRGjEL_UIR_j1JvlAhUlKwBg_j_UqIfVTVQQ8NZFRBtXzyDRHYGqzTRS2nO8BZq2VwJsCDtGYkTwsM7bdIePB65s3VA3YbOEb6hSlNqa5X3PoG_3ufPqnTb9buiPDZeWtieDU6ldTXo4A4vOFfQ0fBaO0s1mkZ9KjWUZy3moY3svEmd5uWKktk-Y6nIBvnPxyXb6DljRXZAwts0YvDCQQ"/>
 </a>
+<!-- Mobile menu button -->
+<button id="mobile-menu-btn-openapi" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" onclick="toggleMobileMenuOpenapi()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </div>
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu-openapi" class="hidden lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-sage-200 dark:border-slate-800 shadow-lg">
+<div class="px-4 py-3 space-y-2">
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="/">首页</a>
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="business/">控制台</a>
+<a class="block py-2 text-sm font-bold text-primary" href="#">API 文档</a>
+<a class="block py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary" href="business/settings.php">系统设置</a>
+</div>
+</div>
+<script>
+function toggleMobileMenuOpenapi() {
+var menu = document.getElementById('mobile-menu-openapi');
+var btn = document.getElementById('mobile-menu-btn-openapi');
+if (menu.classList.contains('hidden')) {
+menu.classList.remove('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'close';
+} else {
+menu.classList.add('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'menu';
+}
+}
+</script>
 </header>
 <div class="flex flex-1 w-full">
 <!-- Sidebar -->
@@ -96,17 +129,17 @@
 <span class="material-symbols-outlined text-xl group-hover:text-primary">overview</span>
 <span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">API概览</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group border-l-4 border-transparent hover:border-sage-300" href="openapi-docs.html">
-<span class="material-symbols-outlined text-xl group-hover:text-primary">quiz</span>
-<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">人格测试接口</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sage-100 dark:bg-sage-900/30 text-primary font-bold transition-all border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="text-sm">人格测试接口</span>
 </a>
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group border-l-4 border-transparent hover:border-sage-300" href="openapi-query.html">
 <span class="material-symbols-outlined text-xl group-hover:text-primary">analytics</span>
 <span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">测试结果查询接口</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sage-100 dark:bg-sage-900/30 text-primary font-bold transition-all border-l-4 border-primary" href="#">
-<span class="material-symbols-outlined text-xl">error</span>
-<span class="text-sm">错误码信息</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group border-l-4 border-transparent hover:border-sage-300" href="openapi-errors.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary">error</span>
+<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">错误码信息</span>
 </a>
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group border-l-4 border-transparent hover:border-sage-300" href="openapi-verify.html">
 <span class="material-symbols-outlined text-xl group-hover:text-primary">verified_user</span>
@@ -118,106 +151,141 @@
 <!-- Article Content -->
 <div class="w-full py-12 px-8">
 <div class="mb-10">
-<h1 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">错误码说明</h1>
+<h1 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">人格测试接口集成指南</h1>
 <p class="text-lg text-slate-600 leading-relaxed">
-                    本文档详细列出了 MBTI API 接口在调用过程中可能返回的状态码及其具体含义，帮助您在集成过程中快速定位并解决问题。
+                    通过简单的 API 集成，在您的应用中无缝嵌入专业的 MBTI 性格测试服务。我们提供全托管的测试流程，确保用户体验的一致性与专业性。
                 </p>
 </div>
-<!-- Section 1: 通用状态码 -->
+<!-- Section 1 -->
 <section class="mb-12">
 <h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
-<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">01.</span> 通用状态码
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">01.</span> 集成方式
                 </h3>
-<div class="overflow-hidden border border-accent-tan rounded-2xl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl">iframe</span>
+<h4 class="font-bold text-slate-900 mb-2">Iframe 嵌入</h4>
+<p class="text-sm text-slate-600">在您的应用页面内直接通过 iframe 标签加载测试链接，保持用户在您的平台内不离开。</p>
+</div>
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl">open_in_new</span>
+<h4 class="font-bold text-slate-900 mb-2">新窗口跳转</h4>
+<p class="text-sm text-slate-600">引导用户至我们托管的测试页面，完成后通过回调 URL 自动引导用户返回您的应用。</p>
+</div>
+</div>
+</section>
+<!-- Section 2 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">02.</span> 请求地址 (Request URL)
+                </h3>
+<div class="bg-slate-900 rounded-xl p-6 relative group border border-slate-800 shadow-inner">
+<div class="flex items-center justify-between mb-4">
+<span class="px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded uppercase tracking-widest">GET 请求</span>
+<button class="text-slate-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+<code class="text-sm text-primary break-all leading-relaxed font-mono">https://mbti.7373.com.cn/api/v1/test?external_user_id=UNIQUE_ID&callback_url=YOUR_CALLBACK_URL&access_key=YOUR_ACCESS_KEY&sign=GENERATED_SIGN</code>
+</div>
+</section>
+<!-- Section 3 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">03.</span> 参数说明 (Parameters)
+                </h3>
+<p class="text-sm text-slate-600 mb-4">
+    所有请求都必须在 URL 参数中包含有效的 <code class="bg-accent-tan/50 px-1.5 py-0.5 rounded text-sm font-mono">access_key</code>。
+</p><div class="overflow-hidden border border-accent-tan rounded-2xl">
 <table class="w-full text-left border-collapse bg-white">
 <thead>
 <tr class="bg-accent-tan/30 border-b border-accent-tan">
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">状态码</th>
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">含义</th>
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">详细描述与建议</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">参数名</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">必选</th><th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">类型</th><th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">最大长度</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">说明</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-accent-tan">
+<tbody class="divide-y divide-accent-tan"><tr><td class="px-6 py-4 text-sm font-mono text-primary font-semibold">access_key</td><td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">128</td><td class="px-6 py-4 text-sm text-slate-600">身份验证密钥，通过 URL 参数传递</td></tr>
 <tr>
-<td class="px-6 py-4 font-mono text-sm">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">200</span>
-</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">SUCCESS</td>
-<td class="px-6 py-4 text-sm text-slate-600">请求成功。业务数据包含在返回体的 data 字段中。</td>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">external_user_id</td>
+<td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">64</td>
+<td class="px-6 py-4 text-sm text-slate-600">客户端用户的唯一标识符，用于关联结果</td>
 </tr>
 <tr>
-<td class="px-6 py-4 font-mono text-sm">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">400</span>
-</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">BAD_REQUEST</td>
-<td class="px-6 py-4 text-sm text-slate-600">请求参数错误。请检查 JSON 格式是否正确或必填参数是否缺失。</td>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">callback_url</td>
+<td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串 (URL)</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">255</td>
+<td class="px-6 py-4 text-sm text-slate-600">测试完成后接收结果的 Webhook URL</td>
 </tr>
 <tr>
-<td class="px-6 py-4 font-mono text-sm">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 border border-rose-200">401</span>
-</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">UNAUTHORIZED</td>
-<td class="px-6 py-4 text-sm text-slate-600">身份验证失败。API Key 无效、已禁用或已过期。</td>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">lang</td>
+<td class="px-6 py-4 text-xs font-bold text-slate-400">可选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">10</td>
+<td class="px-6 py-4 text-sm text-slate-600">语言设置，默认 'zh-CN'。支持 'en-US'</td>
 </tr>
-<tr>
-<td class="px-6 py-4 font-mono text-sm">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 border border-rose-200">403</span>
-</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">FORBIDDEN</td>
-<td class="px-6 py-4 text-sm text-slate-600">权限不足。您当前的套餐级别不支持访问该特定 API 终结点。</td>
-</tr>
-<tr>
-<td class="px-6 py-4 font-mono text-sm">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">500</span>
-</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">INTERNAL_ERROR</td>
-<td class="px-6 py-4 text-sm text-slate-600">服务器内部错误。请记录 Request ID 并联系我们的技术支持团队。</td>
-</tr>
-</tbody>
+<tr><td class="px-6 py-4 text-sm font-mono text-primary font-semibold">sign</td><td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">32</td><td class="px-6 py-4 text-sm text-slate-600">请求签名，详见签名算法说明</td></tr></tbody>
 </table>
 </div>
 </section>
-<!-- Section 2: 签名校验相关错误 -->
+<!-- Section 4 -->
 <section class="mb-12">
 <h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
-<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">02.</span> 签名校验相关错误
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">04.</span> 签名算法 (Signature Algorithm)
                 </h3>
-<div class="flex items-start gap-4 p-4 bg-primary/10 border-l-4 border-primary rounded-r-xl mb-6">
-<span class="material-symbols-outlined text-primary">lock_open</span>
-<div class="flex flex-col gap-1">
-<p class="text-sm text-slate-900 font-bold">注意：安全验证</p>
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm space-y-4">
 <p class="text-sm text-slate-600 leading-relaxed">
-                            为了保证数据传输的安全，所有写入类请求均需要通过 MD5 签名校验。若签名验证失败，接口将返回以下特定错误码。
+                        为了保证 API 请求的安全性，所有请求都必须携带 <code>sign</code> 参数。签名生成的步骤如下：
+                    </p>
+<ol class="list-decimal list-inside text-sm text-slate-600 space-y-2">
+<li>将所有请求参数（除 <code>sign</code> 外）按照参数名的字典顺序（ASCII码）进行排序。</li>
+<li>将排序后的参数及其对应值以 <code>key=value</code> 的形式用 <code>&amp;</code> 符号连接成字符串。</li>
+<li>在拼接后的字符串末尾加上 <code>&amp;secret_key=YOUR_SECRET_KEY</code>。</li>
+<li>对最终生成的字符串进行 <strong>MD5</strong> 加密（32位小写），得到最终的签名。</li>
+</ol>
+<div class="bg-slate-50 p-4 rounded-lg border border-accent-tan/50 mt-4">
+<p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">待签名原始字符串示例</p>
+<code class="text-xs text-slate-500 break-all font-mono italic">
+                            access_key=YOUR_ACCESS_KEY&amp;callback_url=YOUR_URL&amp;external_user_id=ID&amp;secret_key=YOUR_SECRET_KEY
+                        </code>
+</div>
+</div>
+</section><section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">05.</span> 回调机制 (Callback Mechanism)
+                </h3>
+<div class="prose prose-slate max-w-none text-slate-600">
+<p class="mb-4">
+                        当用户在我们的平台上完成所有测试题目后，系统将自动发起一个 <span class="font-bold text-slate-900">POST</span> 请求到您提供的 <code class="bg-accent-tan/50 px-1.5 py-0.5 rounded text-sm font-mono">callback_url</code>。
+                    </p>
+<div class="flex items-start gap-4 p-4 bg-primary/10 border-l-4 border-primary rounded-r-xl mb-6">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-sm text-primary font-medium leading-relaxed">
+                            回调请求包含 <code>application/json</code> 格式的 Payload。为了安全，建议在您的后端验证回调来源的 IP 或使用签名校验。
                         </p>
 </div>
 </div>
-<div class="overflow-hidden border border-accent-tan rounded-2xl">
-<table class="w-full text-left border-collapse bg-white">
-<thead>
-<tr class="bg-accent-tan/30 border-b border-accent-tan">
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">错误码</th>
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">具体原因</th>
-<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">故障排除建议</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-accent-tan">
-<tr>
-<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40101</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">签名不匹配</td>
-<td class="px-6 py-4 text-sm text-slate-600">生成的签名值与服务器计算结果不一致。请检查待签名字符串的排序顺序及 Secret Key。</td>
-</tr>
-<tr>
-<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40102</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">重放攻击检测</td>
-<td class="px-6 py-4 text-sm text-slate-600">Timestamp 字段与服务器当前时间偏差超过 300 秒。请同步您的系统时钟。</td>
-</tr>
-<tr>
-<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40103</td>
-<td class="px-6 py-4 text-sm font-medium text-slate-900">Nonce 重复</td>
-<td class="px-6 py-4 text-sm text-slate-600">Nonce 随机字符串已在近期被使用。请确保每次请求的 Nonce 具有唯一性。</td>
-</tr>
-</tbody>
-</table>
+<div class="bg-slate-900 rounded-xl p-6 border border-slate-800 shadow-inner">
+<p class="text-[10px] font-bold text-slate-500 mb-4 uppercase tracking-widest">回调 JSON 示例</p>
+<pre class="text-sm text-slate-300 font-mono leading-relaxed overflow-x-auto">{
+  "event": "test.completed",
+  "timestamp": 1698765432,
+  "data": {
+    "external_user_id": "U_8829102",
+    "test_id": "mbti_v1_002",
+    "result_type": "INFJ",
+    "personality_name": "提倡者",
+    "scores": {
+      "extraversion": 24,
+      "introversion": 76,
+      "sensing": 45,
+      "intuition": 55,
+      "thinking": 30,
+      "feeling": 70,
+      "judging": 80,
+      "perceiving": 20
+    },
+    "summary": "富有想象力和战略性的思想家，一切皆在计划之中。"
+  }
+}
+                    </pre>
 </div>
 </section>
 <footer class="mt-20 pt-8 border-t border-accent-tan flex justify-between items-center text-slate-400 text-sm">

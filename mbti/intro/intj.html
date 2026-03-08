@@ -52,13 +52,13 @@
 <body>
 <div class="relative flex min-h-screen flex-col overflow-x-hidden">
 <header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
-<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-10 lg:py-4">
 <div class="flex items-center gap-3">
 <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
 <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
 <span class="material-symbols-outlined text-2xl icon-fill">psychology</span>
 </div>
-<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 首页</h2>
+<h2 class="text-lg font-bold tracking-tight text-primary lg:text-xl">MBTI 首页</h2>
 </a>
 </div>
 <nav class="hidden md:flex items-center gap-10">
@@ -68,13 +68,43 @@
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="/openapi.html">开放API</a>
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="/aboutus.html">关于我们</a>
 </nav>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 lg:gap-4">
 <a href="../testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
 <span>开始测试</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
+<!-- Mobile menu button -->
+<button id="mobile-menu-btn-intro" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" onclick="toggleMobileMenuIntro()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </div>
 </div>
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu-intro" class="hidden md:hidden border-t border-primary/10 bg-background-light dark:bg-background-dark">
+<div class="px-4 py-3 space-y-2">
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/index.html">首页</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/type.html">人格类型</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/compatibility.html">契合度分析</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/openapi.html">开放API</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/aboutus.html">关于我们</a>
+<a href="../testing.html" class="mt-2 w-full flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all">
+<span>开始测试</span>
+</a>
+</div>
+</div>
+<script>
+function toggleMobileMenuIntro() {
+var menu = document.getElementById('mobile-menu-intro');
+var btn = document.getElementById('mobile-menu-btn-intro');
+if (menu.classList.contains('hidden')) {
+menu.classList.remove('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'close';
+} else {
+menu.classList.add('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'menu';
+}
+}
+</script>
 </header>
 <main class="flex-1">
 <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">

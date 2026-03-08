@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MBTI 性格详情页 - 调停者 (INFP)</title>
+<title>MBTI 性格详情页 - 建筑师 (INTJ)</title>
 <link rel="icon" type="image/png" href="../favicon.png"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
@@ -52,13 +52,13 @@
 <body>
 <div class="relative flex min-h-screen flex-col overflow-x-hidden">
 <header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
-<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-10 lg:py-4">
 <div class="flex items-center gap-3">
 <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
 <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
 <span class="material-symbols-outlined text-2xl icon-fill">psychology</span>
 </div>
-<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 首页</h2>
+<h2 class="text-lg font-bold tracking-tight text-primary lg:text-xl">MBTI 首页</h2>
 </a>
 </div>
 <nav class="hidden md:flex items-center gap-10">
@@ -68,35 +68,65 @@
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="/openapi.html">开放API</a>
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="/aboutus.html">关于我们</a>
 </nav>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 lg:gap-4">
 <a href="../testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
 <span>开始测试</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
+<!-- Mobile menu button -->
+<button id="mobile-menu-btn-intro" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors" onclick="toggleMobileMenuIntro()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </div>
 </div>
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu-intro" class="hidden md:hidden border-t border-primary/10 bg-background-light dark:bg-background-dark">
+<div class="px-4 py-3 space-y-2">
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/index.html">首页</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/type.html">人格类型</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/compatibility.html">契合度分析</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/openapi.html">开放API</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300" href="/aboutus.html">关于我们</a>
+<a href="../testing.html" class="mt-2 w-full flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all">
+<span>开始测试</span>
+</a>
+</div>
+</div>
+<script>
+function toggleMobileMenuIntro() {
+var menu = document.getElementById('mobile-menu-intro');
+var btn = document.getElementById('mobile-menu-btn-intro');
+if (menu.classList.contains('hidden')) {
+menu.classList.remove('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'close';
+} else {
+menu.classList.add('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'menu';
+}
+}
+</script>
 </header>
 <main class="flex-1">
 <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
 <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
 <div class="relative flex justify-center lg:justify-start">
 <div class="relative h-[440px] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-sage-light dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-700 shadow-2xl">
-<img alt="调停者 INFP" class="h-4/5 w-4/5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
+<img alt="建筑师 INTJ" class="h-4/5 w-4/5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
 <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
 <div class="rounded-xl bg-white/90 dark:bg-slate-900/90 px-4 py-2 backdrop-blur shadow-sm">
-<span class="text-lg font-bold text-primary">调停者</span>
+<span class="text-lg font-bold text-primary">建筑师</span>
 </div>
 <div class="rounded-xl bg-primary px-4 py-2 shadow-lg">
-<span class="text-sm font-bold text-white">INFP-A / INFP-T</span>
+<span class="text-sm font-bold text-white">INTJ-A / INTJ-T</span>
 </div>
 </div>
 </div>
 </div>
 <div class="space-y-8">
 <div class="space-y-4">
-<h1 class="text-5xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">调停者</h1>
-<p class="text-xl leading-relaxed text-warm-gray dark:text-slate-400 max-w-xl">
-                            诗意、善良且利他的主义者，总是渴望帮助有意义的事业。
+<h1 class="text-5xl font-black tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">建筑师</h1>
+<p class="text-xl leading-relaxed text-warm-gray dark:text-slate-400">
+                            富有想象力且具备战略眼光的思考者，他们对万事皆有计划。
                         </p>
 </div>
 <div class="flex flex-wrap gap-4">
@@ -113,24 +143,24 @@
 <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
 <div class="space-y-4 text-center">
 <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-<span class="material-symbols-outlined text-3xl icon-fill">favorite</span>
+<span class="material-symbols-outlined text-3xl">verified_user</span>
 </div>
-<h3 class="text-xl font-bold">极具同情心</h3>
-<p class="text-warm-gray dark:text-slate-400 px-4">对他人的痛苦感同身受，总是愿意倾听并给予深切的情感支持。</p>
-</div>
-<div class="space-y-4 text-center">
-<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-<span class="material-symbols-outlined text-3xl icon-fill">auto_fix_high</span>
-</div>
-<h3 class="text-xl font-bold">丰富想象力</h3>
-<p class="text-warm-gray dark:text-slate-400 px-4">拥有一个丰富多彩的内心世界，常常在白日梦和创意构思中寻找慰藉。</p>
+<h3 class="text-xl font-bold">独立性</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">他们非常信任自己的智慧，更倾向于依靠自己的判断而非随波逐流。</p>
 </div>
 <div class="space-y-4 text-center">
 <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-<span class="material-symbols-outlined text-3xl icon-fill">verified</span>
+<span class="material-symbols-outlined text-3xl">strategy</span>
 </div>
-<h3 class="text-xl font-bold">对价值的坚持</h3>
-<p class="text-warm-gray dark:text-slate-400 px-4">内心有一套坚定的道德准则，在追求理想的道路上绝不轻易妥协。</p>
+<h3 class="text-xl font-bold">战略思维</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">将生活看作一盘棋，时刻在脑海中构思着未来的每一步走向。</p>
+</div>
+<div class="space-y-4 text-center">
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<h3 class="text-xl font-bold">追求卓越</h3>
+<p class="text-warm-gray dark:text-slate-400 px-4">对任何事物都持有极高的标准，无论是个人目标还是职场表现。</p>
 </div>
 </div>
 </div>
@@ -143,60 +173,60 @@
 <div class="space-y-2">
 <div class="flex justify-between text-sm font-bold">
 <span>精神 (Mind)</span>
-<span class="text-primary">内向型 (82%)</span>
+<span class="text-primary">内向型 (78%)</span>
 </div>
 <div class="trait-bar-bg">
-<div class="trait-bar-fill" style="width: 82%"></div>
+<div class="trait-bar-fill" style="width: 78%"></div>
 </div>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-sm font-bold">
 <span>能量 (Energy)</span>
-<span class="text-primary">直觉型 (75%)</span>
+<span class="text-primary">直觉型 (85%)</span>
 </div>
 <div class="trait-bar-bg">
-<div class="trait-bar-fill" style="width: 75%"></div>
+<div class="trait-bar-fill" style="width: 85%"></div>
 </div>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-sm font-bold">
 <span>本性 (Nature)</span>
-<span class="text-primary">情感型 (88%)</span>
+<span class="text-primary">思考型 (92%)</span>
 </div>
 <div class="trait-bar-bg">
-<div class="trait-bar-fill" style="width: 88%"></div>
+<div class="trait-bar-fill" style="width: 92%"></div>
 </div>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-sm font-bold">
 <span>战术 (Tactics)</span>
-<span class="text-primary">勘探型 (71%)</span>
+<span class="text-primary">评判型 (66%)</span>
 </div>
 <div class="trait-bar-bg">
-<div class="trait-bar-fill" style="width: 71%"></div>
+<div class="trait-bar-fill" style="width: 66%"></div>
 </div>
 </div>
 <div class="space-y-2">
 <div class="flex justify-between text-sm font-bold">
 <span>身份 (Identity)</span>
-<span class="text-primary">谨慎型 (64%)</span>
+<span class="text-primary">坚定型 (74%)</span>
 </div>
 <div class="trait-bar-bg">
-<div class="trait-bar-fill" style="width: 64%"></div>
+<div class="trait-bar-fill" style="width: 74%"></div>
 </div>
 </div>
 </div>
 </div>
 <div class="rounded-3xl bg-primary p-8 lg:p-12 text-white shadow-xl">
-<h3 class="text-2xl font-bold mb-4">为什么叫"调停者"？</h3>
+<h3 class="text-2xl font-bold mb-4">为什么叫"建筑师"？</h3>
 <p class="text-white/80 text-lg leading-relaxed mb-8">
-                        INFP 类型的人格是真正的理想主义者。他们安静、谦逊，但内心深处燃烧着炽热的热情。他们之所以被称为"调停者"，是因为他们具有极强的共情能力，总是在寻求建立和谐的联系，不仅在人与人之间，也在自己的现实与深邃的内心理想之间。
+                        INTJ 类型的人格在所有类型中最为罕见，他们深沉、充满理性，总是尝试理解世间万物背后的逻辑。他们不仅是在构想蓝图，更是在现实中一步步建立起他们的理想世界。
                     </p>
 <div class="flex flex-wrap gap-3 text-sm font-bold">
-<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">共情</span>
-<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">创意</span>
-<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">诚实</span>
-<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">灵活</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">理性</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">独立</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">高效</span>
+<span class="px-4 py-2 bg-white/15 rounded-lg border border-white/10 backdrop-blur">远见</span>
 </div>
 </div>
 </div>
@@ -205,38 +235,38 @@
 <div class="flex flex-wrap justify-center gap-12 lg:gap-20">
 <div class="flex flex-col items-center text-center space-y-4">
 <div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
-<img alt="威廉·莎士比亚" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZuqFRmTYP5_CEu8e2StFHUepuAeMwkcDb0OqZ7mu3NNx-l2tyT0iAfFURfs5DRzn19LDYvc6sbCLIN0h62bvm-h4uyiAQ2OPkmUgvCB7jNwRe3FzY2x242yekgHMXYsOMvkU8X0alwQHX25-hi4oeKqyuSezaRLc5oe6E-4DqkH-xDbhplRuC0rnMhwQSKjv72tgL9X9Lcx4b7pspbYs9BOxbfz3puXuoT-DWtboI8W9ipBao1MwJLj8cEr-D1xOJ_Lh4aN3qNw"/>
+<img alt="埃隆·马斯克" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNAj0ao1DQzUlvSsSApNQaJqfMUAXlgHkCdtb5DVF-HaaL0XSZ5zIAgJTU2nf0r9KaPc4pmJZ-ClT1sp0mDh4NLS5KJDyQz2gfeVFSeneVj0SoGIoqMMfugyIF94b3NQ36Ty4mKyAaDf899X-hYR3-GKqk9paM7R43bKYRkSZ1bkaMRFqMbZ5tbjkMJ8NIeDz2r2HXDMk37lerP49Llcm4FTAg7c7Upks5WLUOLPfNxQCS1umeyVEypNSEZ-C4G0fwgbDtSaxF_rQ"/>
 </div>
 <div>
-<p class="text-lg font-bold text-slate-900 dark:text-white">威廉·莎士比亚</p>
-<p class="text-sm text-primary font-medium">剧作家 / 诗人</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">埃隆·马斯克</p>
+<p class="text-sm text-primary font-medium">企业家 / 技术专家</p>
 </div>
 </div>
 <div class="flex flex-col items-center text-center space-y-4">
 <div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
-<img alt="J.R.R. 托尔金" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODyusoGiX9Q2TIExw1aBOvkB2fAMkNyWH1G0b5Y6W8NB5jGKIAR0Fd2f_bL-ARWk6eaCSrsvPOdriS1zQ5uqp35LcvRTo2Lpm24rtY4PlMnwi8ybfAttka9axGA2MRD86IcV-IyU61StLIyKuacUrz5i8BhVbzS7nIkfS7Yg53iEToWZ7pMItbvf3o2b-S3dyBQN8nA8C8fxmmJMLS56fv3AQfmJqsDWv0omv9DY5x4BU-29vNwteRWntD3i35UU-X5MAOvCde2g"/>
+<img alt="克里斯托弗·诺兰" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBODyusoGiX9Q2TIExw1aBOvkB2fAMkNyWH1G0b5Y6W8NB5jGKIAR0Fd2f_bL-ARWk6eaCSrsvPOdriS1zQ5uqp35LcvRTo2Lpm24rtY4PlMnwi8ybfAttka9axGA2MRD86IcV-IyU61StLIyKuacUrz5i8BhVbzS7nIkfS7Yg53iEToWZ7pMItbvf3o2b-S3dyBQN8nA8C8fxmmJMLS56fv3AQfmJqsDWv0omv9DY5x4BU-29vNwteRWntD3i35UU-X5MAOvCde2g"/>
 </div>
 <div>
-<p class="text-lg font-bold text-slate-900 dark:text-white">J.R.R. 托尔金</p>
-<p class="text-sm text-primary font-medium">作家 / 学者</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">克里斯托弗·诺兰</p>
+<p class="text-sm text-primary font-medium">导演 / 编剧</p>
 </div>
 </div>
 <div class="flex flex-col items-center text-center space-y-4">
 <div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
-<img alt="比约克" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNAj0ao1DQzUlvSsSApNQaJqfMUAXlgHkCdtb5DVF-HaaL0XSZ5zIAgJTU2nf0r9KaPc4pmJZ-ClT1sp0mDh4NLS5KJDyQz2gfeVFSeneVj0SoGIoqMMfugyIF94b3NQ36Ty4mKyAaDf899X-hYR3-GKqk9paM7R43bKYRkSZ1bkaMRFqMbZ5tbjkMJ8NIeDz2r2HXDMk37lerP49Llcm4FTAg7c7Upks5WLUOLPfNxQCS1umeyVEypNSEZ-C4G0fwgbDtSaxF_rQ"/>
+<img alt="米歇尔·奥巴马" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeS612A6KtFNWf5JP9hBPHB-Y2ya-wORQ8LVcHQ3rce5mWB7JPMKk8of9EEMkpuXGb6y0GBSbz06MIOEdXuCk14xA1T2KXxNGDsqY6Q1ruHohWba3EicDQOJE-r_3kNMnD2qG--64ffakWAt7TvnXrPh9MY55No16LXdJjOpcweYkt3VFzduDSj3ZEIof-ZVg9dCM6vACYK49w8fyea81u8_tv0CC3sVL_LuXt7_u-vNJLQd7Ahg1LNV95LpXDVSl3vDrJmdeLkk0"/>
 </div>
 <div>
-<p class="text-lg font-bold text-slate-900 dark:text-white">比约克</p>
-<p class="text-sm text-primary font-medium">歌手 / 艺术家</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">米歇尔·奥巴马</p>
+<p class="text-sm text-primary font-medium">前第一夫人 / 作家</p>
 </div>
 </div>
 <div class="flex flex-col items-center text-center space-y-4">
 <div class="h-36 w-36 rounded-full border-4 border-sage-light dark:border-slate-800 overflow-hidden shadow-xl transition-all hover:scale-105 hover:border-primary">
-<img alt="艾丽西亚·凯斯" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeS612A6KtFNWf5JP9hBPHB-Y2ya-wORQ8LVcHQ3rce5mWB7JPMKk8of9EEMkpuXGb6y0GBSbz06MIOEdXuCk14xA1T2KXxNGDsqY6Q1ruHohWba3EicDQOJE-r_3kNMnD2qG--64ffakWAt7TvnXrPh9MY55No16LXdJjOpcweYkt3VFzduDSj3ZEIof-ZVg9dCM6vACYK49w8fyea81u8_tv0CC3sVL_LuXt7_u-vNJLQd7Ahg1LNV95LpXDVSl3vDrJmdeLkk0"/>
+<img alt="弗里德里希·尼采" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFZuqFRmTYP5_CEu8e2StFHUepuAeMwkcDb0OqZ7mu3NNx-l2tyT0iAfFURfs5DRzn19LDYvc6sbCLIN0h62bvm-h4uyiAQ2OPkmUgvCB7jNwRe3FzY2x242yekgHMXYsOMvkU8X0alwQHX25-hi4oeKqyuSezaRLc5oe6E-4DqkH-xDbhplRuC0rnMhwQSKjv72tgL9X9Lcx4b7pspbYs9BOxbfz3puXuoT-DWtboI8W9ipBao1MwJLj8cEr-D1xOJ_Lh4aN3qNw"/>
 </div>
 <div>
-<p class="text-lg font-bold text-slate-900 dark:text-white">艾丽西亚·凯斯</p>
-<p class="text-sm text-primary font-medium">音乐人 / 词曲作者</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">弗里德里希·尼采</p>
+<p class="text-sm text-primary font-medium">哲学家</p>
 </div>
 </div>
 </div>
@@ -251,19 +281,19 @@
 <ul class="space-y-4">
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">深切的共情：</b> 能感知到他人最微小的情绪波动并提供安慰。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">理性的思考：</b> 能够客观地分析极其复杂的情况。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">慷慨大方：</b> 乐于分享自己的时间和精力，特别是为了他们关心的事业。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">独立自主：</b> 勇于挑战传统，坚定地坚持自己的见解。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">思想开放：</b> 极具包容心，很少对不同的生活方式评头论足。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">极高的工作热情：</b> 对感兴趣的目标极其专注且高效。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-emerald-500 mt-0.5 text-xl">check</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">充满创意：</b> 能够从独特的视角看待世界，产出富有诗意的构想。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">开放的心态：</b> 只要证据充分，就愿意在逻辑上改变观点。</span>
 </li>
 </ul>
 </div>
@@ -274,19 +304,19 @@
 <ul class="space-y-4">
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">过度理想化：</b> 可能会因为现实世界无法达到其高尚标准而感到失望。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">傲慢：</b> 有时会显得不耐烦，甚至看不起不够敏捷的人。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">自我批判：</b> 总是对自己要求过高，容易陷入自我怀疑。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">情感疏离：</b> 难以理解和应对高度感性的非逻辑沟通。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">过于注重隐私：</b> 倾向于把感受藏在心里，有时会让亲近的人感到疏远。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">过度挑剔：</b> 往往由于完美主义标准过高而感到挫败。</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-orange-500 mt-0.5 text-xl">error</span>
-<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">难以执行：</b> 在处理琐碎的日常事务和行政细节时常感到吃力。</span>
+<span class="text-slate-700 dark:text-slate-300"><b class="text-slate-900 dark:text-white">忽视社交：</b> 可能表现得不合群或对社交礼仪缺乏敏感。</span>
 </li>
 </ul>
 </div>
@@ -298,7 +328,7 @@
 <span class="material-symbols-outlined text-primary text-3xl icon-fill">work</span> 职业路径
                     </h3>
 <p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
-                        调停者在能够发挥创意并帮助他人的领域中最为快乐。他们通常是优秀的作家、心理咨询师、艺术家，社会工作者或非营利组织领导者。他们追求职业的"意义感"远胜于追求金钱或名声。
+                        建筑师在需要深度复杂思考和高度自主权的职位上表现出色。他们通常是优秀的软件架构师、战略分析师、科学家或投资顾问。他们更喜欢独立工作或与精明能干的小团队共事。
                     </p>
 </div>
 <div class="bg-white dark:bg-slate-800/50 p-8 rounded-3xl border border-primary/5">
@@ -306,7 +336,7 @@
 <span class="material-symbols-outlined text-rose-500 text-3xl icon-fill">favorite</span> 人际关系
                     </h3>
 <p class="text-warm-gray dark:text-slate-400 leading-relaxed text-lg">
-                        对于调停者而言，人际关系是关于灵魂的共鸣。他们寻找的是深度的理解和长久的承诺。虽然他们可能需要很长时间才能真正对一个人敞开心扉，但一旦认定，他们会表现出极高的忠诚和无私的关怀。
+                        在爱情和友谊中，建筑师寻找的是智力上的终身伴侣。他们不擅长浪漫的甜言蜜语，但他们极其忠诚，并倾向于通过共同成长和解决现实问题来表达对爱人的关心。
                     </p>
 </div>
 </div>

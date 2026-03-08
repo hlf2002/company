@@ -65,15 +65,40 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-<header class="w-full bg-white/80 backdrop-blur-md border-b border-sage-green/10 px-6 py-4 sticky top-0 z-50">
+<header class="w-full bg-white/80 backdrop-blur-md border-b border-sage-green/10 px-4 py-3 sticky top-0 z-50">
 <div class="max-w-5xl mx-auto flex items-center justify-between">
 <div class="flex items-center gap-2">
+<button id="mobile-menu-btn-testing" class="md:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-sage-green/10 text-sage-green hover:bg-sage-green/20 transition-colors mr-1" onclick="toggleMobileMenuTesting()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 <div class="size-9 bg-sage-green rounded-xl flex items-center justify-center text-white">
 <span class="material-symbols-outlined text-2xl">psychology</span>
 </div>
-<a href="https://mbti.7373.com.cn" class="text-lg font-bold tracking-tight text-sage-green hover:opacity-80">MBTI性格测试</a>
+<a href="https://mbti.7373.com.cn" class="text-base font-bold tracking-tight text-sage-green hover:opacity-80 md:text-lg">MBTI性格测试</a>
 </div>
 </div>
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu-testing" class="hidden md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-sage-green/10 shadow-lg">
+<div class="px-4 py-3 space-y-2 max-w-5xl mx-auto">
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-sage-green" href="https://mbti.7373.com.cn">首页</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-sage-green" href="https://mbti.7373.com.cn/type.html">人格类型</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-sage-green" href="https://mbti.7373.com.cn/compatibility.html">契合度分析</a>
+<a class="block py-2 text-sm font-semibold text-slate-600 hover:text-sage-green" href="https://mbti.7373.com.cn/openapi.html">开放API</a>
+</div>
+</div>
+<script>
+function toggleMobileMenuTesting() {
+var menu = document.getElementById('mobile-menu-testing');
+var btn = document.getElementById('mobile-menu-btn-testing');
+if (menu.classList.contains('hidden')) {
+menu.classList.remove('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'close';
+} else {
+menu.classList.add('hidden');
+btn.querySelector('.material-symbols-outlined').textContent = 'menu';
+}
+}
+</script>
 </header>
 <main class="flex-grow flex flex-col items-center pt-12 pb-20 px-6">
 <div class="w-full max-w-3xl">
