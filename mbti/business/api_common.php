@@ -57,7 +57,7 @@ function generateSign($params, $secret_key) {
     $string .= 'secret_key=' . $secret_key;
 
     // 4. MD5 加密
-    return strtoupper(md5($string));
+    return md5($string);
 }
 
 /**
