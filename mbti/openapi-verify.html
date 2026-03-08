@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7A9478",
+                        "background-light": "#F9F7F2",
+                        "background-dark": "#1A1C19",
+                        "accent-tan": "#E8E2D9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>验签指南 | MBTI API Documentation</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800">
+<div class="relative flex h-auto min-h-screen w-full flex-row overflow-x-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 border-r border-accent-tan bg-background-light sticky top-0 h-screen flex flex-col justify-between p-4 shrink-0">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 text-sm font-bold leading-tight uppercase tracking-wider">人格测试 API</h1>
+<p class="text-primary text-xs font-medium">v1.2.4</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="/"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">home</span><span class="text-sm font-medium">首页</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">dashboard</span><span class="text-sm font-medium">API概览</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">description</span><span class="text-sm font-medium">人格测试接口</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">database</span><span class="text-sm font-medium">测试结果查询接口</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">error</span><span class="text-sm font-medium">错误码信息</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="text-sm font-medium">验签指南</span></a></nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-3 bg-accent-tan/50 rounded-xl">
+<p class="text-[11px] text-slate-500 mb-2 uppercase font-bold tracking-widest">当前环境</p>
+<div class="flex items-center gap-2">
+<span class="size-2 bg-green-500 rounded-full"></span>
+<span class="text-xs font-semibold text-slate-700">Production</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-2.5 px-4 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                控制台
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-16 border-b border-accent-tan flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-20">
+<div class="flex items-center gap-6">
+<h2 class="text-slate-900 font-bold text-lg">验签指南</h2>
+<div class="h-4 w-px bg-accent-tan"></div>
+<div class="flex gap-4">
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">文档中心</a>
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">开发者社区</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 border border-transparent focus:border-primary/30 focus:bg-white rounded-full text-sm focus:ring-4 focus:ring-primary/10 w-64 transition-all outline-none" placeholder="搜索文档..." type="text"/>
+</div>
+<button class="text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-8 rounded-full bg-accent-tan flex items-center justify-center overflow-hidden border border-white">
+<img class="size-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrK3TexbYPLqUGbaKjITOKW2GV6ruv45l2KfYoxbMaB0eEJPZN3KNDmdhHPkCZM0XIylit4LDn2q6Rwj6Gu0jZK4AxQcqysXXgjbble2n6Qaq9mjSHqMJwK_FE1uQx3yMJS1vgwITd0xTV2hykllMZPcwMd6IwbHkhVFSZtGRHMCxxMcljIXRVqq2VgBAXDu-zJ3HMxVYXjPKabSxp9F21v5jJOdN8ORpD7mUMuzurTH7_2JnwDTMGARIcdLB-z3WvF6rTxj1sk14"/>
+</div>
+</div>
+</header>
+<!-- Article Content -->
+<div class="max-w-4xl mx-auto w-full py-12 px-8">
+<div class="mb-10">
+<h1 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">验签指南</h1>
+<p class="text-lg text-slate-600 leading-relaxed">
+                    为了保障请求的安全性和数据的完整性，所有接口请求均需包含签名（<code class="bg-accent-tan/50 px-1.5 py-0.5 rounded text-sm font-mono">sign</code>）参数。此机制可防止请求在传输过程中被篡改，并验证调用者的合法身份。
+                </p>
+</div>
+<!-- Step-by-Step Flow -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">01.</span> 验签步骤流程
+                </h3>
+<div class="relative space-y-0">
+<!-- Step 1 -->
+<div class="grid grid-cols-[48px_1fr] gap-x-4">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined">sort_by_alpha</span>
+</div>
+<div class="w-0.5 bg-slate-200 h-full"></div>
+</div>
+<div class="pb-10 pt-2">
+<h4 class="text-lg font-bold text-slate-900 text-primary">步骤 1：参数排序</h4>
+<p class="text-slate-600 mt-2">
+                                        除 <code class="text-primary font-mono text-sm">sign</code> 字段外，将所有请求参数按其参数名的 ASCII 码从小到大排序。
+                                    </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="grid grid-cols-[48px_1fr] gap-x-4">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined">link</span>
+</div>
+<div class="w-0.5 bg-slate-200 h-full"></div>
+</div>
+<div class="pb-10 pt-2">
+<h4 class="text-lg font-bold text-slate-900 text-primary">步骤 2：字符串拼接</h4>
+<p class="text-slate-600 mt-2">
+                                        将排序后的参数按 <code class="text-primary font-mono text-sm">key=value&key2=value2...</code> 格式拼接成一个基础待签名字符串。
+                                    </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="grid grid-cols-[48px_1fr] gap-x-4">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined">key</span>
+</div>
+<div class="w-0.5 bg-slate-200 h-full"></div>
+</div>
+<div class="pb-10 pt-2">
+<h4 class="text-lg font-bold text-slate-900 text-primary">步骤 3：追加密钥</h4>
+<p class="text-slate-600 mt-2">
+                                        在拼接好的字符串末尾追加 <code class="text-primary font-mono text-sm">&secret_key=您的密钥</code>。此密钥请在控制台查看。
+                                    </p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="grid grid-cols-[48px_1fr] gap-x-4">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined">fingerprint</span>
+</div>
+</div>
+<div class="pt-2">
+<h4 class="text-lg font-bold text-slate-900 text-primary">步骤 4：生成摘要</h4>
+<p class="text-slate-600 mt-2">
+                                        对最终生成的字符串进行 <strong class="text-slate-900">MD5 加密</strong>，并将结果转换为 <strong class="text-slate-900">小写</strong>，即得到最终的签名。
+                                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Code Example Section -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">02.</span> 代码示例
+                </h3>
+<div class="bg-slate-900 rounded-xl overflow-hidden shadow-inner border border-slate-800">
+<div class="flex items-center justify-between px-4 py-3 bg-slate-800/50 border-b border-white/10">
+<span class="text-slate-400 text-xs font-mono ml-2">sign_generator.py</span>
+<button class="text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+<div class="p-6 overflow-x-auto">
+<pre class="text-sm font-mono text-slate-300 leading-relaxed"><code><span class="text-pink-400">import</span> hashlib
+
+<span class="text-slate-500"># 1. 准备请求参数</span>
+params = {
+    <span class="text-green-400">"access_key"</span>: <span class="text-green-400">"your_access_key"</span>,
+    <span class="text-green-400">"external_user_id"</span>: <span class="text-green-400">"user_123"</span>,
+    <span class="text-green-400">"callback_url"</span>: <span class="text-green-400">"https://example.com/callback"</span>
+}
+secret_key = <span class="text-green-400">"your_secret_key"</span>
+
+<span class="text-slate-500"># 2. 按照 ASCII 排序</span>
+sorted_keys = <span class="text-yellow-400">sorted</span>(params.keys())
+
+<span class="text-slate-500"># 3. 拼接字符串</span>
+query_string = <span class="text-green-400">"&"</span>.<span class="text-yellow-400">join</span>([<span class="text-green-400">f"{k}={params[k]}"</span> <span class="text-pink-400">for</span> k <span class="text-pink-400">in</span> sorted_keys])
+
+<span class="text-slate-500"># 4. 追加密钥</span>
+sign_str = query_string + <span class="text-green-400">f"&secret_key={secret_key}"</span>
+
+<span class="text-slate-500"># 5. MD5 加密并转小写</span>
+sign = hashlib.<span class="text-yellow-400">md5</span>(sign_str.<span class="text-yellow-400">encode</span>(<span class="text-green-400">'utf-8'</span>)).<span class="text-yellow-400">hexdigest</span>().<span class="text-yellow-400">lower</span>()
+
+<span class="text-yellow-400">print</span>(<span class="text-green-400">f"Generated Sign: {sign}"</span>)</code></pre>
+</div>
+</div>
+</section>
+<!-- Important Notes -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">03.</span> 注意事项
+                </h3>
+<div class="flex items-start gap-4 p-4 bg-primary/10 border-l-4 border-primary rounded-r-xl">
+<span class="material-symbols-outlined text-primary">warning</span>
+<div class="flex flex-col gap-2">
+<ul class="list-disc list-inside text-sm text-slate-600 space-y-2 marker:text-primary">
+<li><strong class="font-bold text-slate-900">严禁公开密钥</strong>：Secret Key 是您的最高安全凭证，请勿在前端代码（如 HTML/JS）中硬编码。</li>
+<li><strong class="font-bold text-slate-900">服务端调用</strong>：强烈建议所有的签名操作均在您的后端服务器完成。</li>
+<li><strong class="font-bold text-slate-900">字符编码</strong>：所有待签名内容必须统一使用 <span class="font-mono">UTF-8</span> 编码。</li>
+<li><strong class="font-bold text-slate-900">空值处理</strong>：若参数值为空，则不参与签名。</li>
+</ul>
+</div>
+</div>
+</section>
+<footer class="mt-20 pt-8 border-t border-accent-tan flex justify-between items-center text-slate-400 text-sm">
+<p>© 2024 MBTI Platform Integration Team</p>
+<div class="flex gap-4">
+<a class="hover:text-primary" href="#">服务条款</a>
+<a class="hover:text-primary" href="#">隐私政策</a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</body></html>
